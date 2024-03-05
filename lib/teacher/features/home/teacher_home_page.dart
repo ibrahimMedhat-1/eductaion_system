@@ -8,14 +8,14 @@ import '../../../shared/utils/colors.dart';
 import '../choose_grade/choose_grade_view2.dart';
 import '../profile/teacher_profile_page.dart';
 
-class TeacherHomePage extends StatefulWidget {
-  const TeacherHomePage({super.key});
+class TeacherLayout extends StatefulWidget {
+  const TeacherLayout({super.key});
 
   @override
-  State<TeacherHomePage> createState() => _TeacherHomePageState();
+  State<TeacherLayout> createState() => _TeacherLayoutState();
 }
 
-class _TeacherHomePageState extends State<TeacherHomePage> {
+class _TeacherLayoutState extends State<TeacherLayout> {
   Widget selectedWidget = const ChooseGradePage2();
   @override
   Widget build(BuildContext context) {

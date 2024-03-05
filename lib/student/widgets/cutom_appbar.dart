@@ -64,7 +64,7 @@ PreferredSizeWidget customAppBar(BuildContext context) {
         TextButton(
           onPressed: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const StudentHomePage()),
+              MaterialPageRoute(builder: (context) => const Studentlayout()),
             );
           },
           child: Text(

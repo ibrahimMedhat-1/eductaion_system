@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../shared/utils/colors.dart';
 import '../../widgets/cutom_appbar.dart';
-import '../quiz/quiz_page.dart';
 
 class ViewCoursePage extends StatefulWidget {
   const ViewCoursePage({super.key});
@@ -15,21 +14,27 @@ class _ViewCoursePageState extends State<ViewCoursePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  customAppBar(context),
+      appBar: customAppBar(context),
       body: Row(
         children: [
           const Flexible(
             flex: 3,
-            child: QuizPage(),
+            child: VideoLecturePage(),
           ),
           Flexible(
             flex: 1,
             child: Container(
               decoration: const BoxDecoration(
                 border: Border(
-                    bottom: BorderSide(color:ColorsAsset.kPrimary ,),
-                    left: BorderSide(color:ColorsAsset.kPrimary ,),
-                    right: BorderSide(color:ColorsAsset.kPrimary ,),
+                  bottom: BorderSide(
+                    color: ColorsAsset.kPrimary,
+                  ),
+                  left: BorderSide(
+                    color: ColorsAsset.kPrimary,
+                  ),
+                  right: BorderSide(
+                    color: ColorsAsset.kPrimary,
+                  ),
                 ),
               ),
               child: ListView.builder(
@@ -40,9 +45,12 @@ class _ViewCoursePageState extends State<ViewCoursePage> {
                     child: Card(
                       elevation: 2,
                       child: ListTile(
-                        onTap: (){},
+                        onTap: () {},
                         tileColor: ColorsAsset.kLightPurble,
-                        title: const Text("الوحدة الاولي ",style: TextStyle(fontWeight: FontWeight.bold,color:ColorsAsset.kPrimary),),
+                        title: const Text(
+                          "الوحدة الاولي ",
+                          style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                        ),
                       ),
                     ),
                   );
@@ -66,17 +74,17 @@ class VideoLecturePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height:  MediaQuery.of(context).size.height*0.6,
-                color: ColorsAsset.kLight,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(child: Image.asset("assets/images/video.png")),
-                ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+              color: ColorsAsset.kLight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(child: Image.asset("assets/images/video.png")),
               ),
             ),
+          ),
           const SizedBox(
             height: 25,
           ),
@@ -85,11 +93,14 @@ class VideoLecturePage extends StatelessWidget {
             child: const ExpansionTile(
               shape: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: ColorsAsset.kPrimary,
-                  )),
+                color: ColorsAsset.kPrimary,
+              )),
               backgroundColor: ColorsAsset.kLight,
               expandedAlignment: Alignment.topLeft,
-              title: Text('الشهر الاول',style: TextStyle(fontWeight: FontWeight.bold,color:ColorsAsset.kPrimary),),
+              title: Text(
+                'الشهر الاول',
+                style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+              ),
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -114,11 +125,14 @@ class VideoLecturePage extends StatelessWidget {
             child: const ExpansionTile(
               shape: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: ColorsAsset.kPrimary,
-                  )),
+                color: ColorsAsset.kPrimary,
+              )),
               backgroundColor: ColorsAsset.kLight,
               expandedAlignment: Alignment.topLeft,
-              title: Text('الشهر الثاني',style: TextStyle(fontWeight: FontWeight.bold,color:ColorsAsset.kPrimary),),
+              title: Text(
+                'الشهر الثاني',
+                style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+              ),
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -143,11 +157,14 @@ class VideoLecturePage extends StatelessWidget {
             child: const ExpansionTile(
               shape: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: ColorsAsset.kPrimary,
-                  )),
+                color: ColorsAsset.kPrimary,
+              )),
               backgroundColor: ColorsAsset.kLight,
               expandedAlignment: Alignment.topLeft,
-              title: Text('الشهر الثالث',style: TextStyle(fontWeight: FontWeight.bold,color:ColorsAsset.kPrimary),),
+              title: Text(
+                'الشهر الثالث',
+                style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+              ),
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -164,8 +181,8 @@ class VideoLecturePage extends StatelessWidget {
               ],
             ),
           ),
-
-      ],),
+        ],
+      ),
     );
   }
 }

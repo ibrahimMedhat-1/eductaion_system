@@ -4,7 +4,6 @@ import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/profile/widgets/parent_data.dart';
 import '../../../../student/features/profile/widgets/personal_data.dart';
 
-
 class StudentPage extends StatefulWidget {
   const StudentPage({super.key});
 
@@ -55,29 +54,24 @@ class _StudentPageState extends State<StudentPage> {
             const Flexible(
                 flex: 3,
                 child: SingleChildScrollView(
-                  child:  Column(
+                  child: Column(
                     children: [
                       CircleAvatar(
                         radius: 80,
                         backgroundColor: Color(0xFF6E85B7),
-                        backgroundImage: AssetImage(
-                            "assets/images/profile purple.png"
-                        ),
+                        backgroundImage: AssetImage("assets/images/profile purple.png"),
                       ),
-                      SizedBox(height: 30,),
-
+                      SizedBox(
+                        height: 30,
+                      ),
                       PersonalData(),
                       FamilyDataSection(),
-
-
-
                     ],
                   ),
-                )
-            ),
+                )),
             Flexible(
               flex: 4,
-              child:  Padding(
+              child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: ListView.builder(
                   itemCount: 5,
@@ -90,15 +84,13 @@ class _StudentPageState extends State<StudentPage> {
                           child: ExpansionTile(
                             shape: const OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: ColorsAsset.kPrimary,
-                                )),
+                              color: ColorsAsset.kPrimary,
+                            )),
                             backgroundColor: ColorsAsset.kLight,
                             expandedAlignment: Alignment.topLeft,
                             title: const Text(
                               'Quiz One',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorsAsset.kPrimary),
+                              style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                             ),
                             trailing: const Text("Grade = 12/15"),
                             children: <Widget>[
@@ -116,23 +108,21 @@ class _StudentPageState extends State<StudentPage> {
                                       ),
                                       const SizedBox(height: 8.0),
                                       Column(
-                                        children: List.generate(answers[index].length,
-                                                (optionIndex) {
-                                              return RadioListTile(
-                                                title: Text(
-                                                  answers[index][optionIndex],
-                                                  style: const TextStyle(
-                                                      color: ColorsAsset.kTextcolor),
-                                                ),
-                                                value: optionIndex,
-                                                groupValue: selectedAnswers[index],
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    selectedAnswers[index] = value!;
-                                                  });
-                                                },
-                                              );
-                                            }),
+                                        children: List.generate(answers[index].length, (optionIndex) {
+                                          return RadioListTile(
+                                            title: Text(
+                                              answers[index][optionIndex],
+                                              style: const TextStyle(color: ColorsAsset.kTextcolor),
+                                            ),
+                                            value: optionIndex,
+                                            groupValue: selectedAnswers[index],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                selectedAnswers[index] = value!;
+                                              });
+                                            },
+                                          );
+                                        }),
                                       ),
                                       Row(
                                         children: [
@@ -164,7 +154,6 @@ class _StudentPageState extends State<StudentPage> {
           ],
         ),
       ),
-
     );
   }
 }

@@ -1,6 +1,6 @@
+import 'package:eductaion_system/auth/login/login%20page.dart';
 import 'package:eductaion_system/shared/main_cubit/main_cubit.dart';
 import 'package:eductaion_system/shared/utils/colors.dart';
-import 'package:eductaion_system/teacher/features/home/teacher_home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: const TeacherHomePage(),
             localizationsDelegates: const [
               AppLocale.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -68,6 +67,10 @@ class MyApp extends StatelessWidget {
               return supportLang.first;
             },
             locale: Locale(MainCubit.get(context).lang),
+            // TeacherLayout
+            // Studentlayout
+            // LoginPage
+            home: const LoginPage(),
           );
         },
       ),

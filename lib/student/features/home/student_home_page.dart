@@ -9,14 +9,14 @@ import '../../widgets/cutom_appbar.dart';
 import '../course_details/course_page.dart';
 import '../payment/widgets/my_text_field.dart';
 
-class StudentHomePage extends StatefulWidget {
-  const StudentHomePage({super.key});
+class Studentlayout extends StatefulWidget {
+  const Studentlayout({super.key});
 
   @override
-  StudentHomePageState createState() => StudentHomePageState();
+  StudentlayoutState createState() => StudentlayoutState();
 }
 
-class StudentHomePageState extends State<StudentHomePage> {
+class StudentlayoutState extends State<Studentlayout> {
   final List<String> homeData = [
     "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
     "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
