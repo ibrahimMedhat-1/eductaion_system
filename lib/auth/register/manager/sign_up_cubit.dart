@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eductaion_system/models/student_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,15 +24,24 @@ class SignUpCubit extends Cubit<SignUpState> {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text)
         .then((value) {
-      FirebaseFirestore.instance.collection('students').doc(value.user!.uid).set({
-        'name': fullNameController.text,
-        'phone': phoneController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
-        'parentName': parentNameController.text,
-        'parentEmail': parentEmailController.text,
-        'parentPhone': parentPhoneController.text,
-      }).then((value) {
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(value.user!.uid)
+          .set(
+            StudentModel(
+              fullNameController.text,
+              emailController.text,
+              phoneController.text,
+              value.user!.uid,
+              passwordController.text,
+              StudentParentData(
+                parentNameController.text,
+                parentEmailController.text,
+                parentPhoneController.text,
+              ),
+            ).toMap(),
+          )
+          .then((value) {
         emit(SignUpSuccessfully());
         Navigator.pop(context);
       }).catchError((onError) {
