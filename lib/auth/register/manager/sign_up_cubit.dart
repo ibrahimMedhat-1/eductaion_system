@@ -29,12 +29,13 @@ class SignUpCubit extends Cubit<SignUpState> {
           .doc(value.user!.uid)
           .set(
             StudentModel(
-              fullNameController.text,
-              emailController.text,
-              phoneController.text,
-              value.user!.uid,
-              passwordController.text,
-              StudentParentData(
+              gender: 'Male',
+              name: fullNameController.text,
+              email: emailController.text,
+              phone: phoneController.text,
+              id: value.user!.uid,
+              password: passwordController.text,
+              parentData: StudentParentData(
                 parentNameController.text,
                 parentEmailController.text,
                 parentPhoneController.text,

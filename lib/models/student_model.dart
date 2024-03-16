@@ -3,22 +3,26 @@ class StudentModel {
   String? email;
   String? phone;
   String? id;
+  String? gender;
   String? password;
   StudentParentData? parentData;
 
-  StudentModel(
-    this.name,
-    this.email,
-    this.phone,
-    this.id,
-    this.password,
-    this.parentData,
-  );
+  StudentModel({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.id,
+    required this.password,
+    required this.parentData,
+    required this.gender,
+  });
 
   StudentModel.fromJson(Map<String, dynamic>? json) {
     name = json!['name'];
     email = json['email'];
     phone = json['phone'];
+    gender = json['gender'];
+    password = json['password'];
     id = json['id'];
     parentData = StudentParentData.fromJson(json['parentData']);
   }
@@ -27,6 +31,7 @@ class StudentModel {
         'name': name,
         'email': email,
         'phone': phone,
+        'gender': gender,
         'id': id,
         'password': password,
         'parentData': parentData!.toMap(),

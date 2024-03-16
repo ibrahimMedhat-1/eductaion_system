@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/profile/widgets/parent_data.dart';
-import '../../../../student/features/profile/widgets/personal_data.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({super.key});
@@ -64,7 +63,7 @@ class _StudentPageState extends State<StudentPage> {
                       SizedBox(
                         height: 30,
                       ),
-                      PersonalData(),
+                      // PersonalData(),
                       FamilyDataSection(),
                     ],
                   ),

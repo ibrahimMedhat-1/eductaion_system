@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../components/locale/applocale.dart';
+import '../../shared/constants.dart';
 import '../../shared/main_cubit/main_cubit.dart';
 import '../../shared/utils/colors.dart';
 import '../features/chats/choose_chat.dart';
@@ -57,7 +58,7 @@ PreferredSizeWidget customAppBar(BuildContext context) {
         ),
         const SizedBox(width: 10),
         Text(
-          '${getLang(context, "Student Name")}',
+          Constants.studentModel!.name!,
           style: const TextStyle(fontSize: 12),
         ),
         const SizedBox(width: 50),
