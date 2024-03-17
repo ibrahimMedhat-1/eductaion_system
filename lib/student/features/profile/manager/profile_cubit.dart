@@ -49,6 +49,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         .doc(Constants.studentModel!.id)
         .update(StudentModel(
           name: nameController.text,
+          reference: Constants.studentModel!.reference,
           email: Constants.studentModel!.email!,
           phone: phoneController.text,
           id: idController.text,
@@ -63,6 +64,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         .then((value) {
       Constants.studentModel = StudentModel(
         name: nameController.text,
+        reference: Constants.studentModel!.reference,
         email: Constants.studentModel!.email!,
         phone: phoneController.text,
         id: idController.text,

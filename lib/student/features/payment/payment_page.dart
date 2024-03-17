@@ -1,3 +1,4 @@
+import 'package:eductaion_system/models/course_model.dart';
 import 'package:eductaion_system/student/features/payment/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,8 @@ import '../../../shared/utils/colors.dart';
 import 'manager/payment_cubit.dart';
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({super.key});
+  final CourseModel courseModel;
+  const PaymentPage({super.key, required this.courseModel});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class PaymentPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       onPressed: () {
-                        cubit.submitPayment(context);
+                        cubit.submitPayment(context, courseModel);
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

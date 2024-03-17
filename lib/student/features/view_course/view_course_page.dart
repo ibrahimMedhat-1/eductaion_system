@@ -1,10 +1,12 @@
+import 'package:eductaion_system/models/course_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/utils/colors.dart';
 import '../../widgets/cutom_appbar.dart';
 
 class ViewCoursePage extends StatefulWidget {
-  const ViewCoursePage({super.key});
+  final CourseModel courseModel;
+  const ViewCoursePage({super.key, required this.courseModel});
 
   @override
   State<ViewCoursePage> createState() => _ViewCoursePageState();

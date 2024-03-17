@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class StudentModel {
   String? name;
+  DocumentReference<Map<String, dynamic>>? reference;
   String? email;
   String? phone;
   String? id;
@@ -9,6 +12,7 @@ class StudentModel {
 
   StudentModel({
     required this.name,
+    required this.reference,
     required this.email,
     required this.phone,
     required this.id,
@@ -19,6 +23,7 @@ class StudentModel {
 
   StudentModel.fromJson(Map<String, dynamic>? json) {
     name = json!['name'];
+    reference = json['reference'];
     email = json['email'];
     phone = json['phone'];
     gender = json['gender'];
@@ -30,6 +35,7 @@ class StudentModel {
   Map<String, dynamic> toMap() => {
         'name': name,
         'email': email,
+        'reference': reference,
         'phone': phone,
         'gender': gender,
         'id': id,

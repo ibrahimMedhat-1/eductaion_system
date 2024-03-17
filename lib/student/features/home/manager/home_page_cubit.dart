@@ -14,13 +14,15 @@ class HomePageCubit extends Cubit<HomePageState> {
   static HomePageCubit get(context) => BlocProvider.of(context);
 
   List<CourseModel> courses = [];
+  List<String> subjects = [];
   List<OfferModel> offers = [];
   List<CourseModel> searchList = [];
+  String year = 'first secondary';
 
   void getCourses(value) async {
     emit(GetCoursesLoading());
     courses.clear();
-    String year = 'first secondary';
+    subjects.clear();
     if (value == 'الصف الاول' || value == 'first secondary') {
       year = 'first Secondary';
     } else if (value == 'الصف الثاني' || value == 'second secondary') {
@@ -29,27 +31,30 @@ class HomePageCubit extends Cubit<HomePageState> {
       year = 'third Secondary';
     }
     await FirebaseFirestore.instance.collection('secondary years').doc(year).get().then((value) {
-      print('1');
       for (var subject in value.data()!['subjects']) {
-        FirebaseFirestore.instance
-            .collection('secondary years')
-            .doc(year)
-            .collection(subject)
-            .get()
-            .then((value) {
-          value.docs.forEach((element) {
-            courses.add(CourseModel.fromJson(element.data()));
-          });
-          emit(GetCoursesSuccessfully());
-        }).catchError((onError) {
-          emit(GetCoursesError());
-          print(onError.toString());
-          Fluttertoast.showToast(msg: onError.toString());
-        });
+        subjects.add(subject);
+        getCoursesOfSubject(subject, year);
       }
+    }).catchError((onError) {
+      emit(GetCoursesError());
+      Fluttertoast.showToast(msg: onError.toString());
+    });
+  }
+
+  void getCoursesOfSubject(subject, year) {
+    courses.clear();
+    emit(GetCoursesLoading());
+    FirebaseFirestore.instance
+        .collection('secondary years')
+        .doc(year)
+        .collection(subject)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        courses.add(CourseModel.fromJson(element.data()));
+      });
       emit(GetCoursesSuccessfully());
     }).catchError((onError) {
-      print('2');
       emit(GetCoursesError());
       print(onError.toString());
       Fluttertoast.showToast(msg: onError.toString());
@@ -57,6 +62,21 @@ class HomePageCubit extends Cubit<HomePageState> {
   }
 
   void getOffers() {}
+  void isSearching() {
+    emit(IsSearching());
+  }
 
-  void search() {}
+  void isNotSearching() {
+    emit(IsNotSearching());
+  }
+
+  void search(String value) {
+    searchList.clear();
+    for (var course in courses) {
+      if (course.courseName!.toLowerCase().contains(value.toLowerCase())) {
+        searchList.add(course);
+        emit(SearchCourse());
+      }
+    }
+  }
 }

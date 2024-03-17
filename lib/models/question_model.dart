@@ -6,6 +6,29 @@ class ViewQuestionModel {
   String? option2;
   String? option3;
   String? modelAnswer;
+
+  ViewQuestionModel({
+    required this.question,
+    required this.option1,
+    required this.option2,
+    required this.option3,
+    required this.modelAnswer,
+  });
+
+  ViewQuestionModel.fromJson(Map<String, dynamic>? json) {
+    question = json!['question'];
+    option1 = json['answer1'];
+    option2 = json['answer2'];
+    option3 = json['answer3'];
+    modelAnswer = json['modelAnswer'];
+  }
+  Map<String, dynamic> toMap() => {
+        'question': question,
+        'answer1': option1,
+        'answer2': option2,
+        'answer3': option3,
+        'modelAnswer': modelAnswer,
+      };
 }
 
 class AddQuestionModel {

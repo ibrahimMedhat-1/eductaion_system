@@ -117,7 +117,7 @@ class _AddLessonPageState extends State<AddLessonPage> {
   void generateQuestions() {
     questions.clear();
     for (int i = 0; i < selectedQuantity!; i++) {
-      questions.add(ViewQuestionModel());
+      // questions.add(ViewQuestionModel());
     }
   }
 }

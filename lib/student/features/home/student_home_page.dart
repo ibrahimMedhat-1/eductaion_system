@@ -149,34 +149,39 @@ class StudentlayoutState extends State<Studentlayout> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Row(
+                  Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       MyTextField(
                         flex: 2,
                         hintText: "Search",
-                        prefixIcon: Icon(Icons.search),
+                        prefixIcon: const Icon(Icons.search),
+                        onChanged: (value) {
+                          if (value.isNotEmpty) {
+                            cubit.isSearching();
+                            cubit.search(value);
+                          } else {
+                            cubit.isNotSearching();
+                          }
+                        },
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SubjectContainer(subjectName: 'Math'),
-                      SubjectContainer(subjectName: 'Science'),
-                      SubjectContainer(subjectName: 'History'),
-                      SubjectContainer(subjectName: 'English'),
-                      SubjectContainer(subjectName: 'Geography'),
-                      SubjectContainer(subjectName: 'Math'),
-                      SubjectContainer(subjectName: 'Science'),
-                      SubjectContainer(subjectName: 'History'),
-                      SubjectContainer(subjectName: 'English'),
-                      SubjectContainer(subjectName: 'Geography'),
-                    ],
+                    children: cubit.subjects
+                        .map(
+                          (e) => InkWell(
+                              onTap: () {
+                                cubit.getCoursesOfSubject(e, cubit.year);
+                              },
+                              child: SubjectContainer(subjectName: e)),
+                        )
+                        .toList(),
                   ),
                   const SizedBox(
                     height: 10,
@@ -191,7 +196,8 @@ class StudentlayoutState extends State<Studentlayout> {
                               height: MediaQuery.of(context).size.height * 0.5,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: cubit.courses.length,
+                                itemCount:
+                                    state is IsSearching ? cubit.searchList.length : cubit.courses.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -209,17 +215,23 @@ class StudentlayoutState extends State<Studentlayout> {
                                           child: Column(
                                             children: [
                                               Image.network(
-                                                cubit.courses[index].image!,
+                                                state is IsSearching
+                                                    ? cubit.searchList[index].image!
+                                                    : cubit.courses[index].image!,
                                                 height: MediaQuery.of(context).size.height * 0.35,
                                               ),
                                               const SizedBox(
                                                 height: 10,
                                               ),
-                                              Text(cubit.courses[index].teacherName!),
+                                              Text(state is IsSearching
+                                                  ? cubit.searchList[index].teacherName!
+                                                  : cubit.courses[index].teacherName!),
                                               const SizedBox(
                                                 height: 5,
                                               ),
-                                              Text(cubit.courses[index].courseName!),
+                                              Text(state is IsSearching
+                                                  ? cubit.searchList[index].courseName!
+                                                  : cubit.courses[index].courseName!),
                                             ],
                                           ),
                                         ),
