@@ -8,7 +8,21 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
   ViewCourseCubit() : super(ViewCourseInitial());
   static ViewCourseCubit get(context) => BlocProvider.of(context);
 
+  List<Map<String, dynamic>> material = [];
   void getCourseMaterial(CourseModel courseModel) async {
-    await courseModel.reference!.collection('material').get().then((value) {});
+    emit(GetMaterialLoading());
+    await courseModel.reference!.collection('material').snapshots().listen((value) {
+      material.clear();
+      for (var element in value.docs) {
+        material.add(element.data());
+      }
+      emit(GetMaterialSuccessfully());
+    });
+  }
+
+  int index = 0;
+  void select(Map<String, dynamic>? selectedItem, index) {
+    this.index = index;
+    emit(SelectMaterial());
   }
 }
