@@ -7,7 +7,7 @@ final class ProfileInitial extends ProfileState {}
 
 final class InitializeControllers extends ProfileState {}
 
-final class ChangeGender extends ProfileState {}
+final class ChangeProfileImage extends ProfileState {}
 
 final class UpdateDataError extends ProfileState {}
 

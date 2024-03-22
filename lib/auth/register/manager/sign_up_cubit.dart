@@ -29,6 +29,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           .doc(value.user!.uid)
           .set(
             StudentModel(
+              image: '',
               gender: 'Male',
               reference: FirebaseFirestore.instance.collection('students').doc(value.user!.uid),
               name: fullNameController.text,

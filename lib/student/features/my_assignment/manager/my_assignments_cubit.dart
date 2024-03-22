@@ -1,22 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eductaion_system/models/course_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../models/course_model.dart';
 import '../../../../shared/constants.dart';
 
-part 'my_grades_state.dart';
+part 'my_assignments_state.dart';
 
-class MyGradesCubit extends Cubit<MyGradesState> {
-  MyGradesCubit() : super(MyGradesInitial());
-  static MyGradesCubit get(context) => BlocProvider.of(context);
+class MyAssignmentsCubit extends Cubit<MyAssignmentsState> {
+  MyAssignmentsCubit() : super(MyAssignmentsInitial());
+  static MyAssignmentsCubit get(context) => BlocProvider.of(context);
   List<CourseModel> courses = [];
-  void myCoursesGrades() async {
-    emit(GetMyCoursesGradesLoading());
+  void myCoursesAssignments() async {
+    emit(GetMyCoursesAssignmentsLoading());
     await FirebaseFirestore.instance
         .collection('students')
         .doc(Constants.studentModel!.id)
-        .collection('quiz')
+        .collection('assignment')
         .get()
         .then((value) async {
       for (var element in value.docs) {
@@ -26,40 +26,40 @@ class MyGradesCubit extends Cubit<MyGradesState> {
           print(courses);
         }).catchError((onError) {
           print(onError.toString());
-          emit(GetMyCoursesGradesError());
+          emit(GetMyCoursesAssignmentsError());
         });
       }
-      emit(GetMyCoursesGradesSuccessfully());
+      emit(GetMyCoursesAssignmentsSuccessfully());
     }).catchError((onError) {
       print(onError.toString());
-      emit(GetMyCoursesGradesError());
+      emit(GetMyCoursesAssignmentsError());
     });
   }
 
-  final List<Map<String, dynamic>> quizzes = [];
+  final List<Map<String, dynamic>> assignments = [];
   List<List<String>> selectedAnswers = [];
   List<List<String>> groupAnswers = [];
 
-  void myQuizzes(String id) async {
+  void myAssignments(String id) async {
     print(id);
     print(Constants.studentModel!.id);
-    emit(GetMyQuizzesLoading());
+    emit(GetMyAssignmentsLoading());
 
     await FirebaseFirestore.instance
         .collection('students')
         .doc(Constants.studentModel!.id)
-        .collection('quiz')
+        .collection('assignment')
         .doc(id.trim())
-        .collection('quiz')
+        .collection('assignment')
         .get()
         .then((value) {
       for (var element in value.docs) {
-        quizzes.add(element.data());
+        assignments.add(element.data());
       }
     });
-    print(quizzes);
+    print(assignments);
 
-    for (var element in quizzes) {
+    for (var element in assignments) {
       List<String> answers = [];
 
       for (var question in element['questions']) {
@@ -73,6 +73,6 @@ class MyGradesCubit extends Cubit<MyGradesState> {
       selectedAnswers.add(answers);
     }
     print(selectedAnswers);
-    emit(GetMyQuizzesSuccessfully());
+    emit(GetMyAssignmentsSuccessfully());
   }
 }

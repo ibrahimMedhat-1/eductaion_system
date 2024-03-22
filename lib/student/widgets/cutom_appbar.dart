@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eductaion_system/student/features/profile/manager/profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/locale/applocale.dart';
 import '../../shared/constants.dart';
@@ -52,8 +55,23 @@ PreferredSizeWidget customAppBar(BuildContext context) {
               MaterialPageRoute(builder: (context) => const ProfilePage()),
             );
           },
-          child: const CircleAvatar(
-            backgroundImage: AssetImage("assets/images/profile purple.png"),
+          child: BlocConsumer<ProfileCubit, ProfileState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return CachedNetworkImage(
+                imageUrl: ProfileCubit.get(context).profileImage,
+                imageBuilder: (context, imageProvider) => CircleAvatar(
+                  backgroundColor: Color(0xFF6E85B7),
+                  backgroundImage: imageProvider,
+                ),
+                errorWidget: (context, url, error) => const CircleAvatar(
+                  backgroundColor: Color(0xFF6E85B7),
+                  backgroundImage: AssetImage("assets/images/profile purple.png"),
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(width: 10),

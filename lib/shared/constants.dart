@@ -5,6 +5,7 @@ String lang = "en";
 
 abstract class Constants {
   static StudentModel? studentModel = StudentModel(
+      image: 'https://avatars.githubusercontent.com/u/105655543?v=4',
       name: 'ibrahim',
       reference: FirebaseFirestore.instance.collection('students').doc('xaGtgWrUrEW2cDybEp4vOHGrB7m2'),
       email: 'email',

@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eductaion_system/models/student_model.dart';
 import 'package:eductaion_system/shared/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'profile_state.dart';
 
@@ -39,7 +41,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void setSelectGender(String newValue) {
     selectedGender = newValue;
-    emit(ChangeGender());
+    emit(ChangeProfileImage());
   }
 
   void updateData(context) async {
@@ -48,6 +50,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         .collection('students')
         .doc(Constants.studentModel!.id)
         .update(StudentModel(
+          image: Constants.studentModel!.image,
           name: nameController.text,
           reference: Constants.studentModel!.reference,
           email: Constants.studentModel!.email!,
@@ -63,6 +66,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         ).toMap())
         .then((value) {
       Constants.studentModel = StudentModel(
+        image: Constants.studentModel!.image,
         name: nameController.text,
         reference: Constants.studentModel!.reference,
         email: Constants.studentModel!.email!,
@@ -81,6 +85,45 @@ class ProfileCubit extends Cubit<ProfileState> {
     }).catchError((onError) {
       emit(UpdateDataError());
       Fluttertoast.showToast(msg: onError.toString());
+    });
+  }
+
+  String profileImage = Constants.studentModel?.image ?? '';
+  void changeProfileImage() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
+      final image = await value!.readAsBytes();
+      await FirebaseStorage.instance
+          .ref()
+          .child(Constants.studentModel!.id!)
+          .putData(
+            image,
+            SettableMetadata(contentType: 'image/png'),
+          )
+          .then((p0) async {
+        await p0.ref.getDownloadURL().then((value) async {
+          await FirebaseFirestore.instance
+              .collection('students')
+              .doc(Constants.studentModel!.id)
+              .update({'image': value}).then((value) async {
+            await FirebaseFirestore.instance
+                .collection('students')
+                .doc(Constants.studentModel!.id)
+                .get()
+                .then((value) {
+              Constants.studentModel = StudentModel.fromJson(value.data());
+              profileImage = Constants.studentModel?.image ?? '';
+              print(profileImage);
+              emit(ChangeProfileImage());
+            });
+          });
+        });
+      }).catchError((onError) {
+        print('2');
+        print(onError);
+      });
+    }).catchError((onError) {
+      print('1');
+      print(onError);
     });
   }
 }

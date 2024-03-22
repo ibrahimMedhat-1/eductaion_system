@@ -56,7 +56,7 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(GetCoursesSuccessfully());
     }).catchError((onError) {
       emit(GetCoursesError());
-      print(onError.toString());
+      print('fdf ${onError.toString()}');
       Fluttertoast.showToast(msg: onError.toString());
     });
   }

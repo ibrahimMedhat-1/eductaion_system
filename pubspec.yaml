@@ -7,6 +7,11 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  universal_html:
+  restart_app:
+  image_picker:
+  image_picker_web:
+  cached_network_image:
   chewie:
   video_player:
   fluttertoast: ^8.2.4

@@ -81,7 +81,8 @@ class MyGradesPage extends StatelessWidget {
                                             ElevatedButton(
                                               onPressed: () {
                                                 Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (context) => const MyGradesDetails(),
+                                                  builder: (context) =>
+                                                      MyGradesDetails(id: cubit.courses[index].id!),
                                                 ));
                                               },
                                               style: ElevatedButton.styleFrom(

@@ -10,3 +10,9 @@ final class GetMyCoursesGradesLoading extends MyGradesState {}
 final class GetMyCoursesGradesSuccessfully extends MyGradesState {}
 
 final class GetMyCoursesGradesError extends MyGradesState {}
+
+final class GetMyQuizzesLoading extends MyGradesState {}
+
+final class GetMyQuizzesSuccessfully extends MyGradesState {}
+
+final class GetMyQuizzesError extends MyGradesState {}

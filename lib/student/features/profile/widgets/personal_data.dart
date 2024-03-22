@@ -31,14 +31,12 @@ class PersonalData extends StatelessWidget {
             columns: const [
               DataColumn(label: Text('Name')),
               DataColumn(label: Text('ID')),
-              DataColumn(label: Text('Gender')),
               DataColumn(label: Text('Phone Number')),
             ],
             rows: [
               DataRow(cells: [
                 DataCell(Text(Constants.studentModel!.name ?? '')),
                 DataCell(Text(Constants.studentModel!.id ?? '')),
-                DataCell(Text(Constants.studentModel!.gender ?? '')),
                 DataCell(Text(Constants.studentModel!.phone ?? '')),
               ])
             ]),

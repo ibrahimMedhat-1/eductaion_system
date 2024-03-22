@@ -29,7 +29,7 @@ class PaymentCubit extends Cubit<PaymentState> {
           .doc(Constants.studentModel!.id)
           .collection('courses')
           .doc(courseModel.id)
-          .set({'reference': courseModel.reference});
+          .set({'reference': courseModel.reference, 'watched': 0});
 
       await courseModel.reference!
           .collection('students')

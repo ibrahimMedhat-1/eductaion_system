@@ -35,12 +35,12 @@ class ViewCoursePage extends StatelessWidget {
                             flex: 3,
                             child: cubit.material[cubit.index]['type'] == 'lesson'
                                 ? VideoLecturePage(
+                                    courseModel: courseModel,
                                     videoLink: cubit.material[cubit.index]['video'],
                                     lesson: cubit.material[cubit.index]['reference'],
                                   )
                                 : QuizPage(
-                                    courseReference: cubit.material[cubit.index]['courseReference'],
-                                    quiz: cubit.material[cubit.index]['reference'],
+                                    courseModel: courseModel,
                                     type: cubit.material[cubit.index]['type'],
                                     questions: List<Map<String, dynamic>>.from(
                                         cubit.material[cubit.index]['questions']),
@@ -70,16 +70,14 @@ class ViewCoursePage extends StatelessWidget {
                                     child: Card(
                                       elevation: 2,
                                       child: ListTile(
-                                        onTap: index == 0 || cubit.material[index - 1]['watched'] != false
+                                        onTap: index == 0 || cubit.watched[index]
                                             ? () {
-                                                cubit.select(cubit.material[index], index);
+                                                cubit.select(index);
                                               }
                                             : null,
                                         tileColor: cubit.index == index
                                             ? Colors.blueAccent
-                                            : index == 0 ||
-                                                    cubit.material[index - 1]['watched'] != false ||
-                                                    index == 0
+                                            : index == 0 || cubit.watched[index] || index == 0
                                                 ? ColorsAsset.kLightPurble
                                                 : Colors.grey,
                                         title: Text(
@@ -106,8 +104,10 @@ class ViewCoursePage extends StatelessWidget {
 class VideoLecturePage extends StatefulWidget {
   final String videoLink;
   final DocumentReference<Map<String, dynamic>> lesson;
+  final CourseModel courseModel;
   const VideoLecturePage({
     super.key,
+    required this.courseModel,
     required this.videoLink,
     required this.lesson,
   });
@@ -128,7 +128,7 @@ class _VideoLecturePageState extends State<VideoLecturePage> {
       })
       ..addListener(() async {
         if (controller.value.position == controller.value.duration) {
-          await widget.lesson.update({'watched': true});
+          ViewCourseCubit().courseWatched(widget.courseModel);
           print('video Ended');
         }
       });
