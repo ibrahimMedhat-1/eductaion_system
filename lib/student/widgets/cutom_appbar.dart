@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/locale/applocale.dart';
-import '../../shared/constants.dart';
 import '../../shared/main_cubit/main_cubit.dart';
 import '../../shared/utils/colors.dart';
 import '../features/chats/choose_chat.dart';
@@ -75,9 +74,16 @@ PreferredSizeWidget customAppBar(BuildContext context) {
           ),
         ),
         const SizedBox(width: 10),
-        Text(
-          Constants.studentModel!.name!,
-          style: const TextStyle(fontSize: 12),
+        BlocConsumer<ProfileCubit, ProfileState>(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            return Text(
+              ProfileCubit.get(context).name,
+              style: const TextStyle(fontSize: 12),
+            );
+          },
         ),
         const SizedBox(width: 50),
         TextButton(

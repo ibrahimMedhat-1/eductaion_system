@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../models/teacher_model.dart';
 import '../../../shared/constants.dart';
 
 part 'login_state.dart';
@@ -32,16 +33,22 @@ class LoginCubit extends Cubit<LoginState> {
       if (isProfessor) {
         await FirebaseFirestore.instance
             .collection('teachers')
-            .where('email', isEqualTo: emailController.text)
+            .where('email', isEqualTo: emailController.text.trim())
             .get()
             .then((value) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const TeacherLayout(),
-              ));
+          if (value.docs.isEmpty) {
+            emit(LoginError());
+            Fluttertoast.showToast(msg: 'Not a professor');
+          } else {
+            print(value.docs);
+            Constants.teacherModel = TeacherModel.fromJson(value.docs[0].data());
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TeacherLayout(),
+                ));
+          }
         }).catchError((onError) {
-          emit(LoginError());
           emit(LoginError());
           Fluttertoast.showToast(msg: 'Not a professor');
         });

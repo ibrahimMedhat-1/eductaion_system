@@ -1,17 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eductaion_system/models/student_model.dart';
+import 'package:eductaion_system/models/teacher_model.dart';
 
 String lang = "en";
 
 abstract class Constants {
-  static StudentModel? studentModel = StudentModel(
-      image: 'https://avatars.githubusercontent.com/u/105655543?v=4',
-      name: 'ibrahim',
-      reference: FirebaseFirestore.instance.collection('students').doc('xaGtgWrUrEW2cDybEp4vOHGrB7m2'),
-      email: 'email',
-      phone: '010',
-      id: 'xaGtgWrUrEW2cDybEp4vOHGrB7m2',
-      password: 'sdn',
-      parentData: StudentParentData('sd', '@', '23'),
-      gender: 'male');
+  static StudentModel? studentModel;
+
+  static TeacherModel? teacherModel = TeacherModel(
+    bio: 'to7fa',
+    centerName: 'stars',
+    centerNo: '345678',
+    degree: 'bachelor of math',
+    email: 'teacher@gmail.com',
+    name: 'Ibrahim',
+    id: 'cV6Qa074MduGwYC5ujcu',
+    image: '',
+  );
 }
