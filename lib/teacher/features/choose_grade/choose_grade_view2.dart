@@ -20,7 +20,7 @@ class ChooseGradePage2 extends StatelessWidget {
               child: ListTile(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AddMaterialPage(),
+                    builder: (context) => const AddMaterialPage(year: 'first Secondary'),
                   ));
                 },
                 tileColor: ColorsAsset.kLightPurble,
@@ -37,6 +37,11 @@ class ChooseGradePage2 extends StatelessWidget {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               child: ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AddMaterialPage(year: 'second Secondary'),
+                  ));
+                },
                 tileColor: ColorsAsset.kLightPurble,
                 subtitle: const Text("View Material"),
                 leading: Image.asset("assets/images/icons8-graduation-50.png"),
@@ -51,6 +56,11 @@ class ChooseGradePage2 extends StatelessWidget {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               child: ListTile(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AddMaterialPage(year: 'third Secondary'),
+                  ));
+                },
                 tileColor: ColorsAsset.kLightPurble,
                 subtitle: const Text("View Material"),
                 leading: Image.asset("assets/images/icons8-graduation-50.png"),
