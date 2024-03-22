@@ -30,25 +30,21 @@ class LoginCubit extends Cubit<LoginState> {
         .signInWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text)
         .then((value) async {
       if (isProfessor) {
-        var professor = await FirebaseFirestore.instance
-            .collection('professors')
+        await FirebaseFirestore.instance
+            .collection('teachers')
             .where('email', isEqualTo: emailController.text)
             .get()
-            .then((value) {})
-            .catchError((onError) {
-          emit(LoginError());
-          Fluttertoast.showToast(msg: onError.toString());
-        });
-        if (professor != null) {
+            .then((value) {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const TeacherLayout(),
               ));
-        } else {
+        }).catchError((onError) {
+          emit(LoginError());
           emit(LoginError());
           Fluttertoast.showToast(msg: 'Not a professor');
-        }
+        });
       } else {
         await FirebaseFirestore.instance
             .collection('students')
@@ -64,7 +60,7 @@ class LoginCubit extends Cubit<LoginState> {
               ));
         }).catchError((onError) {
           emit(LoginError());
-          Fluttertoast.showToast(msg: onError.toString());
+          Fluttertoast.showToast(msg: 'Not a student');
         });
       }
       emit(LoginSuccessfully());
