@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/course_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../shared/constants.dart';
 
@@ -43,7 +43,7 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
     emit(SelectMaterial());
   }
 
-  void courseWatched(CourseModel courseModel) async {
+  void courseWatched(CourseModel courseModel, context) async {
     int watched = 0;
     await FirebaseFirestore.instance
         .collection('students')
@@ -60,5 +60,11 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
         .collection('courses')
         .doc(courseModel.id)
         .update({'watched': watched + 1});
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Submitted Successfully'),
+      ),
+    );
   }
 }

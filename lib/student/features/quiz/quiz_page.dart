@@ -84,7 +84,7 @@ class QuizPageState extends State<QuizPage> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: ColorsAsset.kPrimary,
         onPressed: () {
-          ViewCourseCubit().courseWatched(widget.courseModel);
+          ViewCourseCubit().courseWatched(widget.courseModel, context);
         },
         label: const Text(
           'Submit',

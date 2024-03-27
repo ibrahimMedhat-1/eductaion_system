@@ -128,7 +128,7 @@ class _VideoLecturePageState extends State<VideoLecturePage> {
       })
       ..addListener(() async {
         if (controller.value.position == controller.value.duration) {
-          ViewCourseCubit().courseWatched(widget.courseModel!);
+          ViewCourseCubit().courseWatched(widget.courseModel!, context);
           print('video Ended');
         }
       });
