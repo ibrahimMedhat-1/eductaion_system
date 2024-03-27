@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eductaion_system/student/features/profile/manager/profile_cubit.dart';
-import 'package:eductaion_system/student/features/profile/widgets/parent_data.dart';
-import 'package:eductaion_system/student/features/profile/widgets/personal_data.dart';
+import 'package:education_system/student/features/profile/manager/profile_cubit.dart';
+import 'package:education_system/student/features/profile/widgets/parent_data.dart';
+import 'package:education_system/student/features/profile/widgets/personal_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restart_app/restart_app.dart';
 
 import '../../../auth/login/login page.dart';
+import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import 'edit_info.dart';
 
@@ -119,11 +121,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             width: 200,
                             child: ElevatedButton(
                               onPressed: () {
+                                Constants.teacherModel = null;
+                                Constants.studentModel = null;
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => const LoginPage(),
                                     ));
+                                Restart.restartApp();
                               },
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,

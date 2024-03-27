@@ -1,4 +1,4 @@
-import 'package:eductaion_system/teacher/features/add_quiz/widgets/question_textfield.dart';
+import 'package:education_system/teacher/features/add_quiz/widgets/question_textfield.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../models/question_model.dart';

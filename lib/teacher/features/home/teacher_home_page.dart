@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eductaion_system/shared/constants.dart';
-import 'package:eductaion_system/teacher/features/home/row_list.dart';
+import 'package:education_system/shared/constants.dart';
+import 'package:education_system/teacher/features/home/row_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restart_app/restart_app.dart';
 
 import '../../../auth/login/login page.dart';
 import '../../../components/locale/applocale.dart';
@@ -108,11 +109,14 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                                       ),
                                     ),
                                     onPressed: () {
+                                      Constants.teacherModel = null;
+                                      Constants.studentModel = null;
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => const LoginPage(),
                                           ));
+                                      Restart.restartApp();
                                     },
                                     child: const Text("Logout"),
                                   ),

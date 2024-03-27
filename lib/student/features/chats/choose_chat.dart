@@ -1,4 +1,4 @@
-import 'package:eductaion_system/student/features/chats/widgets/chat_dialog.dart';
+import 'package:education_system/student/features/chats/widgets/chat_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/utils/colors.dart';

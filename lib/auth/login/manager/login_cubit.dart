@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eductaion_system/models/student_model.dart';
-import 'package:eductaion_system/student/features/home/student_home_page.dart';
-import 'package:eductaion_system/teacher/features/home/teacher_home_page.dart';
+import 'package:education_system/models/student_model.dart';
+import 'package:education_system/student/features/home/student_home_page.dart';
+import 'package:education_system/teacher/features/home/teacher_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +63,7 @@ class LoginCubit extends Cubit<LoginState> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const Studentlayout(),
+                builder: (context) => const StudentLayout(),
               ));
         }).catchError((onError) {
           emit(LoginError());

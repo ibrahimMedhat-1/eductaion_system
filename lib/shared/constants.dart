@@ -1,5 +1,5 @@
-import 'package:eductaion_system/models/student_model.dart';
-import 'package:eductaion_system/models/teacher_model.dart';
+import 'package:education_system/models/student_model.dart';
+import 'package:education_system/models/teacher_model.dart';
 
 String lang = "en";
 

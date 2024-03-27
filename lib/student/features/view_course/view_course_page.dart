@@ -1,8 +1,8 @@
 import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eductaion_system/models/course_model.dart';
-import 'package:eductaion_system/student/features/quiz/quiz_page.dart';
-import 'package:eductaion_system/student/features/view_course/manager/view_course_cubit.dart';
+import 'package:education_system/models/course_model.dart';
+import 'package:education_system/student/features/quiz/quiz_page.dart';
+import 'package:education_system/student/features/view_course/manager/view_course_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
@@ -103,13 +103,13 @@ class ViewCoursePage extends StatelessWidget {
 
 class VideoLecturePage extends StatefulWidget {
   final String videoLink;
-  final DocumentReference<Map<String, dynamic>> lesson;
-  final CourseModel courseModel;
+  final DocumentReference<Map<String, dynamic>>? lesson;
+  final CourseModel? courseModel;
   const VideoLecturePage({
     super.key,
-    required this.courseModel,
+    this.courseModel,
     required this.videoLink,
-    required this.lesson,
+    this.lesson,
   });
 
   @override
@@ -128,7 +128,7 @@ class _VideoLecturePageState extends State<VideoLecturePage> {
       })
       ..addListener(() async {
         if (controller.value.position == controller.value.duration) {
-          ViewCourseCubit().courseWatched(widget.courseModel);
+          ViewCourseCubit().courseWatched(widget.courseModel!);
           print('video Ended');
         }
       });
@@ -159,116 +159,16 @@ class _VideoLecturePageState extends State<VideoLecturePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.6,
+          color: ColorsAsset.kLight,
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              color: ColorsAsset.kLight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(child: Chewie(controller: _chewieController)),
-              ),
-            ),
+            child: Center(child: Chewie(controller: _chewieController)),
           ),
-          const SizedBox(
-            height: 25,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.6,
-            child: const ExpansionTile(
-              shape: OutlineInputBorder(
-                  borderSide: BorderSide(
-                color: ColorsAsset.kPrimary,
-              )),
-              backgroundColor: ColorsAsset.kLight,
-              expandedAlignment: Alignment.topLeft,
-              title: Text(
-                'الشهر الاول',
-                style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
-              ),
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('الوحدة الاولي'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('اسالة عاملة'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('امتحان شامل'),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.6,
-            child: const ExpansionTile(
-              shape: OutlineInputBorder(
-                  borderSide: BorderSide(
-                color: ColorsAsset.kPrimary,
-              )),
-              backgroundColor: ColorsAsset.kLight,
-              expandedAlignment: Alignment.topLeft,
-              title: Text(
-                'الشهر الثاني',
-                style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
-              ),
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('الوحدة الاولي'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('اسالة عاملة'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('امتحان شامل'),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.6,
-            child: const ExpansionTile(
-              shape: OutlineInputBorder(
-                  borderSide: BorderSide(
-                color: ColorsAsset.kPrimary,
-              )),
-              backgroundColor: ColorsAsset.kLight,
-              expandedAlignment: Alignment.topLeft,
-              title: Text(
-                'الشهر الثالث',
-                style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
-              ),
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('الوحدة الاولي'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('اسالة عاملة'),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('امتحان شامل'),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -39,10 +39,10 @@ class AddQuestionModel {
   String? modelAnswer;
 
   Map<String, dynamic> toMap() => {
-        'question': questionController,
-        'option1': option1Controller,
-        'option2': option2Controller,
-        'option3': option3Controller,
+        'question': questionController.text,
+        'answer1': option1Controller.text,
+        'answer2': option2Controller.text,
+        'answer3': option3Controller.text,
         'modelAnswer': modelAnswer,
       };
 }

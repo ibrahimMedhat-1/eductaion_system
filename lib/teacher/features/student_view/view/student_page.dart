@@ -1,16 +1,17 @@
+import 'package:education_system/teacher/features/student_view/manager/student_data_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/profile/widgets/parent_data.dart';
 
-class StudentPage extends StatefulWidget {
-  const StudentPage({super.key});
+class StudentPage extends StatelessWidget {
+  final Map<String, dynamic> student;
+  const StudentPage({
+    super.key,
+    required this.student,
+  });
 
-  @override
-  State<StudentPage> createState() => _StudentPageState();
-}
-
-class _StudentPageState extends State<StudentPage> {
   @override
   Widget build(BuildContext context) {
     Map<int, int> selectedAnswers = {};
@@ -46,111 +47,126 @@ class _StudentPageState extends State<StudentPage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Row(
-          children: [
-            const Flexible(
-                flex: 3,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 80,
-                        backgroundColor: Color(0xFF6E85B7),
-                        backgroundImage: AssetImage("assets/images/profile purple.png"),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      // PersonalData(),
-                      FamilyDataSection(),
-                    ],
-                  ),
-                )),
-            Flexible(
-              flex: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: ExpansionTile(
-                            shape: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: ColorsAsset.kPrimary,
-                            )),
-                            backgroundColor: ColorsAsset.kLight,
-                            expandedAlignment: Alignment.topLeft,
-                            title: const Text(
-                              'Quiz One',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+      body: BlocProvider(
+        create: (context) => StudentDataCubit()..getStudentGrades(student['id']),
+        child: BlocConsumer<StudentDataCubit, StudentDataState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            final StudentDataCubit cubit = StudentDataCubit.get(context);
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Flexible(
+                      flex: 3,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 80,
+                              backgroundColor: const Color(0xFF6E85B7),
+                              backgroundImage: NetworkImage(student['image'] ?? ''),
                             ),
-                            trailing: const Text("Grade = 12/15"),
-                            children: <Widget>[
-                              Column(
-                                children: List.generate(questions.length, (index) {
-                                  return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        questions[index],
-                                        style: const TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorsAsset.kPrimary),
-                                      ),
-                                      const SizedBox(height: 8.0),
-                                      Column(
-                                        children: List.generate(answers[index].length, (optionIndex) {
-                                          return RadioListTile(
-                                            title: Text(
-                                              answers[index][optionIndex],
-                                              style: const TextStyle(color: ColorsAsset.kTextcolor),
-                                            ),
-                                            value: optionIndex,
-                                            groupValue: selectedAnswers[index],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedAnswers[index] = value!;
-                                              });
-                                            },
-                                          );
-                                        }),
-                                      ),
-                                      Row(
-                                        children: [
-                                          const Text("Model Answer : "),
-                                          Text(modelAnswer[index],
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            // PersonalData(),
+                            FamilyDataSection(parentData: student['parentData']),
+                          ],
+                        ),
+                      )),
+                  Flexible(
+                    flex: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: ListView.builder(
+                        itemCount: cubit.quizzes.length,
+                        itemBuilder: (context, indexx) {
+                          print(cubit.quizzes[indexx]['questions'].length);
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                child: ExpansionTile(
+                                  shape: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                    color: ColorsAsset.kPrimary,
+                                  )),
+                                  backgroundColor: ColorsAsset.kLight,
+                                  expandedAlignment: Alignment.topLeft,
+                                  title: Text(
+                                    'Quiz ${indexx + 1}',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                  ),
+                                  trailing: Text(
+                                      "Grade = ${cubit.quizzes[indexx]['myGrade']}/${cubit.quizzes[indexx]['totalGrade']}"),
+                                  children: <Widget>[
+                                    Column(
+                                      children:
+                                          List.generate(cubit.quizzes[indexx]['questions'].length, (index) {
+                                        print(index);
+                                        return Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              cubit.quizzes[indexx]['questions'][index]['question'],
                                               style: const TextStyle(
                                                   fontSize: 16.0,
                                                   fontWeight: FontWeight.bold,
-                                                  color: ColorsAsset.kPrimary))
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Divider(),
-                                    ],
-                                  );
-                                }),
+                                                  color: ColorsAsset.kPrimary),
+                                            ),
+                                            const SizedBox(height: 8.0),
+                                            Column(
+                                              children: List.generate(3, (optionIndex) {
+                                                print(cubit.quizzes[indexx]['questions'][index]
+                                                    ['answer${optionIndex + 1}']);
+                                                print(cubit.selectedAnswers[indexx][index]);
+                                                return RadioListTile(
+                                                  title: Text(
+                                                    cubit.quizzes[indexx]['questions'][index]
+                                                        ['answer${optionIndex + 1}'],
+                                                    style: const TextStyle(color: ColorsAsset.kTextcolor),
+                                                  ),
+                                                  value: cubit.selectedAnswers[indexx][index],
+                                                  groupValue: cubit.quizzes[indexx]['questions'][index]
+                                                      ['answer${optionIndex + 1}'],
+                                                  onChanged: (value) {},
+                                                );
+                                              }),
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text("Model Answer : "),
+                                                Text(cubit.quizzes[indexx]['questions'][index]['modelAnswer'],
+                                                    style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: ColorsAsset.kPrimary))
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            const Divider(),
+                                          ],
+                                        );
+                                      }),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
+            );
+          },
         ),
       ),
     );

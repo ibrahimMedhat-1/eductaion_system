@@ -1,5 +1,5 @@
-import 'package:eductaion_system/models/course_model.dart';
-import 'package:eductaion_system/student/features/payment/widgets/my_text_field.dart';
+import 'package:education_system/models/course_model.dart';
+import 'package:education_system/student/features/payment/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

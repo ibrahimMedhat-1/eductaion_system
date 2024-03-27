@@ -1,7 +1,7 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:eductaion_system/student/features/home/manager/home_page_cubit.dart';
-import 'package:eductaion_system/student/features/home/widgets/subject_container.dart';
+import 'package:education_system/student/features/home/manager/home_page_cubit.dart';
+import 'package:education_system/student/features/home/widgets/subject_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,14 +11,14 @@ import '../../widgets/cutom_appbar.dart';
 import '../course_details/course_page.dart';
 import '../payment/widgets/my_text_field.dart';
 
-class Studentlayout extends StatefulWidget {
-  const Studentlayout({super.key});
+class StudentLayout extends StatefulWidget {
+  const StudentLayout({super.key});
 
   @override
-  StudentlayoutState createState() => StudentlayoutState();
+  StudentLayoutState createState() => StudentLayoutState();
 }
 
-class StudentlayoutState extends State<Studentlayout> {
+class StudentLayoutState extends State<StudentLayout> {
   final List<String> homeData = [
     "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
     "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",

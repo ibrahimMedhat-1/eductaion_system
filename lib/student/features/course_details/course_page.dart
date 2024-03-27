@@ -1,5 +1,5 @@
-import 'package:eductaion_system/models/course_model.dart';
-import 'package:eductaion_system/student/features/course_details/manager/course_details_cubit.dart';
+import 'package:education_system/models/course_model.dart';
+import 'package:education_system/student/features/course_details/manager/course_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,7 +53,7 @@ class CoursePage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "نبذة عامة ",
                                         style: TextStyle(
                                             fontSize: 30,
@@ -82,7 +82,7 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "الشهادة : ",
                                             style: TextStyle(
                                                 fontSize: 22,
@@ -100,7 +100,7 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "الخبرة : ",
                                             style: TextStyle(
                                                 fontSize: 22,
@@ -109,7 +109,8 @@ class CoursePage extends StatelessWidget {
                                           ),
                                           Text(
                                             cubit.teacherData!.data()!['bio'],
-                                            style: TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
@@ -117,7 +118,7 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "اسم السنتر : ",
                                             style: TextStyle(
                                                 fontSize: 22,
@@ -126,7 +127,8 @@ class CoursePage extends StatelessWidget {
                                           ),
                                           Text(
                                             cubit.teacherData!.data()!['centerName'],
-                                            style: TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
@@ -134,7 +136,7 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "رقم السنتر : ",
                                             style: TextStyle(
                                                 fontSize: 22,
@@ -143,7 +145,8 @@ class CoursePage extends StatelessWidget {
                                           ),
                                           Text(
                                             cubit.teacherData!.data()!['centerNo'],
-                                            style: TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
@@ -181,7 +184,7 @@ class CoursePage extends StatelessWidget {
                                       children: e.value
                                           .map<Widget>(
                                             (e) => Padding(
-                                              padding: EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(8.0),
                                               child: Text(e),
                                             ),
                                           )

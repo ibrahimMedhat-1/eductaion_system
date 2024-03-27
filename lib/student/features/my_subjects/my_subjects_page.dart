@@ -1,4 +1,4 @@
-import 'package:eductaion_system/student/features/my_subjects/manager/my_subjects_cubit.dart';
+import 'package:education_system/student/features/my_subjects/manager/my_subjects_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eductaion_system/shared/constants.dart';
+import 'package:education_system/shared/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'add_material_state.dart';

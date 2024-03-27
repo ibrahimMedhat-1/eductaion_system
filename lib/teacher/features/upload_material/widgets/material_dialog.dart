@@ -5,7 +5,8 @@ import '../../add_lesson/view/add_lesson_page.dart';
 import '../../add_quiz/view/add_quiz_page.dart';
 
 class MaterialDialog extends StatelessWidget {
-  const MaterialDialog({super.key});
+  final String year;
+  const MaterialDialog({super.key, required this.year});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,10 @@ class MaterialDialog extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const QuestionPage()),
+                    MaterialPageRoute(
+                        builder: (context) => QuestionPage(
+                              year: year,
+                            )),
                   );
                 },
                 child: Container(
@@ -33,7 +37,7 @@ class MaterialDialog extends StatelessWidget {
                     children: [
                       Image.asset('assets/images/10.png'),
                       const Text(
-                        'Add Quiz',
+                        'Add Questions',
                         style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -47,7 +51,7 @@ class MaterialDialog extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const AddLessonPage()),
+                    MaterialPageRoute(builder: (context) => AddLessonPage(year: year)),
                   );
                 },
                 child: Container(

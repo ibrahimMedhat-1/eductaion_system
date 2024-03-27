@@ -1,15 +1,18 @@
-import 'package:eductaion_system/shared/constants.dart';
+import 'package:education_system/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/utils/colors.dart';
 
 class FamilyDataSection extends StatelessWidget {
+  final Map<String, dynamic>? parentData;
   const FamilyDataSection({
     super.key,
+    this.parentData,
   });
 
   @override
   Widget build(BuildContext context) {
+    print(parentData);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,9 +40,9 @@ class FamilyDataSection extends StatelessWidget {
           ],
           rows: [
             DataRow(cells: [
-              DataCell(Text(Constants.studentModel!.parentData!.name!)),
-              DataCell(Text(Constants.studentModel!.parentData!.email!)),
-              DataCell(Text(Constants.studentModel!.parentData!.phone!)),
+              DataCell(Text(Constants.studentModel?.parentData?.name ?? parentData?['name'] ?? '')),
+              DataCell(Text(Constants.studentModel?.parentData?.email ?? parentData?['email'] ?? '')),
+              DataCell(Text(Constants.studentModel?.parentData?.phone ?? parentData?['phone'] ?? '')),
             ])
           ],
         ),

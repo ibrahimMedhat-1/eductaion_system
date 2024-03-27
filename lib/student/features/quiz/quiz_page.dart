@@ -1,4 +1,4 @@
-import 'package:eductaion_system/models/course_model.dart';
+import 'package:education_system/models/course_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/utils/colors.dart';

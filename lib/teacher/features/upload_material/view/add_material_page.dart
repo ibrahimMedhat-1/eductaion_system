@@ -1,8 +1,10 @@
-import 'package:eductaion_system/teacher/features/upload_material/manager/add_material_cubit.dart';
+import 'package:education_system/teacher/features/upload_material/manager/add_material_cubit.dart';
+import 'package:education_system/teacher/features/upload_material/pages/view_lesson/view/view_lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../shared/utils/colors.dart';
+import '../pages/question_page/view/question_page.dart';
 import '../widgets/material_dialog.dart';
 
 class AddMaterialPage extends StatelessWidget {
@@ -47,7 +49,26 @@ class AddMaterialPage extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ListTile(
-                              onTap: () {},
+                              onTap: () {
+                                if (cubit.material[index]['type'] == 'lesson') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ViewLesson(
+                                          videoLink: cubit.material[index]['video'],
+                                          lessonTitle: cubit.material[index]['name'],
+                                        ),
+                                      ));
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TeacherQuestionPage(
+                                          question: cubit.material[index],
+                                        ),
+                                      ));
+                                }
+                              },
                               leading: Image.asset("assets/images/icons8-study-50.png"),
                               tileColor: ColorsAsset.kLightPurble,
                               title: Text(
@@ -72,7 +93,9 @@ class AddMaterialPage extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return const MaterialDialog();
+                              return MaterialDialog(
+                                year: year,
+                              );
                             },
                           );
                         },
