@@ -91,6 +91,7 @@ class AddLessonCubit extends Cubit<AddLessonState> {
           'reference': quiz,
           'video': value,
           'type': 'lesson',
+          'date': DateTime.now().toString(),
         });
       });
     });

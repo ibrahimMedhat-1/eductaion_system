@@ -15,7 +15,7 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
   List<bool> watched = [];
   void getCourseMaterial(CourseModel courseModel) async {
     emit(GetMaterialLoading());
-    await courseModel.reference!.collection('material').snapshots().listen((value) {
+    await courseModel.reference!.collection('material').orderBy('date').snapshots().listen((value) {
       material.clear();
       for (var element in value.docs) {
         material.add(element.data());
@@ -59,12 +59,14 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
         .doc(Constants.studentModel!.id)
         .collection('courses')
         .doc(courseModel.id)
-        .update({'watched': watched + 1});
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Submitted Successfully'),
-      ),
-    );
+        .update({'watched': watched + 1}).then((value) {
+      emit(ViewCourseInitial());
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Submitted Successfully'),
+        ),
+      );
+    });
   }
 }

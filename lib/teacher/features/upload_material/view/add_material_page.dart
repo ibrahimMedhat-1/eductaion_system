@@ -29,7 +29,7 @@ class AddMaterialPage extends StatelessWidget {
               return Scaffold(
                 appBar: AppBar(
                   title: const Text(
-                    'Add Questions',
+                    'Add Material',
                     style: TextStyle(color: ColorsAsset.kPrimary),
                   ),
                   backgroundColor: ColorsAsset.kLight2,

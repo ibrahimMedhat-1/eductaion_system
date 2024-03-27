@@ -20,6 +20,7 @@ class AddMaterialCubit extends Cubit<AddMaterialState> {
         .collection(Constants.teacherModel!.subject!)
         .doc(Constants.teacherModel!.courseId!.trim())
         .collection('material')
+        .orderBy('date')
         .snapshots()
         .listen((value) {
       material.clear();

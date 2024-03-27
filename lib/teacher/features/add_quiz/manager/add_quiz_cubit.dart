@@ -54,6 +54,7 @@ class AddQuizCubit extends Cubit<AddQuizState> {
       'reference': quiz,
       'questions': questionsData,
       'type': type,
+      'date': DateTime.now().toString(),
     });
 
     Navigator.pop(context);

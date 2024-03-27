@@ -46,6 +46,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   String name = Constants.studentModel?.name ?? Constants.teacherModel!.name!;
+
   void updateData(context, {bool isTeacher = false}) async {
     emit(UpdateDataLoading());
     await FirebaseFirestore.instance
@@ -61,6 +62,8 @@ class ProfileCubit extends Cubit<ProfileState> {
                 centerName: parentNameController.text,
                 bio: parentPhoneController.text,
                 id: Constants.teacherModel!.id,
+                courseId: Constants.teacherModel!.courseId,
+                subject: Constants.teacherModel!.subject,
               ).toMap()
             : StudentModel(
                 image: Constants.studentModel!.image,
@@ -88,6 +91,8 @@ class ProfileCubit extends Cubit<ProfileState> {
               centerName: parentNameController.text,
               bio: parentPhoneController.text,
               id: Constants.teacherModel!.id,
+              courseId: Constants.teacherModel!.courseId,
+              subject: Constants.teacherModel!.subject,
             )
           : Constants.studentModel = StudentModel(
               image: Constants.studentModel!.image,
