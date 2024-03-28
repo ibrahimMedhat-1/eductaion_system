@@ -55,7 +55,7 @@ class _AddLessonPageState extends State<AddLessonPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: cubit.videoFile != null
                               ? HtmlElementView(viewType: cubit.id)
-                              : Center(child: Image.asset("assets/images/video.png")),
+                              : Center(child: Image.asset("assets/images/icons8-add-100.png")),
                         ),
                       ),
                     ),
