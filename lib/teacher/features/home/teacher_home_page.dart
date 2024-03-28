@@ -45,12 +45,12 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                             child: CachedNetworkImage(
                               imageUrl: cubit.profileImage,
                               imageBuilder: (context, imageProvider) => CircleAvatar(
-                                radius: 80,
+                                radius: 50,
                                 backgroundColor: Color(0xFF6E85B7),
                                 backgroundImage: imageProvider,
                               ),
                               errorWidget: (context, url, error) => const CircleAvatar(
-                                radius: 80,
+                                radius: 50,
                                 backgroundColor: Color(0xFF6E85B7),
                                 backgroundImage: NetworkImage("assets/images/profile purple.png"),
                               ),
@@ -62,7 +62,7 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                             },
                           ),
                           const SizedBox(
-                            width: 15,
+                            width: 5,
                           ),
                           Column(
                             children: [

@@ -63,7 +63,10 @@ class ViewStudentsPage extends StatelessWidget {
                                 builder: (context) => StudentPage(student: cubit.students[index]),
                               ));
                             },
-                            leading: Image.asset("assets/images/icons8-student-50.png"),
+                            leading:  cubit.students[index]['image']==''?
+                              Image.asset("assets/images/icons8-student-50.png"):
+                                Image.network(cubit.students[index]['image'])
+                            ,
                             tileColor: ColorsAsset.kLightPurble,
                             title: Text(
                               cubit.students[index]['name'],
