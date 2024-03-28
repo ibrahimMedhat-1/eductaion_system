@@ -46,7 +46,7 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                               imageUrl: cubit.profileImage,
                               imageBuilder: (context, imageProvider) => CircleAvatar(
                                 radius: 50,
-                                backgroundColor: Color(0xFF6E85B7),
+                                backgroundColor: const Color(0xFF6E85B7),
                                 backgroundImage: imageProvider,
                               ),
                               errorWidget: (context, url, error) => const CircleAvatar(
