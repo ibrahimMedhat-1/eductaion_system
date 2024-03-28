@@ -64,7 +64,7 @@ class _MyAssignmentDetailsState extends State<MyAssignmentDetails> {
                                   backgroundColor: ColorsAsset.kLight,
                                   expandedAlignment: Alignment.topLeft,
                                   title: Text(
-                                    'Quiz ${indexx + 1}',
+                                    'Assignment ${indexx + 1}',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                   ),
