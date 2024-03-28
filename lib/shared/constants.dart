@@ -18,6 +18,8 @@ abstract class Constants {
     courseId: 'wwbjZNx7hD1r37PULn0g',
     subject: 'math',
     years: [
+      'first Secondary',
+      'second Secondary',
       'third Secondary',
     ],
   );
