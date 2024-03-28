@@ -9,6 +9,7 @@ class TeacherModel {
   String? email;
   String? degree;
   String? subject;
+  List<String>? years;
 
   TeacherModel({
     this.name,
@@ -21,10 +22,12 @@ class TeacherModel {
     this.degree,
     this.subject,
     this.id,
+    this.years,
   });
 
   TeacherModel.fromJson(Map<String, dynamic>? json) {
     name = json!['name'];
+    years = json['years'];
     id = json['id'];
     courseId = json['courseId'];
     subject = json['subject'];
