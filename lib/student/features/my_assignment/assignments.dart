@@ -65,8 +65,8 @@ class _MyAssignmentDetailsState extends State<MyAssignmentDetails> {
                                   expandedAlignment: Alignment.topLeft,
                                   title: Text(
                                     'Assignment ${indexx + 1}',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                   ),
                                   trailing: Text(
                                       "Grade = ${cubit.assignments[indexx]['myGrade']}/${cubit.assignments[indexx]['totalGrade']}"),

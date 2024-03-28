@@ -69,6 +69,7 @@ class ViewCoursePage extends StatelessWidget {
                                   return Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                                     child: Card(
+                                      clipBehavior: Clip.antiAlias,
                                       elevation: 2,
                                       child: ListTile(
                                         onTap: index == 0 || cubit.watched[index]
