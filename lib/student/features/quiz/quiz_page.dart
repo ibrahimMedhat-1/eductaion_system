@@ -103,7 +103,7 @@ class QuizPageState extends State<QuizPage> {
               .doc(Constants.studentModel!.id)
               .collection(widget.type)
               .doc(widget.courseModel.id!.trim())
-              .collection('assignment')
+              .collection(widget.type)
               .doc(widget.quiz);
           List<Map<String, dynamic>> questions = [];
           int myGrade = 0;
