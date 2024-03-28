@@ -53,11 +53,14 @@ class MyAssignmentsCubit extends Cubit<MyAssignmentsState> {
         .collection('assignment')
         .get()
         .then((value) {
+      print(value.docs);
+      print('value.docs');
       for (var element in value.docs) {
         assignments.add(element.data());
       }
+    }).catchError((onError) {
+      print(onError.toString());
     });
-    print(assignments);
 
     for (var element in assignments) {
       List<String> answers = [];

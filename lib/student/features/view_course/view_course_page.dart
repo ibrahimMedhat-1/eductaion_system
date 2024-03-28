@@ -40,6 +40,7 @@ class ViewCoursePage extends StatelessWidget {
                                     lesson: cubit.material[cubit.index]['reference'],
                                   )
                                 : QuizPage(
+                                    quiz: cubit.material[cubit.index]['id'],
                                     courseModel: courseModel,
                                     type: cubit.material[cubit.index]['type'],
                                     questions: List<Map<String, dynamic>>.from(
