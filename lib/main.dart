@@ -1,12 +1,12 @@
 import 'package:education_system/shared/main_cubit/main_cubit.dart';
 import 'package:education_system/shared/utils/colors.dart';
 import 'package:education_system/student/features/profile/manager/profile_cubit.dart';
+import 'package:education_system/teacher/features/home/teacher_home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 
-import 'admin/features/home/view/home_page.dart';
 import 'components/locale/applocale.dart';
 
 void main() async {
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
             // TeacherLayout
             // Studentlayout
             // LoginPage
-            home: const AdminHomePage(),
+            home: const TeacherLayout(),
           );
         },
       ),
