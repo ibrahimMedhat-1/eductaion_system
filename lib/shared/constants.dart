@@ -15,5 +15,12 @@ abstract class Constants {
     name: 'Ibrahim',
     id: 'cV6Qa074MduGwYC5ujcu',
     image: '',
+    courseId: 'wwbjZNx7hD1r37PULn0g',
+    subject: 'math',
+    years: [
+      'first Secondary',
+      'second Secondary',
+      'third Secondary',
+    ],
   );
 }
