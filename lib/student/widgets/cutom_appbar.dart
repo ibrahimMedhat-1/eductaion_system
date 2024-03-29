@@ -62,7 +62,7 @@ PreferredSizeWidget customAppBar(BuildContext context) {
               return CachedNetworkImage(
                 imageUrl: ProfileCubit.get(context).profileImage,
                 imageBuilder: (context, imageProvider) => CircleAvatar(
-                  backgroundColor: Color(0xFF6E85B7),
+                  backgroundColor: const Color(0xFF6E85B7),
                   backgroundImage: imageProvider,
                 ),
                 errorWidget: (context, url, error) => const CircleAvatar(

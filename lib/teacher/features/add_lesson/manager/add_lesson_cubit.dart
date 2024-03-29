@@ -36,7 +36,7 @@ class AddLessonCubit extends Cubit<AddLessonState> {
       videoFile = await value!.readAsBytes();
       final sourceElement = html.SourceElement();
       sourceElement.type = mimeType;
-      sourceElement.src = Uri.dataFromBytes(await value!.readAsBytes(), mimeType: mimeType).toString();
+      sourceElement.src = Uri.dataFromBytes(await value.readAsBytes(), mimeType: mimeType).toString();
 
       final videoElement = html.VideoElement();
       videoElement.controls = true;

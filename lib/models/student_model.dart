@@ -25,7 +25,7 @@ class StudentModel {
 
   StudentModel.fromJson(Map<String, dynamic>? json) {
     name = json!['name'];
-    image = json!['image'];
+    image = json['image'];
     reference = json['reference'];
     email = json['email'];
     phone = json['phone'];

@@ -50,9 +50,9 @@ class HomePageCubit extends Cubit<HomePageState> {
         .collection(subject)
         .get()
         .then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         courses.add(CourseModel.fromJson(element.data()));
-      });
+      }
       emit(GetCoursesSuccessfully());
     }).catchError((onError) {
       emit(GetCoursesError());

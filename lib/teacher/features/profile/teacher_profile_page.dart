@@ -34,7 +34,7 @@ class TeacherProfilePage extends StatelessWidget {
           ),
           body: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Stack(
@@ -43,7 +43,7 @@ class TeacherProfilePage extends StatelessWidget {
                     imageUrl: cubit.profileImage,
                     imageBuilder: (context, imageProvider) => CircleAvatar(
                       radius: 80,
-                      backgroundColor: Color(0xFF6E85B7),
+                      backgroundColor: const Color(0xFF6E85B7),
                       backgroundImage: imageProvider,
                     ),
                     errorWidget: (context, url, error) => const CircleAvatar(
@@ -72,7 +72,7 @@ class TeacherProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              ListTile(
+              const ListTile(
                 title: Text("Personal Data"),
                 tileColor: ColorsAsset.kLightPurble,
                 leading: Icon(
@@ -80,25 +80,25 @@ class TeacherProfilePage extends StatelessWidget {
                   color: ColorsAsset.kPrimary,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   children: [
                     MyTextField(
                       controller: cubit.nameController,
                       labelText: "Name",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     MyTextField(
                       controller: cubit.passwordController,
                       labelText: "Certificate",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     MyTextField(
@@ -108,18 +108,18 @@ class TeacherProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   children: [
                     MyTextField(
                       controller: cubit.parentNameController,
                       labelText: "Center Name",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     MyTextField(
@@ -129,7 +129,7 @@ class TeacherProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               state is UpdateDataLoading

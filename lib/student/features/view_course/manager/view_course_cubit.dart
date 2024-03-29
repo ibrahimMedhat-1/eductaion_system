@@ -15,7 +15,7 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
   List<bool> watched = [];
   void getCourseMaterial(CourseModel courseModel) async {
     emit(GetMaterialLoading());
-    await courseModel.reference!.collection('material').orderBy('date').snapshots().listen((value) {
+    courseModel.reference!.collection('material').orderBy('date').snapshots().listen((value) {
       material.clear();
       for (var element in value.docs) {
         material.add(element.data());
@@ -23,7 +23,7 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
       }
       emit(GetMaterialSuccessfully());
     });
-    await FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection('students')
         .doc(Constants.studentModel!.id)
         .collection('courses')
@@ -63,7 +63,7 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
       emit(ViewCourseInitial());
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (context) => const AlertDialog(
           title: Text('Submitted Successfully'),
         ),
       );

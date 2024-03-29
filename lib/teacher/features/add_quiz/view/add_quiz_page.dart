@@ -61,7 +61,7 @@ class QuestionPageState extends State<QuestionPage> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: TextFormField(
-                            decoration: InputDecoration(hintText: 'Questions Amount'),
+                            decoration: const InputDecoration(hintText: 'Questions Amount'),
                             onChanged: (value) {
                               if (value.isEmpty) {
                                 cubit.selectedQuantity = 0;
@@ -85,7 +85,7 @@ class QuestionPageState extends State<QuestionPage> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: TextFormField(
-                            decoration: InputDecoration(hintText: 'Exam Name'),
+                            decoration: const InputDecoration(hintText: 'Exam Name'),
                             controller: cubit.lessonNameController,
                           ),
                         ),
@@ -98,7 +98,7 @@ class QuestionPageState extends State<QuestionPage> {
                               cubit.typeValue = value!;
                               cubit.emit(AddQuizInitial());
                             },
-                            items: [
+                            items: const [
                               DropdownMenuItem(value: 'quiz', child: Text('quiz')),
                               DropdownMenuItem(value: 'assignment', child: Text('assignment')),
                             ]),

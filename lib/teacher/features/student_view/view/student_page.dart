@@ -98,7 +98,7 @@ class StudentPage extends StatelessWidget {
                                   title: Text(
                                     'Quiz ${indexx + 1}',
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                        const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                   ),
                                   trailing: Text(
                                       "Grade = ${cubit.quizzes[indexx]['myGrade']}/${cubit.quizzes[indexx]['totalGrade']}"),

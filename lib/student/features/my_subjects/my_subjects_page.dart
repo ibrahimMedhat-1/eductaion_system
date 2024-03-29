@@ -65,7 +65,7 @@ class MySubjectsPage extends StatelessWidget {
                                           children: [
                                             Text(
                                               cubit.myCourses[index].courseName ?? '',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                                             ),
                                             const SizedBox(

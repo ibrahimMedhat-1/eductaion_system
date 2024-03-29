@@ -48,21 +48,21 @@ class EditInfoPage extends StatelessWidget {
                 height: 20,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   children: [
                     MyTextField(
                       controller: cubit.nameController,
                       labelText: "Student Name",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     MyTextField(
                       controller: cubit.idController,
                       labelText: "Student ID",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                   ],
@@ -132,19 +132,19 @@ class EditInfoPage extends StatelessWidget {
                 height: 20,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   children: [
                     MyTextField(
                       controller: cubit.parentNameController,
                       labelText: "Name",
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     MyTextField(
                       controller: cubit.parentPhoneController,
                       labelText: "Phone Number",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     MyTextField(

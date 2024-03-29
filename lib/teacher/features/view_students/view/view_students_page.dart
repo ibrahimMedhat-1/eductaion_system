@@ -27,7 +27,7 @@ class ViewStudentsPage extends StatelessWidget {
                 children: [
                   Text(
                     'total students = ${cubit.students.length}',
-                    style: TextStyle(color: ColorsAsset.kPrimary),
+                    style: const TextStyle(color: ColorsAsset.kPrimary),
                   ),
                   const SizedBox(
                     width: 30,
@@ -70,7 +70,7 @@ class ViewStudentsPage extends StatelessWidget {
                             tileColor: ColorsAsset.kLightPurble,
                             title: Text(
                               cubit.students[index]['name'],
-                              style: TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                             ),
                           ),
                         );

@@ -142,7 +142,7 @@ class _LessonVideoState extends State<LessonVideo> {
         return Center(
           child: Text(
             errorMessage,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         );
       },
