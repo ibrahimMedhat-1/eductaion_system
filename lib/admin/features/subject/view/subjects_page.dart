@@ -61,51 +61,54 @@ class SubjectsPage extends StatelessWidget {
               ),
               Stack(
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: state is GetCoursesLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: cubit.courses.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => CourseDetails(
-                                        courseModel: cubit.courses[index],
-                                        subject: cubit.selectedSubject,
-                                      ),
-                                    ));
-                                  },
-                                  child: SizedBox(
-                                    width: MediaQuery.of(context).size.width * 0.2,
-                                    child: Card(
-                                      elevation: 2,
-                                      color: ColorsAsset.kLight2,
-                                      child: Column(
-                                        children: [
-                                          Image.network(
-                                            cubit.courses[index].image ?? '',
-                                            height: MediaQuery.of(context).size.height * 0.35,
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(cubit.courses[index].courseName ?? ''),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                        ],
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: state is GetCoursesLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: cubit.courses.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => CourseDetails(
+                                          courseModel: cubit.courses[index],
+                                          subject: cubit.selectedSubject,
+                                        ),
+                                      ));
+                                    },
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width * 0.2,
+                                      child: Card(
+                                        elevation: 2,
+                                        color: ColorsAsset.kLight2,
+                                        child: Column(
+                                          children: [
+                                            Image.network(
+                                              cubit.courses[index].image ?? '',
+                                              height: MediaQuery.of(context).size.height * 0.35,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(cubit.courses[index].courseName ?? ''),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
+                                );
+                              },
+                            ),
+                    ),
                   ),
                   const CourseDialog(),
                 ],

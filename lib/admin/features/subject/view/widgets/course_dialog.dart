@@ -148,10 +148,16 @@ class CourseDialog extends StatelessWidget {
         onPressed: () {
           _showAddDialog(context);
         },
-        icon: const Icon(
-          Icons.add_box,
-          size: 50,
-          color: ColorsAsset.kPrimary,
+        icon: Row(
+          children: const [
+            Icon(
+              Icons.add_box,
+              size: 50,
+              color: ColorsAsset.kPrimary,
+            ),
+            SizedBox(width: 20),
+            Text('Add Course')
+          ],
         ));
   }
 }

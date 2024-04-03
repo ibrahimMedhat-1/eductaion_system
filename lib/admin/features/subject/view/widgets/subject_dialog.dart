@@ -51,6 +51,7 @@ class SubjectDialog extends StatelessWidget {
         icon: const Icon(
           Icons.add_box,
           color: ColorsAsset.kPrimary,
+          size: 60,
         ));
   }
 }

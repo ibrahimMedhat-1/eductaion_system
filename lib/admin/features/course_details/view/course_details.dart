@@ -1,9 +1,7 @@
 import 'package:education_system/admin/features/course_details/manager/course_details_cubit.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/models/teacher_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../shared/utils/colors.dart';
@@ -16,13 +14,14 @@ class CourseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('fgdhsjk ${courseModel.id}');
     return BlocProvider(
       create: (context) => CourseDetailsCubit()
         ..getTeachers()
         ..getCourseDetails(
-          courseModel.years!.first,
-          subject,
-          courseModel.id,
+          courseModel.years!.first.trim(),
+          subject.toString().trim(),
+          courseModel.id!.trim(),
         ),
       child: BlocConsumer<CourseDetailsCubit, CourseDetailsState>(
         listener: (context, state) {
@@ -73,7 +72,6 @@ class CourseDetails extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     child: const SizedBox(
                       height: 20,
-
                     ),
                   ),
                   DataTable(
@@ -84,7 +82,10 @@ class CourseDetails extends StatelessWidget {
                       DataColumn(label: Expanded(child: Text('Course Reference'))),
                       DataColumn(label: Expanded(child: Text('Teacher Name'))),
                       DataColumn(label: Expanded(child: Text('Teacher ID'))),
-                      DataColumn(label: Expanded(child: Text('Teacher Reference'),)),
+                      DataColumn(
+                          label: Expanded(
+                        child: Text('Teacher Reference'),
+                      )),
                     ],
                     rows: [
                       DataRow(cells: [
