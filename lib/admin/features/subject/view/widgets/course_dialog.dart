@@ -129,6 +129,7 @@ class CourseDialog extends StatelessWidget {
                   child: const Text('Add'),
                   onPressed: () async {
                     cubit.addCourse().then((value) {
+                      cubit.getCourses(cubit.selectedSubject);
                       Navigator.pop(context);
                     });
                   },
