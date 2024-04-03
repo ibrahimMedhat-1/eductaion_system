@@ -3,6 +3,7 @@ import 'package:education_system/student/features/course_details/manager/course_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 import '../../widgets/cutom_appbar.dart';
 import '../payment/payment_page.dart';
@@ -53,9 +54,9 @@ class CoursePage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
-                                        "نبذة عامة ",
-                                        style: TextStyle(
+                                       Text(
+                                        '${getLang(context, "Overview")}',
+                                        style:const  TextStyle(
                                             fontSize: 30,
                                             fontWeight: FontWeight.bold,
                                             color: ColorsAsset.kPrimary),
@@ -64,9 +65,10 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "الاسم : ",
-                                            style: TextStyle(
+                                           Text(
+                                            '${getLang(context, "Name : ")}'
+                                            ,
+                                            style: const TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.bold,
                                                 color: ColorsAsset.kPrimary),
@@ -82,9 +84,10 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "الشهادة : ",
-                                            style: TextStyle(
+                                           Text(
+                                            '${getLang(context, "Certificate: ")}'
+                                           ,
+                                            style: const TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.bold,
                                                 color: ColorsAsset.kPrimary),
@@ -100,9 +103,9 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "الخبرة : ",
-                                            style: TextStyle(
+                                           Text(
+                                            '${getLang(context, "Experience: ")}',
+                                            style: const TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.bold,
                                                 color: ColorsAsset.kPrimary),
@@ -118,9 +121,9 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "اسم السنتر : ",
-                                            style: TextStyle(
+                                           Text(
+                                            '${getLang(context, "Center Name: ")}',
+                                            style: const TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.bold,
                                                 color: ColorsAsset.kPrimary),
@@ -136,9 +139,10 @@ class CoursePage extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "رقم السنتر : ",
-                                            style: TextStyle(
+                                           Text(
+                                            '${getLang(context, "Center Number: ")}'
+                                            ,
+                                            style: const TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.bold,
                                                 color: ColorsAsset.kPrimary),
@@ -157,9 +161,9 @@ class CoursePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Text(
-                          "اطلع علي الخطة الدراسية",
-                          style: TextStyle(
+                         Text(
+                          '${getLang(context, "See the study plan")}',
+                          style: const TextStyle(
                               fontSize: 30, fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                         ),
                         const SizedBox(
@@ -212,9 +216,9 @@ class CoursePage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                            child: Text('اشترك الان'),
+                          child:  Padding(
+                            padding:const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                            child: Text('${getLang(context, "subscribe now")}'),
                           ),
                         ),
                       ],

@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 body: Center(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height * 0.75,
                     width: MediaQuery.of(context).size.width * 0.4,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20), color: Colors.white.withOpacity(0.8)),
@@ -60,27 +60,35 @@ class LoginPage extends StatelessWidget {
                           hintText: "كلمة السر",
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 8,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Checkbox(
-                                value: cubit.isProfessor,
-                                onChanged: (value) {
-                                  cubit.changeToProfessor();
-                                }),
-                            const Text('Professor'),
+                            Row(
+                              children: [
+                                Checkbox(
+                                    value: cubit.isProfessor,
+                                    onChanged: (value) {
+                                      cubit.changeToProfessor();
+                                    }),
+                                const Text('Professor'),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Checkbox(
+                                    value: cubit.isAdmin,
+                                    onChanged: (value) {
+                                      cubit.changeToadmin();
+                                    }),
+                                const Text('Admin'),
+                              ],
+                            ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Checkbox(
-                                value: cubit.isAdmin,
-                                onChanged: (value) {
-                                  cubit.changeToadmin();
-                                }),
-                            const Text('Admin'),
-                          ],
+                        const SizedBox(
+                          height: 8,
                         ),
                         state is LoginLoading
                             ? const Center(child: CircularProgressIndicator())

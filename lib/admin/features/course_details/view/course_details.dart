@@ -1,7 +1,9 @@
 import 'package:education_system/admin/features/course_details/manager/course_details_cubit.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/models/teacher_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../shared/utils/colors.dart';
@@ -67,27 +69,31 @@ class CourseDetails extends StatelessWidget {
                         },
                       ),
                     ),
-                  const SizedBox(
-                    height: 20,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: const SizedBox(
+                      height: 20,
+
+                    ),
                   ),
                   DataTable(
                     dataTextStyle: const TextStyle(color: ColorsAsset.kPrimary),
                     columns: const [
-                      DataColumn(label: Text('Course Name')),
-                      DataColumn(label: Text('Course ID')),
-                      DataColumn(label: Text('Course Reference')),
-                      DataColumn(label: Text('Teacher Name')),
-                      DataColumn(label: Text('Teacher ID')),
-                      DataColumn(label: Text('Teacher Reference')),
+                      DataColumn(label: Expanded(child: Text('Course Name'))),
+                      DataColumn(label: Expanded(child: Text('Course ID'))),
+                      DataColumn(label: Expanded(child: Text('Course Reference'))),
+                      DataColumn(label: Expanded(child: Text('Teacher Name'))),
+                      DataColumn(label: Expanded(child: Text('Teacher ID'))),
+                      DataColumn(label: Expanded(child: Text('Teacher Reference'),)),
                     ],
                     rows: [
                       DataRow(cells: [
-                        DataCell(Text(cubit.courseModel?.courseName ?? '')),
-                        DataCell(Text(cubit.courseModel?.id ?? '')),
-                        DataCell(Text(cubit.courseModel?.reference?.path ?? '')),
-                        DataCell(Text(cubit.courseModel?.teacherName ?? '')),
-                        DataCell(Text(cubit.courseModel?.teacher?.id ?? '')),
-                        DataCell(Text(cubit.courseModel?.teacher?.path ?? '')),
+                        DataCell(Expanded(child: Text(cubit.courseModel?.courseName ?? ''))),
+                        DataCell(Expanded(child: Text(cubit.courseModel?.id ?? ''))),
+                        DataCell(Expanded(child: Text(cubit.courseModel?.reference?.path ?? ''))),
+                        DataCell(Expanded(child: Text(cubit.courseModel?.teacherName ?? ''))),
+                        DataCell(Expanded(child: Text(cubit.courseModel?.teacher?.id ?? ''))),
+                        DataCell(Expanded(child: Text(cubit.courseModel?.teacher?.path ?? ''))),
                       ]),
                     ],
                   ),

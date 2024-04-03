@@ -2,6 +2,7 @@ import 'package:education_system/student/features/my_subjects/manager/my_subject
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 import '../../widgets/cutom_appbar.dart';
 import '../view_course/view_course_page.dart';
@@ -22,7 +23,7 @@ class MySubjectsPage extends StatelessWidget {
             body: state is GetMyCoursesLoading
                 ? const Center(child: CircularProgressIndicator())
                 : cubit.myCourses.isEmpty
-                    ? const Text('No Courses')
+                    ?  Text('${getLang(context, "No Courses")}')
                     : Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
                         child: GridView.builder(
@@ -85,9 +86,9 @@ class MySubjectsPage extends StatelessWidget {
                                                   borderRadius: BorderRadius.circular(10),
                                                 ),
                                               ),
-                                              child: const Padding(
-                                                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                                                child: Text('Start the Course'),
+                                              child:  Padding(
+                                                padding:const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                                                child: Text('${getLang(context, "Start the Course")}'),
                                               ),
                                             ),
                                           ],

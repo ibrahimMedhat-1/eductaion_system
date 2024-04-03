@@ -154,7 +154,8 @@ class StudentLayoutState extends State<StudentLayout> {
                       const Spacer(),
                       MyTextField(
                         flex: 2,
-                        hintText: "Search",
+                        hintText: '${getLang(context, "Search")}'
+                       ,
                         prefixIcon: const Icon(Icons.search),
                         onChanged: (value) {
                           if (value.isNotEmpty) {
@@ -189,8 +190,8 @@ class StudentLayoutState extends State<StudentLayout> {
                   state is GetCoursesLoading
                       ? const Center(child: CircularProgressIndicator())
                       : cubit.courses.isEmpty
-                          ? const Center(
-                              child: Text('No Courses'),
+                          ?  Center(
+                              child: Text('${getLang(context, "No Courses")}'),
                             )
                           : SizedBox(
                               height: MediaQuery.of(context).size.height * 0.5,

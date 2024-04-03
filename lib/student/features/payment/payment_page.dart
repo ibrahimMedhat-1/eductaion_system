@@ -3,6 +3,7 @@ import 'package:education_system/student/features/payment/widgets/my_text_field.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 import 'manager/payment_cubit.dart';
 
@@ -21,9 +22,10 @@ class PaymentPage extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'الدفع الالكتروني',
-                style: TextStyle(color: ColorsAsset.kPrimary),
+              title:  Text(
+                '${getLang(context, "Online Payment")}'
+                ,
+                style: const TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
               actions: [
@@ -38,9 +40,10 @@ class PaymentPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    "قيمة الاشتراك : 2500",
-                    style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
+                   Text(
+                    '${getLang(context, "Price of registration : ")}'
+                   ,
+                    style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                   ),
                   Center(
                     child: Image.asset(
@@ -51,28 +54,31 @@ class PaymentPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   MyTextField(
                     controller: cubit.cardNumberController,
-                    labelText: 'رقم البطاقة',
+                    labelText: '${getLang(context, "Card Number")}'
+                    ,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   MyTextField(
                     controller: cubit.expiryDateController,
-                    labelText: 'تاريخ الانتهاء',
+                    labelText: '${getLang(context, "Expiry date")}'
+                   ,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   MyTextField(
                     controller: cubit.cardHolderNameController,
-                    labelText: 'اسم حامل البطاقة',
+                    labelText: '${getLang(context, "Name of card holder")}'
+                    ,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   MyTextField(
                     controller: cubit.cvvController,
-                    labelText: "CVV",
+                    labelText: '${getLang(context, "CVV")}',
                   ),
                   const SizedBox(
                     height: 15,
@@ -90,9 +96,9 @@ class PaymentPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-                        child: Text('اتمام الدفع'),
+                      child:  Padding(
+                        padding:const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                        child: Text('${getLang(context, "Submit Payment")}',),
                       ),
                     ),
                   ),

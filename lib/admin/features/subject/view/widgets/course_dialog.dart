@@ -20,7 +20,7 @@ class CourseDialog extends StatelessWidget {
             return AlertDialog(
               title: const Text('Add Course'),
               content: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.6,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -2,6 +2,7 @@ import 'package:education_system/student/features/my_grades/manager/my_grades_cu
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 import '../../../widgets/cutom_appbar.dart';
 import 'my_grades_details.dart';
@@ -68,9 +69,9 @@ class MyGradesPage extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                   color: ColorsAsset.kTextcolor),
                                             ),
-                                            const Text(
-                                              "Enrolled",
-                                              style: TextStyle(
+                                             Text(
+                                              '${getLang(context, "Enrolled")}',
+                                              style: const TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold,
                                                   color: ColorsAsset.kPrimary),
@@ -92,9 +93,9 @@ class MyGradesPage extends StatelessWidget {
                                                   borderRadius: BorderRadius.circular(10),
                                                 ),
                                               ),
-                                              child: const Padding(
-                                                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                                                child: Text('See My Grades'),
+                                              child:  Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                                                child: Text( '${getLang(context, "See my Grades ")}'),
                                               ),
                                             ),
                                           ],
