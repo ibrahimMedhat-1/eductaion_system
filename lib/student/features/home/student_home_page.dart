@@ -224,14 +224,14 @@ class StudentLayoutState extends State<StudentLayout> {
                                                 height: 10,
                                               ),
                                               Text(state is IsSearching
-                                                  ? cubit.searchList[index].teacherName!
-                                                  : cubit.courses[index].teacherName!),
+                                                  ? cubit.searchList[index].teacherName ?? ''
+                                                  : cubit.courses[index].teacherName ?? ''),
                                               const SizedBox(
                                                 height: 5,
                                               ),
                                               Text(state is IsSearching
-                                                  ? cubit.searchList[index].courseName!
-                                                  : cubit.courses[index].courseName!),
+                                                  ? cubit.searchList[index].courseName ?? ''
+                                                  : cubit.courses[index].courseName ?? ''),
                                             ],
                                           ),
                                         ),

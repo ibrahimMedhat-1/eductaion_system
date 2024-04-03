@@ -64,6 +64,7 @@ class AddLessonCubit extends Cubit<AddLessonState> {
     required String name,
     required DocumentReference<Map<String, dynamic>> courseReference,
   }) async {
+    emit(LessonAddedLoading());
     var quiz = FirebaseFirestore.instance
         .collection('secondary years')
         .doc(year)

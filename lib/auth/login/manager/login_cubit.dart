@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_system/admin/features/home/view/home_page.dart';
 import 'package:education_system/models/student_model.dart';
 import 'package:education_system/student/features/home/student_home_page.dart';
 import 'package:education_system/teacher/features/home/teacher_home_page.dart';
@@ -19,8 +20,15 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isProfessor = false;
+  bool isAdmin = false;
+  void changeToadmin() {
+    isProfessor = false;
+    isAdmin = !isAdmin;
+    emit(ChangeType());
+  }
 
-  void changeType() {
+  void changeToProfessor() {
+    isAdmin = false;
     isProfessor = !isProfessor;
     emit(ChangeType());
   }
@@ -38,6 +46,7 @@ class LoginCubit extends Cubit<LoginState> {
             .then((value) {
           if (value.docs.isEmpty) {
             emit(LoginError());
+            print('h');
             Fluttertoast.showToast(msg: 'Not a professor');
           } else {
             print(value.docs);
@@ -50,7 +59,29 @@ class LoginCubit extends Cubit<LoginState> {
           }
         }).catchError((onError) {
           emit(LoginError());
+          print('k$onError');
           Fluttertoast.showToast(msg: 'Not a professor');
+        });
+      } else if (isAdmin) {
+        await FirebaseFirestore.instance
+            .collection('admin')
+            .where('email', isEqualTo: emailController.text.trim())
+            .get()
+            .then((value) {
+          if (value.docs.isEmpty) {
+            emit(LoginError());
+            Fluttertoast.showToast(msg: 'Not an Admin');
+          } else {
+            print(value.docs);
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminHomePage(),
+                ));
+          }
+        }).catchError((onError) {
+          emit(LoginError());
+          Fluttertoast.showToast(msg: 'Not an Admin');
         });
       } else {
         await FirebaseFirestore.instance

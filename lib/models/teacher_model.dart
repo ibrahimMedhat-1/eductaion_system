@@ -27,7 +27,7 @@ class TeacherModel {
 
   TeacherModel.fromJson(Map<String, dynamic>? json) {
     name = json!['name'];
-    years = json['years'];
+    years = List.generate(json['years'].length, (index) => json['years'][index].toString());
     id = json['id'];
     courseId = json['courseId'];
     subject = json['subject'];
@@ -49,5 +49,6 @@ class TeacherModel {
         'subject': subject,
         'degree': degree,
         'bio': bio,
+        'years': years,
       };
 }

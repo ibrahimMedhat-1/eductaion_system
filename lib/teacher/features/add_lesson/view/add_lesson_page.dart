@@ -39,48 +39,53 @@ class _AddLessonPageState extends State<AddLessonPage> {
                 Padding(padding: const EdgeInsets.all(5.0), child: Image.asset("assets/images/logo2.png")),
               ],
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      cubit.selectVideo();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        color: ColorsAsset.kLight,
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          cubit.selectVideo();
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: cubit.videoFile != null
-                              ? HtmlElementView(viewType: cubit.id)
-                              : Center(child: Image.asset("assets/images/icons8-add-100.png")),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            color: ColorsAsset.kLight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: cubit.videoFile != null
+                                  ? HtmlElementView(viewType: cubit.id)
+                                  : Center(child: Image.asset("assets/images/icons8-add-100.png")),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  if (cubit.videoFile != null)
-                    MaterialButton(
-                      onPressed: () {
-                        cubit.videoFile = null;
-                        cubit.emit(SelectLessonVideo());
-                      },
-                      child: const Text('Remove Video'),
-                    ),
-                  Row(
-                    children: [
-                      MyTextField(
-                        hintText: "Lesson Name",
-                        controller: cubit.lessonNameController,
-                      )
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      if (cubit.videoFile != null)
+                        MaterialButton(
+                          onPressed: () {
+                            cubit.videoFile = null;
+                            cubit.emit(SelectLessonVideo());
+                          },
+                          child: const Text('Remove Video'),
+                        ),
+                      Row(
+                        children: [
+                          MyTextField(
+                            hintText: "Lesson Name",
+                            controller: cubit.lessonNameController,
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                if (state is LessonAddedLoading) const Center(child: CircularProgressIndicator())
+              ],
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {

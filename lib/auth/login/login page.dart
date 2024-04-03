@@ -67,9 +67,19 @@ class LoginPage extends StatelessWidget {
                             Checkbox(
                                 value: cubit.isProfessor,
                                 onChanged: (value) {
-                                  cubit.changeType();
+                                  cubit.changeToProfessor();
                                 }),
                             const Text('Professor'),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                                value: cubit.isAdmin,
+                                onChanged: (value) {
+                                  cubit.changeToadmin();
+                                }),
+                            const Text('Admin'),
                           ],
                         ),
                         state is LoginLoading

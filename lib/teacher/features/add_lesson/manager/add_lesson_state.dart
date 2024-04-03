@@ -7,4 +7,6 @@ final class AddLessonInitial extends AddLessonState {}
 
 final class LessonAddedSuccessfully extends AddLessonState {}
 
+final class LessonAddedLoading extends AddLessonState {}
+
 final class SelectLessonVideo extends AddLessonState {}

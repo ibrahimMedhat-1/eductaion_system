@@ -72,11 +72,12 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   void search(String value) {
     searchList.clear();
+    print(value);
     for (var course in courses) {
       if (course.courseName!.toLowerCase().contains(value.toLowerCase())) {
         searchList.add(course);
-        emit(SearchCourse());
       }
     }
+    emit(IsSearching());
   }
 }

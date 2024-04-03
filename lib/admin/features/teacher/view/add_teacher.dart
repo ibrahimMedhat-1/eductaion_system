@@ -11,7 +11,7 @@ class AddTeacher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddTeacherCubit(),
+      create: (context) => AddTeacherCubit()..getSubjects(),
       child: BlocConsumer<AddTeacherCubit, AddTeacherState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -21,43 +21,53 @@ class AddTeacher extends StatelessWidget {
           return Scaffold(
               appBar: AppBar(
                 title: const Text(
-                    'Add Teacher',style: TextStyle(color: ColorsAsset.kPrimary),
+                  'Add Teacher',
+                  style: TextStyle(color: ColorsAsset.kPrimary),
                 ),
                 centerTitle: true,
               ),
-              body:
-              Column(
+              body: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-
                 children: [
                   Align(
                       alignment: Alignment.center,
                       child: Image.asset(
                         "assets/images/Cream and Black Simple Education Logo (7).png",
-                        height: 250,)),
-                  const SizedBox(height: 15,),
+                        height: 250,
+                      )),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   MainTextField(
                     controller: cubit.teacherNameController,
-                    hintText: "Teacher Name",),
-                  const SizedBox(height: 15,),
+                    hintText: "Teacher Name",
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   MainTextField(
                     controller: cubit.teacherEmailController,
-                    hintText: "Teacher Email",),
-                  const SizedBox(height: 15,),
+                    hintText: "Teacher Email",
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   MainTextField(
                     controller: cubit.teacherPasswordController,
-                    hintText: "Teacher Password",),
-                  const SizedBox(height: 15,),
-
+                    hintText: "Teacher Password",
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   SizedBox(
                     height: 60,
-                    width: MediaQuery.of(context).size.width*0.3,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     child: DropdownButtonFormField<String>(
                       value: cubit.selectedSubject,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:ColorsAsset.kPrimary,
+                            color: ColorsAsset.kPrimary,
                           ),
                         ),
                         labelText: "Choose Subject",
@@ -73,31 +83,67 @@ class AddTeacher extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(height: 15,),
-
-                  ElevatedButton(
-                    onPressed: () {
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsAsset.kPrimary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0), // Border radius
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
-                      child: Text(
-                        'Add teacher',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  )
-
-
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: cubit.firstYear,
+                          onChanged: (value) {
+                            cubit.firstYear = value!;
+                            cubit.emit(ChangeValue());
+                            cubit.selectYear(value, 'first Secondary');
+                          }),
+                      const Text('First Year'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: cubit.secondYear,
+                          onChanged: (value) {
+                            cubit.secondYear = value!;
+                            cubit.emit(ChangeValue());
+                            cubit.selectYear(value, 'second Secondary');
+                          }),
+                      const Text('Second Year'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: cubit.thirdYear,
+                          onChanged: (value) {
+                            cubit.thirdYear = value!;
+                            cubit.emit(ChangeValue());
+                            cubit.selectYear(value, 'third Secondary');
+                          }),
+                      const Text('Third Year'),
+                    ],
+                  ),
+                  state is AddTeacherLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : ElevatedButton(
+                          onPressed: () {
+                            cubit.addTeacher(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorsAsset.kPrimary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0), // Border radius
+                            ),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                            child: Text(
+                              'Add teacher',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
                 ],
-              )
-
-          );
+              ));
         },
       ),
     );
