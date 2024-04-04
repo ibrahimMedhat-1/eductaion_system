@@ -37,7 +37,7 @@ class AddTeacherCubit extends Cubit<AddTeacherState> {
     emit(AddTeacherLoading());
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(
-      email: teacherEmailController.text.trim(),
+      email: teacherEmailController.text.trim().toLowerCase(),
       password: teacherPasswordController.text,
     )
         .then((value) async {
