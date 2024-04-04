@@ -6,6 +6,7 @@ class CourseModel {
   String? courseName;
   String? teacherName;
   String? teacherImage;
+  String? price;
   String? image;
   DocumentReference<Map<String, dynamic>>? teacher;
   Map<String, dynamic>? studyPlan;
@@ -14,19 +15,20 @@ class CourseModel {
   CourseModel(
       {this.id,
       this.reference,
+      this.price,
       this.courseName,
       this.teacherName,
       this.image,
       this.teacher,
       this.studyPlan,
       this.years,
-        this.teacherImage
-      });
+      this.teacherImage});
 
   CourseModel.fromJson(Map<String, dynamic>? json) {
     courseName = json!['course name'];
     years = List.generate(json['years'].length, (index) => json['years'][index].toString());
     id = json['id'];
+    price = json['price'];
     reference = json['reference'];
     teacherName = json['teacher name'];
     image = json['image'];
@@ -36,6 +38,7 @@ class CourseModel {
 
   Map<String, dynamic> toMap() => {
         'course name': courseName,
+        'price': price,
         'years': years,
         'id': id,
         'reference': reference,

@@ -15,6 +15,7 @@ class SubjectsCubit extends Cubit<SubjectsState> {
   String courseImage = '';
 
   TextEditingController courseNameController = TextEditingController();
+  TextEditingController coursePriceController = TextEditingController();
   String? selectedSubject;
   List<String> years = [];
 
@@ -89,6 +90,7 @@ class SubjectsCubit extends Cubit<SubjectsState> {
         .doc();
     await courseDoc.set(CourseModel(
       image: courseImage,
+      price: coursePriceController.text,
       courseName: courseNameController.text,
       id: courseDoc.id,
       reference: courseDoc,

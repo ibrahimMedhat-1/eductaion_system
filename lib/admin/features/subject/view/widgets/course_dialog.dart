@@ -62,6 +62,11 @@ class CourseDialog extends StatelessWidget {
                       controller: cubit.courseNameController,
                     ),
                     const SizedBox(height: 20),
+                    MainTextField(
+                      hintText: "Course Price",
+                      controller: cubit.coursePriceController,
+                    ),
+                    const SizedBox(height: 20),
                     SizedBox(
                       height: 60,
                       child: DropdownButtonFormField<String>(
