@@ -64,6 +64,7 @@ class ProfileCubit extends Cubit<ProfileState> {
                 id: Constants.teacherModel!.id,
                 courseId: Constants.teacherModel!.courseId,
                 subject: Constants.teacherModel!.subject,
+                years: Constants.teacherModel!.years,
               ).toMap()
             : StudentModel(
                 image: Constants.studentModel!.image,
