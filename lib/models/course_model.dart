@@ -5,6 +5,7 @@ class CourseModel {
   DocumentReference<Map<String, dynamic>>? reference;
   String? courseName;
   String? teacherName;
+  String? teacherImage;
   String? image;
   DocumentReference<Map<String, dynamic>>? teacher;
   Map<String, dynamic>? studyPlan;
@@ -18,7 +19,9 @@ class CourseModel {
       this.image,
       this.teacher,
       this.studyPlan,
-      this.years});
+      this.years,
+        this.teacherImage
+      });
 
   CourseModel.fromJson(Map<String, dynamic>? json) {
     courseName = json!['course name'];
@@ -40,5 +43,6 @@ class CourseModel {
         'image': image,
         'teacher': teacher,
         'study plan': studyPlan,
+        'teacher image': teacherImage,
       };
 }
