@@ -43,7 +43,7 @@ class AddTeacherCubit extends Cubit<AddTeacherState> {
         .then((value) async {
       await FirebaseFirestore.instance
           .collection('teachers')
-          .doc(teacherEmailController.text.trim())
+          .doc(teacherEmailController.text.trim().toLowerCase())
           .set(TeacherModel(
                   bio: '',
                   centerName: '',
