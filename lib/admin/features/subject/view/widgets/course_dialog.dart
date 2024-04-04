@@ -20,113 +20,115 @@ class CourseDialog extends StatelessWidget {
             return AlertDialog(
               title: const Text('Add Course'),
               content: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: cubit.courseImage,
-                          imageBuilder: (context, imageProvider) => CircleAvatar(
-                            radius: 80,
-                            backgroundColor: const Color(0xFF6E85B7),
-                            backgroundImage: imageProvider,
+                height: MediaQuery.of(context).size.height * 0.8,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl: cubit.courseImage,
+                            imageBuilder: (context, imageProvider) => CircleAvatar(
+                              radius: 80,
+                              backgroundColor: const Color(0xFF6E85B7),
+                              backgroundImage: imageProvider,
+                            ),
+                            errorWidget: (context, url, error) => const CircleAvatar(
+                              radius: 80,
+                              backgroundColor: Color(0xFF6E85B7),
+                              backgroundImage: NetworkImage("assets/images/profile purple.png"),
+                            ),
                           ),
-                          errorWidget: (context, url, error) => const CircleAvatar(
-                            radius: 80,
-                            backgroundColor: Color(0xFF6E85B7),
-                            backgroundImage: NetworkImage("assets/images/profile purple.png"),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            cubit.changeCourseImage();
-                            cubit.getCourses(cubit.selectedSubject);
-                          },
-                          child: const CircleAvatar(
-                            radius: 30,
-                            backgroundColor: ColorsAsset.kLight2,
-                            child: Center(
-                              child: Icon(
-                                Icons.edit,
-                                color: ColorsAsset.kPrimary,
+                          InkWell(
+                            onTap: () {
+                              cubit.changeCourseImage();
+                              cubit.getCourses(cubit.selectedSubject);
+                            },
+                            child: const CircleAvatar(
+                              radius: 30,
+                              backgroundColor: ColorsAsset.kLight2,
+                              child: Center(
+                                child: Icon(
+                                  Icons.edit,
+                                  color: ColorsAsset.kPrimary,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    MainTextField(
-                      hintText: "Course Name",
-                      controller: cubit.courseNameController,
-                    ),
-                    const SizedBox(height: 20),
-                    MainTextField(
-                      hintText: "Course Price",
-                      controller: cubit.coursePriceController,
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      height: 60,
-                      child: DropdownButtonFormField<String>(
-                        value: cubit.selectedSubject,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorsAsset.kPrimary,
-                            ),
-                          ),
-                          labelText: "Choose Subject",
-                        ),
-                        items: cubit.subjects.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          cubit.handleSubjectChange(newValue!);
-                        },
+                        ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                            value: cubit.firstYear,
-                            onChanged: (value) {
-                              cubit.firstYear = value!;
-                              cubit.emit(ChangeValue());
-                              cubit.selectYear(value, 'first Secondary');
-                            }),
-                        const Text('First Year'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                            value: cubit.secondYear,
-                            onChanged: (value) {
-                              cubit.secondYear = value!;
-                              cubit.emit(ChangeValue());
-                              cubit.selectYear(value, 'second Secondary');
-                            }),
-                        const Text('Second Year'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                            value: cubit.thirdYear,
-                            onChanged: (value) {
-                              cubit.thirdYear = value!;
-                              cubit.emit(ChangeValue());
-                              cubit.selectYear(value, 'third Secondary');
-                            }),
-                        const Text('Third Year'),
-                      ],
-                    ),
-                  ],
+                      MainTextField(
+                        hintText: "Course Name",
+                        controller: cubit.courseNameController,
+                      ),
+                      const SizedBox(height: 20),
+                      MainTextField(
+                        hintText: "Course Price",
+                        controller: cubit.coursePriceController,
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 60,
+                        child: DropdownButtonFormField<String>(
+                          value: cubit.selectedSubject,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: ColorsAsset.kPrimary,
+                              ),
+                            ),
+                            labelText: "Choose Subject",
+                          ),
+                          items: cubit.subjects.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            cubit.handleSubjectChange(newValue!);
+                          },
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: cubit.firstYear,
+                              onChanged: (value) {
+                                cubit.firstYear = value!;
+                                cubit.emit(ChangeValue());
+                                cubit.selectYear(value, 'first Secondary');
+                              }),
+                          const Text('First Year'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: cubit.secondYear,
+                              onChanged: (value) {
+                                cubit.secondYear = value!;
+                                cubit.emit(ChangeValue());
+                                cubit.selectYear(value, 'second Secondary');
+                              }),
+                          const Text('Second Year'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: cubit.thirdYear,
+                              onChanged: (value) {
+                                cubit.thirdYear = value!;
+                                cubit.emit(ChangeValue());
+                                cubit.selectYear(value, 'third Secondary');
+                              }),
+                          const Text('Third Year'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               actions: <Widget>[
@@ -153,8 +155,8 @@ class CourseDialog extends StatelessWidget {
         onPressed: () {
           _showAddDialog(context);
         },
-        icon: Row(
-          children: const [
+        icon: const Row(
+          children: [
             Icon(
               Icons.add_box,
               size: 50,

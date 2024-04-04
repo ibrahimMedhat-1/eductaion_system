@@ -173,16 +173,31 @@ class StudentLayoutState extends State<StudentLayout> {
                     height: 20,
                   ),
                   Row(
+
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: cubit.subjects
-                        .map(
-                          (e) => InkWell(
-                              onTap: () {
-                                cubit.getCoursesOfSubject(e, cubit.year);
-                              },
-                              child: SubjectContainer(subjectName: e)),
-                        )
-                        .toList(),
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            cubit.getCourses("first Secondary");
+                          },
+                          child: const SubjectContainer(subjectName: "all")),
+                      SizedBox(
+                        height: 55,
+                        child: ListView(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          children: cubit.subjects
+                              .map(
+                                (e) => InkWell(
+                                    onTap: () {
+                                      cubit.getCoursesOfSubject(e, cubit.year);
+                                    },
+                                    child: SubjectContainer(subjectName: e)),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 10,
@@ -211,16 +226,26 @@ class StudentLayoutState extends State<StudentLayout> {
                                       child: SizedBox(
                                         width: MediaQuery.of(context).size.width * 0.2,
                                         child: Card(
+                                          clipBehavior:Clip.antiAlias,
                                           elevation: 2,
                                           color: ColorsAsset.kLight2,
                                           child: Column(
                                             children: [
-                                              Image.network(
-                                                state is IsSearching
-                                                    ? cubit.searchList[index].image!
-                                                    : cubit.courses[index].image!,
-                                                height: MediaQuery.of(context).size.height * 0.35,
+                                              SizedBox(
+
+                                                height: 180,
+                                                width: double.infinity,
+
+                                                child: Expanded(
+                                                  child: Image.network(
+                                                    fit: BoxFit.fill,
+                                                    state is IsSearching
+                                                        ? cubit.searchList[index].image!
+                                                        : cubit.courses[index].image!,),
+                                                ),
+
                                               ),
+
                                               const SizedBox(
                                                 height: 10,
                                               ),

@@ -51,7 +51,7 @@ class AddTeacherCubit extends Cubit<AddTeacherState> {
                   courseId: '',
                   degree: '',
                   email: teacherEmailController.text.trim().toLowerCase(),
-                  id: teacherEmailController.text.trim(),
+                  id: teacherEmailController.text.trim().toLowerCase(),
                   image: '',
                   name: teacherNameController.text.trim(),
                   subject: selectedSubject,

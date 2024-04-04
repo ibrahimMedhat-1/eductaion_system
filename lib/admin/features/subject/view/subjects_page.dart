@@ -62,7 +62,7 @@ class SubjectsPage extends StatelessWidget {
               Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 60),
+                    padding: const EdgeInsets.only(top: 60),
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.5,
                       child: state is GetCoursesLoading

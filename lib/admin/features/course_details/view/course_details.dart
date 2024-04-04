@@ -68,9 +68,9 @@ class CourseDetails extends StatelessWidget {
                         },
                       ),
                     ),
-                  SingleChildScrollView(
+                  const SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: const SizedBox(
+                    child: SizedBox(
                       height: 20,
                     ),
                   ),

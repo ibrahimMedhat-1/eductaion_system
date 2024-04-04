@@ -28,5 +28,6 @@
  "Expiry date": "تاريخ الانتهاء",
  "Name of card holder": "اسم حامل البطاقة",
  "CVV": "الرقم السري",
- "Submit Payment": "اتمام الدفع"
+ "Submit Payment": "اتمام الدفع",
+ "Price : ": "السعر : "
 }
