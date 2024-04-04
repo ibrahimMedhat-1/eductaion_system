@@ -44,7 +44,7 @@ class CoursePage extends StatelessWidget {
                                   width: 230,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          fit: BoxFit.cover, image: NetworkImage(courseModel.image!))),
+                                          fit: BoxFit.cover, image: NetworkImage( cubit.teacherData!.data()!['image']))),
                                 ),
                                 const SizedBox(
                                   width: 15,
