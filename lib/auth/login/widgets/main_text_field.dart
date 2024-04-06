@@ -12,10 +12,12 @@ class MainTextField extends StatelessWidget {
     this.hintText,
     this.onSubmitted,
     this.onChanged,
+    this.validationText,
     required this.textInputType,
   });
 
   final String? labeltext;
+  final String? validationText;
   final String? hintText;
   final TextEditingController? controller;
   void Function(String)? onSubmitted;
@@ -26,29 +28,30 @@ class MainTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      width: MediaQuery.of(context).size.width * 0.3,
-      child: TextField(
-        onChanged: onChanged,
-        controller: controller,
-        onSubmitted: onSubmitted,
-        keyboardType: textInputType,
-        decoration: InputDecoration(
-          fillColor: Colors.white,
-          filled: true,
-          labelText: labeltext,
-          hintText: hintText,
-          hintStyle: const TextStyle(fontSize: 12),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsAsset.kPrimary),
-          ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsAsset.kPrimary),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsAsset.kPrimary),
-          ),
+    return TextFormField(
+      onChanged: onChanged,
+      controller: controller,
+      onFieldSubmitted: onSubmitted,
+      keyboardType: textInputType,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return validationText;
+        }
+      },
+      decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        labelText: labeltext,
+        hintText: hintText,
+        hintStyle: const TextStyle(fontSize: 12),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorsAsset.kPrimary),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorsAsset.kPrimary),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorsAsset.kPrimary),
         ),
       ),
     );
