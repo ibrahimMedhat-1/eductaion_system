@@ -78,7 +78,7 @@ class AddLessonCubit extends Cubit<AddLessonState> {
     print(quiz);
     await FirebaseStorage.instance
         .ref()
-        .child('lessons/${Constants.teacherModel!.courseId.toString().trim()}')
+        .child('lessons/${Constants.teacherModel!.courseId.toString().trim()}/${DateTime.now()}')
         .putData(
           videoFile!,
           SettableMetadata(contentType: 'video/mp4'),

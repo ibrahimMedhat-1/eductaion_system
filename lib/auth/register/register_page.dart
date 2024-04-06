@@ -1,7 +1,9 @@
 import 'package:education_system/auth/register/manager/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../shared/constants.dart';
 import '../../shared/utils/colors.dart';
 import '../login/widgets/main_text_field.dart';
 
@@ -66,6 +68,7 @@ class RegisterPage extends StatelessWidget {
                               Row(children: [
                                 Flexible(
                                   child: MainTextField(
+                                    textInputType: TextInputType.text,
                                     controller: cubit.fullNameController,
                                     hintText: "الاسم بالكامل",
                                   ),
@@ -75,6 +78,13 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: MainTextField(
+                                    onChanged: (value) {
+                                      if (!isNumber(value)) {
+                                        cubit.parentPhoneController.clear();
+                                        cubit.emit(CheckIsNubmer());
+                                      }
+                                    },
+                                    textInputType: TextInputType.phone,
                                     controller: cubit.phoneController,
                                     hintText: "رقم الهاتف",
                                   ),
@@ -86,6 +96,7 @@ class RegisterPage extends StatelessWidget {
                               Row(children: [
                                 Flexible(
                                   child: MainTextField(
+                                    textInputType: TextInputType.emailAddress,
                                     controller: cubit.emailController,
                                     hintText: "البريد الالكتروني",
                                   ),
@@ -95,6 +106,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: MainTextField(
+                                    textInputType: TextInputType.text,
                                     controller: cubit.passwordController,
                                     hintText: "كلمة السر",
                                   ),
@@ -116,6 +128,13 @@ class RegisterPage extends StatelessWidget {
                               Row(children: [
                                 Flexible(
                                   child: MainTextField(
+                                    onChanged: (value) {
+                                      if (!isNumber(value)) {
+                                        cubit.parentPhoneController.clear();
+                                        cubit.emit(CheckIsNubmer());
+                                      }
+                                    },
+                                    textInputType: TextInputType.phone,
                                     hintText: "رقم الهاتف",
                                     controller: cubit.parentPhoneController,
                                   ),
@@ -125,6 +144,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: MainTextField(
+                                    textInputType: TextInputType.emailAddress,
                                     controller: cubit.parentEmailController,
                                     hintText: "البريد الالكتروني",
                                   ),
@@ -134,6 +154,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: MainTextField(
+                                    textInputType: TextInputType.name,
                                     controller: cubit.parentNameController,
                                     hintText: "الاسم",
                                   ),
@@ -146,7 +167,12 @@ class RegisterPage extends StatelessWidget {
                                   ? const Center(child: CircularProgressIndicator())
                                   : ElevatedButton(
                                       onPressed: () {
-                                        cubit.signUp(context);
+                                        if (cubit.emailController.text.contains('@') &&
+                                            cubit.parentEmailController.text.contains('@')) {
+                                          cubit.signUp(context);
+                                        } else {
+                                          Fluttertoast.showToast(msg: 'Please insert valid emails');
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: ColorsAsset.kPrimary,

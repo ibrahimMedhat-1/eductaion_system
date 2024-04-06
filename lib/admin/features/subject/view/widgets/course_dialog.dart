@@ -59,11 +59,13 @@ class CourseDialog extends StatelessWidget {
                         ],
                       ),
                       MainTextField(
+                        textInputType: TextInputType.text,
                         hintText: "Course Name",
                         controller: cubit.courseNameController,
                       ),
                       const SizedBox(height: 20),
                       MainTextField(
+                        textInputType: TextInputType.number,
                         hintText: "Course Price",
                         controller: cubit.coursePriceController,
                       ),

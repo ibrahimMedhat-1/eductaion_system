@@ -30,6 +30,7 @@ class AddQuizCubit extends Cubit<AddQuizState> {
     required String type,
     required DocumentReference<Map<String, dynamic>> courseReference,
   }) async {
+    emit(QuizAddedLoading());
     final List<Map<String, dynamic>> questionsData = [];
     for (final questionModel in questions) {
       questionsData.add(questionModel.toMap());

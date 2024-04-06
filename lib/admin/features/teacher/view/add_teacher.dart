@@ -42,6 +42,7 @@ class AddTeacher extends StatelessWidget {
                         height: 15,
                       ),
                       MainTextField(
+                        textInputType: TextInputType.name,
                         controller: cubit.teacherNameController,
                         hintText: "Teacher Name",
                       ),
@@ -49,6 +50,7 @@ class AddTeacher extends StatelessWidget {
                         height: 15,
                       ),
                       MainTextField(
+                        textInputType: TextInputType.emailAddress,
                         controller: cubit.teacherEmailController,
                         hintText: "Teacher Email",
                       ),
@@ -56,6 +58,7 @@ class AddTeacher extends StatelessWidget {
                         height: 15,
                       ),
                       MainTextField(
+                        textInputType: TextInputType.text,
                         controller: cubit.teacherPasswordController,
                         hintText: "Teacher Password",
                       ),

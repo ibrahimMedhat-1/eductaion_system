@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           InkWell(
                             onTap: () {
-                              cubit.changeProfileImage();
+                              cubit.changeProfileImage(context);
                             },
                             child: const CircleAvatar(
                               radius: 22,

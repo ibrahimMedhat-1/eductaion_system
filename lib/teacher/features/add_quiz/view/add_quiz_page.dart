@@ -107,14 +107,16 @@ class QuestionPageState extends State<QuestionPage> {
                   ),
                   const SizedBox(height: 16.0),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: cubit.questions.length,
-                      itemBuilder: (context, index) {
-                        return QuestionWidget(
-                          addQuestionModel: cubit.questions[index],
-                        );
-                      },
-                    ),
+                    child: state is QuizAddedLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.builder(
+                            itemCount: cubit.questions.length,
+                            itemBuilder: (context, index) {
+                              return QuestionWidget(
+                                addQuestionModel: cubit.questions[index],
+                              );
+                            },
+                          ),
                   ),
                 ],
               ),

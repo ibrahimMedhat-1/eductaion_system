@@ -10,3 +10,5 @@ final class SignUpLoading extends SignUpState {}
 final class SignUpSuccessfully extends SignUpState {}
 
 final class SignUpError extends SignUpState {}
+
+final class CheckIsNubmer extends SignUpState {}

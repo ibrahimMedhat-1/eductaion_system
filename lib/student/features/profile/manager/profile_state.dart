@@ -14,3 +14,5 @@ final class UpdateDataError extends ProfileState {}
 final class UpdateDataLoading extends ProfileState {}
 
 final class UpdateDataSuccessfully extends ProfileState {}
+
+final class CheckIsNubmer extends ProfileState {}

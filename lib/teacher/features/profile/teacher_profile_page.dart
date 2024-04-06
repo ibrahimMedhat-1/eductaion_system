@@ -3,6 +3,7 @@ import 'package:education_system/student/features/profile/manager/profile_cubit.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import '../../../student/features/payment/widgets/my_text_field.dart';
 
@@ -54,7 +55,7 @@ class TeacherProfilePage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      cubit.changeProfileImage(isTeacher: true);
+                      cubit.changeProfileImage(context, isTeacher: true);
                     },
                     child: const CircleAvatar(
                       radius: 30,
@@ -123,6 +124,12 @@ class TeacherProfilePage extends StatelessWidget {
                       width: 10,
                     ),
                     MyTextField(
+                      onChanged: (value) {
+                        if (!isNumber(value)) {
+                          cubit.phoneController.clear();
+                          cubit.emit(CheckIsNubmer());
+                        }
+                      },
                       controller: cubit.phoneController,
                       labelText: "Center Number",
                     ),

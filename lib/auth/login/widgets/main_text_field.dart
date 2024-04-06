@@ -3,7 +3,18 @@ import 'package:flutter/material.dart';
 import '../../../shared/utils/colors.dart';
 
 class MainTextField extends StatelessWidget {
-  MainTextField({super.key,  this.labeltext, this.controller,this.prefixIcon,this.suffixIcon,this.hintText,this.onSubmitted,this.onChanged});
+  MainTextField({
+    super.key,
+    this.labeltext,
+    this.controller,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.hintText,
+    this.onSubmitted,
+    this.onChanged,
+    required this.textInputType,
+  });
+
   final String? labeltext;
   final String? hintText;
   final TextEditingController? controller;
@@ -11,36 +22,32 @@ class MainTextField extends StatelessWidget {
   void Function(String)? onChanged;
   Widget? prefixIcon;
   Widget? suffixIcon;
+  TextInputType textInputType;
+
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
+    return SizedBox(
       height: 40,
-      width: MediaQuery.of(context).size.width*0.3,
+      width: MediaQuery.of(context).size.width * 0.3,
       child: TextField(
-
         onChanged: onChanged,
         controller: controller,
-        onSubmitted:onSubmitted ,
+        onSubmitted: onSubmitted,
+        keyboardType: textInputType,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
           labelText: labeltext,
-          hintText:hintText ,
+          hintText: hintText,
           hintStyle: const TextStyle(fontSize: 12),
           border: const OutlineInputBorder(
-            borderSide: BorderSide(
-                color: ColorsAsset.kPrimary
-            ),
+            borderSide: BorderSide(color: ColorsAsset.kPrimary),
           ),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-                color: ColorsAsset.kPrimary
-            ),
+            borderSide: BorderSide(color: ColorsAsset.kPrimary),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
-                color: ColorsAsset.kPrimary
-            ),
+            borderSide: BorderSide(color: ColorsAsset.kPrimary),
           ),
         ),
       ),

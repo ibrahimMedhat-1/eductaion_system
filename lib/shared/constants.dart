@@ -24,3 +24,12 @@ abstract class Constants {
     ],
   );
 }
+
+// Function to validate the number
+bool isNumber(String value) {
+  if (value == null) {
+    return true;
+  }
+  final n = num.tryParse(value);
+  return n != null;
+}

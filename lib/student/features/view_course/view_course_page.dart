@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/student/features/quiz/quiz_page.dart';
 import 'package:education_system/student/features/view_course/manager/view_course_cubit.dart';
+import 'package:education_system/teacher/features/upload_material/pages/pdf_page/view/pdf_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
@@ -39,13 +40,19 @@ class ViewCoursePage extends StatelessWidget {
                                     videoLink: cubit.material[cubit.index]['video'],
                                     lesson: cubit.material[cubit.index]['reference'],
                                   )
-                                : QuizPage(
-                                    quiz: cubit.material[cubit.index]['id'],
-                                    courseModel: courseModel,
-                                    type: cubit.material[cubit.index]['type'],
-                                    questions: List<Map<String, dynamic>>.from(
-                                        cubit.material[cubit.index]['questions']),
-                                  ),
+                                : cubit.material[cubit.index]['type'] == 'pdf'
+                                    ? ViewPdfPage(
+                                        name: cubit.material[cubit.index]['name'],
+                                        courseModel: courseModel,
+                                        pdfUrl: cubit.material[cubit.index]['pdf'],
+                                      )
+                                    : QuizPage(
+                                        quiz: cubit.material[cubit.index]['id'],
+                                        courseModel: courseModel,
+                                        type: cubit.material[cubit.index]['type'],
+                                        questions: List<Map<String, dynamic>>.from(
+                                            cubit.material[cubit.index]['questions']),
+                                      ),
                           ),
                           Flexible(
                             flex: 1,
@@ -74,6 +81,7 @@ class ViewCoursePage extends StatelessWidget {
                                       child: ListTile(
                                         onTap: index == 0 || cubit.watched[index]
                                             ? () {
+                                                print(index);
                                                 cubit.select(index);
                                               }
                                             : null,
@@ -130,7 +138,7 @@ class _VideoLecturePageState extends State<VideoLecturePage> {
       })
       ..addListener(() async {
         if (controller.value.position == controller.value.duration) {
-          ViewCourseCubit().courseWatched(widget.courseModel!, context);
+          ViewCourseCubit.get(context).courseWatched(widget.courseModel!, context);
           print('video Ended');
         }
       });

@@ -26,7 +26,11 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
   void getCourseDetails(year, subject, courseId) async {
     await FirebaseFirestore.instance
         .collection('secondary years')
-        .doc('first Secondary')
+        .doc(isFirstYearSelected
+            ? 'first Secondary'
+            : isSecondYearSelected
+                ? 'second Secondary'
+                : 'third Secondary')
         .collection(subject)
         .doc(courseId.toString().trim())
         .get()

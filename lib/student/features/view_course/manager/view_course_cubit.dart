@@ -40,26 +40,18 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
   int index = 0;
   void select(index) {
     this.index = index;
+    print(this.index);
     emit(SelectMaterial());
   }
 
   void courseWatched(CourseModel courseModel, context) async {
-    int watched = 0;
+    print(index);
     await FirebaseFirestore.instance
         .collection('students')
         .doc(Constants.studentModel!.id)
         .collection('courses')
         .doc(courseModel.id)
-        .get()
-        .then((value) {
-      watched = value.data()!['watched'];
-    });
-    await FirebaseFirestore.instance
-        .collection('students')
-        .doc(Constants.studentModel!.id)
-        .collection('courses')
-        .doc(courseModel.id)
-        .update({'watched': watched + 1}).then((value) {
+        .update({'watched': index + 2}).then((value) {
       emit(ViewCourseInitial());
       showDialog(
         context: context,

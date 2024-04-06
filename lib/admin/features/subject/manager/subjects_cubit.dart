@@ -85,7 +85,7 @@ class SubjectsCubit extends Cubit<SubjectsState> {
   Future<void> addCourse() async {
     DocumentReference<Map<String, dynamic>> courseDoc = FirebaseFirestore.instance
         .collection('secondary years')
-        .doc('first Secondary')
+        .doc(years.first)
         .collection(selectedSubject!)
         .doc();
     await courseDoc.set(CourseModel(

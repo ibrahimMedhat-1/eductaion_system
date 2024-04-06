@@ -16,6 +16,7 @@ class SubjectDialog extends StatelessWidget {
         return AlertDialog(
           title: const Text('Add Subject'),
           content: MainTextField(
+            textInputType: TextInputType.text,
             hintText: "Subject Name",
             controller: subjectName,
           ),

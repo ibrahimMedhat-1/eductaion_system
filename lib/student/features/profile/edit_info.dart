@@ -2,6 +2,7 @@ import 'package:education_system/student/features/profile/manager/profile_cubit.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import '../payment/widgets/my_text_field.dart';
 
@@ -58,10 +59,10 @@ class EditInfoPage extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    MyTextField(
-                      controller: cubit.idController,
-                      labelText: "Student ID",
-                    ),
+                    // MyTextField(
+                    //   controller: cubit.idController,
+                    //   labelText: "Student ID",
+                    // ),
                     const SizedBox(
                       width: 10,
                     ),
@@ -76,6 +77,12 @@ class EditInfoPage extends StatelessWidget {
                 child: Row(
                   children: [
                     MyTextField(
+                      onChanged: (value) {
+                        if (!isNumber(value)) {
+                          cubit.phoneController.clear();
+                          cubit.emit(CheckIsNubmer());
+                        }
+                      },
                       controller: cubit.phoneController,
                       labelText: "Phone Number",
                     ),
@@ -141,6 +148,12 @@ class EditInfoPage extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     MyTextField(
+                      onChanged: (value) {
+                        if (!isNumber(value)) {
+                          cubit.parentPhoneController.clear();
+                          cubit.emit(CheckIsNubmer());
+                        }
+                      },
                       controller: cubit.parentPhoneController,
                       labelText: "Phone Number",
                     ),

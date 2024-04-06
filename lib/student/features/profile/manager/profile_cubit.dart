@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'profile_state.dart';
@@ -121,39 +122,45 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   String profileImage = Constants.studentModel?.image ?? Constants.teacherModel?.image ?? '';
 
-  void changeProfileImage({bool isTeacher = false}) async {
+  void changeProfileImage(context, {bool isTeacher = false}) async {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
-      final image = await value!.readAsBytes();
-      await FirebaseStorage.instance
-          .ref()
-          .child(Constants.studentModel?.id ?? Constants.teacherModel!.id!)
-          .putData(
-            image,
-            SettableMetadata(contentType: 'image/png'),
-          )
-          .then((p0) async {
-        await p0.ref.getDownloadURL().then((value) async {
-          await FirebaseFirestore.instance
-              .collection(isTeacher ? 'teachers' : 'students')
-              .doc(Constants.studentModel?.id ?? Constants.teacherModel!.id)
-              .update({'image': value}).then((value) async {
+      ImageCropper().cropImage(sourcePath: value!.path, cropStyle: CropStyle.circle, uiSettings: [
+        WebUiSettings(
+          context: context,
+        )
+      ]).then((value) async {
+        final image = await value!.readAsBytes();
+        await FirebaseStorage.instance
+            .ref()
+            .child(Constants.studentModel?.id ?? Constants.teacherModel!.id!)
+            .putData(
+              image,
+              SettableMetadata(contentType: 'image/png'),
+            )
+            .then((p0) async {
+          await p0.ref.getDownloadURL().then((value) async {
             await FirebaseFirestore.instance
                 .collection(isTeacher ? 'teachers' : 'students')
                 .doc(Constants.studentModel?.id ?? Constants.teacherModel!.id)
-                .get()
-                .then((value) {
-              isTeacher
-                  ? Constants.teacherModel = TeacherModel.fromJson(value.data())
-                  : Constants.studentModel = StudentModel.fromJson(value.data());
-              profileImage = Constants.studentModel?.image ?? Constants.teacherModel!.image!;
-              print(profileImage);
-              emit(ChangeProfileImage());
+                .update({'image': value}).then((value) async {
+              await FirebaseFirestore.instance
+                  .collection(isTeacher ? 'teachers' : 'students')
+                  .doc(Constants.studentModel?.id ?? Constants.teacherModel!.id)
+                  .get()
+                  .then((value) {
+                isTeacher
+                    ? Constants.teacherModel = TeacherModel.fromJson(value.data())
+                    : Constants.studentModel = StudentModel.fromJson(value.data());
+                profileImage = Constants.studentModel?.image ?? Constants.teacherModel!.image!;
+                print(profileImage);
+                emit(ChangeProfileImage());
+              });
             });
           });
+        }).catchError((onError) {
+          print('2');
+          print(onError);
         });
-      }).catchError((onError) {
-        print('2');
-        print(onError);
       });
     }).catchError((onError) {
       print('1');

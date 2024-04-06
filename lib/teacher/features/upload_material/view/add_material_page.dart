@@ -1,4 +1,5 @@
 import 'package:education_system/teacher/features/upload_material/manager/add_material_cubit.dart';
+import 'package:education_system/teacher/features/upload_material/pages/pdf_page/view/pdf_page.dart';
 import 'package:education_system/teacher/features/upload_material/pages/view_lesson/view/view_lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,12 +60,21 @@ class AddMaterialPage extends StatelessWidget {
                                           lessonTitle: cubit.material[index]['name'],
                                         ),
                                       ));
-                                } else {
+                                } else if (cubit.material[index]['type'] == 'quiz' ||
+                                    cubit.material[index]['type'] == 'assignment') {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => TeacherQuestionPage(
                                           question: cubit.material[index],
+                                        ),
+                                      ));
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ViewPdfPage(
+                                          name: cubit.material[index]['name'],
                                         ),
                                       ));
                                 }

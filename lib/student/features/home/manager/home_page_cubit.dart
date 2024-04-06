@@ -30,7 +30,7 @@ class HomePageCubit extends Cubit<HomePageState> {
     } else if (value == 'الصف الثالث' || value == 'third secondary') {
       year = 'third Secondary';
     }
-    await FirebaseFirestore.instance.collection('secondary years').doc(year).get().then((value) {
+    await FirebaseFirestore.instance.collection('secondary years').doc('first Secondary').get().then((value) {
       for (var subject in value.data()!['subjects']) {
         subjects.add(subject);
         getCoursesOfSubject(subject, year);

@@ -49,6 +49,7 @@ class LoginPage extends StatelessWidget {
                           height: 10,
                         ),
                         MainTextField(
+                          textInputType: TextInputType.emailAddress,
                           controller: cubit.emailController,
                           hintText: "البريد الالكتروني",
                         ),
@@ -56,6 +57,7 @@ class LoginPage extends StatelessWidget {
                           height: 10,
                         ),
                         MainTextField(
+                          textInputType: TextInputType.text,
                           controller: cubit.passwordController,
                           hintText: "كلمة السر",
                         ),
