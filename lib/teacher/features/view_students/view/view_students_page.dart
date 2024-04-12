@@ -32,10 +32,12 @@ class ViewStudentsPage extends StatelessWidget {
                   const SizedBox(
                     width: 30,
                   ),
-                  MainTextField(
-                    textInputType: TextInputType.text,
-                    hintText: "Search",
-                    prefixIcon: const Icon(Icons.search),
+                  Expanded(
+                    child: MainTextField(
+                      textInputType: TextInputType.text,
+                      hintText: "Search",
+                      prefixIcon: const Icon(Icons.search),
+                    ),
                   ),
                 ],
               ),
@@ -61,15 +63,15 @@ class ViewStudentsPage extends StatelessWidget {
                           child: ListTile(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => StudentPage(student: cubit.students[index]),
+                                builder: (context) => StudentPage(studentModel: cubit.students[index]),
                               ));
                             },
-                            leading: cubit.students[index]['image'] == ''
+                            leading: cubit.students[index].image == ''
                                 ? Image.asset("assets/images/icons8-student-50.png")
-                                : Image.network(cubit.students[index]['image']),
+                                : Image.network(cubit.students[index].image!),
                             tileColor: ColorsAsset.kLightPurble,
                             title: Text(
-                              cubit.students[index]['name'],
+                              cubit.students[index].name ?? '',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                             ),

@@ -30,127 +30,119 @@ class CourseDetails extends StatelessWidget {
         builder: (context, state) {
           final CourseDetailsCubit cubit = CourseDetailsCubit.get(context);
           return Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 50,
+            body: Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text(
+                  "Please Assign Teacher to This Course",
+                  style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                if (cubit.courseModel?.teacher == null)
+                  SizedBox(
+                    height: 60,
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: DropdownButtonFormField<TeacherModel>(
+                      value: cubit.selectedTeacher,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ColorsAsset.kPrimary,
+                          ),
+                        ),
+                        labelText: "Choose Teacher",
+                      ),
+                      items: cubit.teachers.map((teacher) {
+                        return DropdownMenuItem<TeacherModel>(
+                          value: teacher,
+                          child: Text(teacher.name ?? ''),
+                        );
+                      }).toList(),
+                      onChanged: (TeacherModel? newValue) {
+                        cubit.handleTeacherChange(newValue!);
+                      },
+                    ),
                   ),
-                  const Text(
-                    "Please Assign Teacher to This Course",
-                    style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  if (cubit.courseModel?.teacher == null)
-                    SizedBox(
-                      height: 60,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: DropdownButtonFormField<TeacherModel>(
-                        value: cubit.selectedTeacher,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: ColorsAsset.kPrimary,
+                SizedBox(
+                  height: 20,
+                ),
+                DataTable(
+                  dataTextStyle: const TextStyle(color: ColorsAsset.kPrimary),
+                  columns: const [
+                    DataColumn(label: Expanded(child: Text('Course Name'))),
+                    DataColumn(label: Expanded(child: Text('Course ID'))),
+                    DataColumn(label: Expanded(child: Text('Course Reference'))),
+                    DataColumn(label: Expanded(child: Text('Teacher Name'))),
+                    DataColumn(label: Expanded(child: Text('Teacher ID'))),
+                    DataColumn(label: Expanded(child: Text('Teacher Reference'))),
+                  ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text(cubit.courseModel?.courseName ?? '')),
+                      DataCell(Text(cubit.courseModel?.id ?? '')),
+                      DataCell(Text(cubit.courseModel?.reference?.path ?? '')),
+                      DataCell(Text(cubit.courseModel?.teacherName ?? '')),
+                      DataCell(Text(cubit.courseModel?.teacher?.id ?? '')),
+                      DataCell(Text(cubit.courseModel?.teacher?.path ?? '')),
+                    ]),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      value: courseModel.years?.contains('first Secondary'),
+                      onChanged: null,
+                    ),
+                    const Text('First Secondary Year'),
+                    const SizedBox(width: 16.0),
+                    Checkbox(
+                      value: courseModel.years?.contains('second Secondary'),
+                      onChanged: null,
+                    ),
+                    const Text('Second Secondary Year'),
+                    const SizedBox(width: 16.0),
+                    Checkbox(
+                      value: courseModel.years?.contains('third Secondary'),
+                      onChanged: null,
+                    ),
+                    const Text('Third Secondary Year'),
+                  ],
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                if (cubit.courseModel?.teacher == null)
+                  state is AssignTeacherLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : ElevatedButton(
+                          onPressed: () {
+                            cubit.assignTeacher(courseModel.reference!).then((value) {
+                              cubit.getCourseDetails(courseModel.years!.first, subject, courseModel.id);
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorsAsset.kPrimary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0), // Border radius
                             ),
                           ),
-                          labelText: "Choose Teacher",
-                        ),
-                        items: cubit.teachers.map((teacher) {
-                          return DropdownMenuItem<TeacherModel>(
-                            value: teacher,
-                            child: Text(teacher.name ?? ''),
-                          );
-                        }).toList(),
-                        onChanged: (TeacherModel? newValue) {
-                          cubit.handleTeacherChange(newValue!);
-                        },
-                      ),
-                    ),
-                  const SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      height: 20,
-                    ),
-                  ),
-                  DataTable(
-                    dataTextStyle: const TextStyle(color: ColorsAsset.kPrimary),
-                    columns: const [
-                      DataColumn(label: Expanded(child: Text('Course Name'))),
-                      DataColumn(label: Expanded(child: Text('Course ID'))),
-                      DataColumn(label: Expanded(child: Text('Course Reference'))),
-                      DataColumn(label: Expanded(child: Text('Teacher Name'))),
-                      DataColumn(label: Expanded(child: Text('Teacher ID'))),
-                      DataColumn(
-                          label: Expanded(
-                        child: Text('Teacher Reference'),
-                      )),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Expanded(child: Text(cubit.courseModel?.courseName ?? ''))),
-                        DataCell(Expanded(child: Text(cubit.courseModel?.id ?? ''))),
-                        DataCell(Expanded(child: Text(cubit.courseModel?.reference?.path ?? ''))),
-                        DataCell(Expanded(child: Text(cubit.courseModel?.teacherName ?? ''))),
-                        DataCell(Expanded(child: Text(cubit.courseModel?.teacher?.id ?? ''))),
-                        DataCell(Expanded(child: Text(cubit.courseModel?.teacher?.path ?? ''))),
-                      ]),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Checkbox(
-                        value: courseModel.years?.contains('first Secondary'),
-                        onChanged: null,
-                      ),
-                      const Text('First Secondary Year'),
-                      const SizedBox(width: 16.0),
-                      Checkbox(
-                        value: courseModel.years?.contains('second Secondary'),
-                        onChanged: null,
-                      ),
-                      const Text('Second Secondary Year'),
-                      const SizedBox(width: 16.0),
-                      Checkbox(
-                        value: courseModel.years?.contains('third Secondary'),
-                        onChanged: null,
-                      ),
-                      const Text('Third Secondary Year'),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  if (cubit.courseModel?.teacher == null)
-                    state is AssignTeacherLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : ElevatedButton(
-                            onPressed: () {
-                              cubit.assignTeacher(courseModel.reference!).then((value) {
-                                cubit.getCourseDetails(courseModel.years!.first, subject, courseModel.id);
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorsAsset.kPrimary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0), // Border radius
-                              ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                            child: Text(
+                              'Save',
+                              style: TextStyle(color: Colors.white),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
-                              child: Text(
-                                'Save',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          )
-                ],
-              ),
+                          ),
+                        )
+              ],
             ),
           );
         },

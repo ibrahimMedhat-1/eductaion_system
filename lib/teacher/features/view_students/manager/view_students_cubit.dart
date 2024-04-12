@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_system/models/student_model.dart';
 import 'package:education_system/shared/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -9,7 +10,7 @@ class ViewStudentsCubit extends Cubit<ViewStudentsState> {
   ViewStudentsCubit() : super(ViewStudentsInitial());
   static ViewStudentsCubit get(context) => BlocProvider.of(context);
 
-  List<Map<String, dynamic>> students = [];
+  List<StudentModel> students = [];
   void getCourseStudents(String year) async {
     await FirebaseFirestore.instance
         .collection('secondary years')
@@ -22,7 +23,7 @@ class ViewStudentsCubit extends Cubit<ViewStudentsState> {
       for (var element in value.docs) {
         DocumentReference<Map<String, dynamic>> reference = await element.data()['reference'];
         await reference.get().then((value) {
-          students.add(value.data()!);
+          students.add(StudentModel.fromJson(value.data()));
         });
         print(students.length);
       }

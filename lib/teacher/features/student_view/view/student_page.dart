@@ -1,3 +1,4 @@
+import 'package:education_system/models/student_model.dart';
 import 'package:education_system/teacher/features/student_view/manager/student_data_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,10 +7,10 @@ import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/profile/widgets/parent_data.dart';
 
 class StudentPage extends StatelessWidget {
-  final Map<String, dynamic> student;
+  final StudentModel studentModel;
   const StudentPage({
     super.key,
-    required this.student,
+    required this.studentModel,
   });
 
   @override
@@ -29,7 +30,7 @@ class StudentPage extends StatelessWidget {
         ],
       ),
       body: BlocProvider(
-        create: (context) => StudentDataCubit()..getStudentGrades(student['id']),
+        create: (context) => StudentDataCubit()..getStudentGrades(studentModel.id!),
         child: BlocConsumer<StudentDataCubit, StudentDataState>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -46,13 +47,13 @@ class StudentPage extends StatelessWidget {
                             CircleAvatar(
                               radius: 80,
                               backgroundColor: const Color(0xFF6E85B7),
-                              backgroundImage: NetworkImage(student['image'] ?? ''),
+                              backgroundImage: NetworkImage(studentModel.image ?? ''),
                             ),
                             const SizedBox(
                               height: 30,
                             ),
                             // PersonalData(),
-                            FamilyDataSection(parentData: student['parentData']),
+                            FamilyDataSection(parentData: studentModel.parentData),
                           ],
                         ),
                       )),
