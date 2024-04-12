@@ -24,17 +24,17 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
   CourseModel? courseModel;
 
   void getCourseDetails(year, subject, courseId) async {
+    print(year);
+    print(subject);
+    print(courseId);
     await FirebaseFirestore.instance
         .collection('secondary years')
-        .doc(isFirstYearSelected
-            ? 'first Secondary'
-            : isSecondYearSelected
-                ? 'second Secondary'
-                : 'third Secondary')
-        .collection(subject)
+        .doc(year)
+        .collection(subject.toString().trim())
         .doc(courseId.toString().trim())
         .get()
         .then((value) {
+      print('value.data()');
       print(value.data());
       courseModel = CourseModel.fromJson(value.data());
       emit(GetCourseDetails());
