@@ -17,7 +17,10 @@ class CourseDetails extends StatelessWidget {
     print('fgdhsjk ${courseModel.id}');
     return BlocProvider(
       create: (context) => CourseDetailsCubit()
-        ..getTeachers()
+        ..getTeachers(
+          courseModel.years!.first.trim(),
+          subject,
+        )
         ..getCourseDetails(
           courseModel.years!.first.trim(),
           subject.toString().trim(),

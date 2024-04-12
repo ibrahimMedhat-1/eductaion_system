@@ -45,14 +45,21 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
 
   List<TeacherModel> teachers = [];
 
-  void getTeachers() async {
-    await FirebaseFirestore.instance.collection('teachers').get().then((value) {
-      for (var teacher in value.docs) {
-        teachers.add(TeacherModel.fromJson(teacher.data()));
-        print(teacher.data());
-      }
-      emit(GetTeachers());
-    });
+  void getTeachers(year, subject) async {
+    await FirebaseFirestore.instance
+        .collection('teachers')
+        .where('subject', isEqualTo: subject)
+        .where('years', isEqualTo: [year])
+        .get()
+        .then((value) {
+          for (var teacher in value.docs) {
+            if (teacher.data()['courseId'] == null) {
+              teachers.add(TeacherModel.fromJson(teacher.data()));
+              print(teacher.data());
+            }
+          }
+          emit(GetTeachers());
+        });
   }
 
   Future<void> assignTeacher(DocumentReference<Map<String, dynamic>> courseRef) async {
