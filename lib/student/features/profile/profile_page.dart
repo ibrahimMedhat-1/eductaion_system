@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 30,
                       ),
-                      const PersonalData(),
+                      PersonalData(studentModel: Constants.studentModel!),
                       const FamilyDataSection(),
                       const SizedBox(
                         height: 30,

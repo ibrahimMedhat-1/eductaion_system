@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/admin/features/home/view/home_page.dart';
+import 'package:education_system/models/parent_model.dart';
 import 'package:education_system/models/student_model.dart';
+import 'package:education_system/parent/features/home_page/view/parent_home_page.dart';
 import 'package:education_system/student/features/home/student_home_page.dart';
 import 'package:education_system/teacher/features/home/teacher_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,9 +23,19 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   bool isProfessor = false;
   bool isAdmin = false;
+
   void changeToadmin() {
     isProfessor = false;
     isAdmin = !isAdmin;
+    emit(ChangeType());
+  }
+
+  bool isParent = false;
+
+  void changeToParent() {
+    isProfessor = false;
+    isAdmin = false;
+    isParent = !isParent;
     emit(ChangeType());
   }
 
@@ -82,6 +94,19 @@ class LoginCubit extends Cubit<LoginState> {
         }).catchError((onError) {
           emit(LoginError());
           Fluttertoast.showToast(msg: 'Not an Admin');
+        });
+      } else if (isParent) {
+        await FirebaseFirestore.instance
+            .collection('parents')
+            .doc(emailController.text.trim().toLowerCase())
+            .get()
+            .then((value) {
+          Constants.parentModel = ParentModel.fromJson(value.data());
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ParentHomePage(),
+              ));
         });
       } else {
         await FirebaseFirestore.instance

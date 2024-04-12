@@ -87,6 +87,16 @@ class LoginPage extends StatelessWidget {
                                 const Text('Admin'),
                               ],
                             ),
+                            Row(
+                              children: [
+                                Checkbox(
+                                    value: cubit.isParent,
+                                    onChanged: (value) {
+                                      cubit.changeToParent();
+                                    }),
+                                const Text('Parent'),
+                              ],
+                            ),
                           ],
                         ),
                         const SizedBox(

@@ -21,10 +21,12 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void signUp(context) {
     emit(SignUpLoading());
+    DocumentReference id;
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text)
-        .then((value) {
-      FirebaseFirestore.instance
+        .then((value) async {
+      id = FirebaseFirestore.instance.collection('students').doc(value.user!.uid);
+      await FirebaseFirestore.instance
           .collection('students')
           .doc(value.user!.uid)
           .set(
@@ -44,7 +46,36 @@ class SignUpCubit extends Cubit<SignUpState> {
               ),
             ).toMap(),
           )
-          .then((value) {
+          .then((value) async {
+        var acs = ActionCodeSettings(
+          // URL you want to redirect back to. The domain (www.example.com) for this
+          // URL must be whitelisted in the Firebase Console.
+          url: 'https://education-system1.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
+          // This must be true
+
+          handleCodeInApp: true,
+          // installIfNotAvailable
+          // minimumVersion
+        );
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: parentEmailController.text.trim().toLowerCase(), password: '123456')
+            .then((value) async {
+          await FirebaseFirestore.instance
+              .collection('parents')
+              .doc(parentEmailController.text.trim().toLowerCase())
+              .set({
+            'id': parentEmailController.text.trim().toLowerCase(),
+            'studentReference': id,
+          });
+          await FirebaseAuth.instance
+              .sendSignInLinkToEmail(
+                email: parentEmailController.text.trim(),
+                actionCodeSettings: acs,
+              )
+              .catchError((onError) => print('Error sending email verification $onError'))
+              .then((value) => print('Successfully sent email verification'));
+        });
         emit(SignUpSuccessfully());
         Navigator.pop(context);
       }).catchError((onError) {

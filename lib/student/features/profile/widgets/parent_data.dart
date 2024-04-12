@@ -1,10 +1,11 @@
+import 'package:education_system/models/student_model.dart';
 import 'package:education_system/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../shared/utils/colors.dart';
 
 class FamilyDataSection extends StatelessWidget {
-  final Map<String, dynamic>? parentData;
+  final StudentParentData? parentData;
   const FamilyDataSection({
     super.key,
     this.parentData,
@@ -40,9 +41,9 @@ class FamilyDataSection extends StatelessWidget {
           ],
           rows: [
             DataRow(cells: [
-              DataCell(Text(Constants.studentModel?.parentData?.name ?? parentData?['name'] ?? '')),
-              DataCell(Text(Constants.studentModel?.parentData?.email ?? parentData?['email'] ?? '')),
-              DataCell(Text(Constants.studentModel?.parentData?.phone ?? parentData?['phone'] ?? '')),
+              DataCell(Text(Constants.studentModel?.parentData?.name ?? parentData?.name ?? '')),
+              DataCell(Text(Constants.studentModel?.parentData?.email ?? parentData?.email ?? '')),
+              DataCell(Text(Constants.studentModel?.parentData?.phone ?? parentData?.phone ?? '')),
             ])
           ],
         ),

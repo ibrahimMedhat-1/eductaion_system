@@ -14,25 +14,6 @@ class StudentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<int, int> selectedAnswers = {};
-
-    final List<String> questions = [
-      'Question 1',
-      'Question 2',
-      'Question 3',
-    ];
-    final List<String> modelAnswer = [
-      'Answer 1',
-      'Answer 3',
-      'Answer 3',
-    ];
-
-    final List<List<String>> answers = [
-      ['Answer 1', 'Answer 2', 'Answer 3'],
-      ['Answer 1', 'Answer 2', 'Answer 3'],
-      ['Answer 1', 'Answer 2', 'Answer 3'],
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -97,8 +78,8 @@ class StudentPage extends StatelessWidget {
                                   expandedAlignment: Alignment.topLeft,
                                   title: Text(
                                     'Quiz ${indexx + 1}',
-                                    style:
-                                        const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                   ),
                                   trailing: Text(
                                       "Grade = ${cubit.quizzes[indexx]['myGrade']}/${cubit.quizzes[indexx]['totalGrade']}"),

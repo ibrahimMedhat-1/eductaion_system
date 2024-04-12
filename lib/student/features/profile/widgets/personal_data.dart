@@ -1,10 +1,11 @@
+import 'package:education_system/models/student_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/constants.dart';
 import '../../../../shared/utils/colors.dart';
 
 class PersonalData extends StatelessWidget {
-  const PersonalData({super.key});
+  final StudentModel studentModel;
+  const PersonalData({super.key, required this.studentModel});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,9 @@ class PersonalData extends StatelessWidget {
             ],
             rows: [
               DataRow(cells: [
-                DataCell(Text(Constants.studentModel!.name ?? '')),
-                DataCell(Text(Constants.studentModel!.id ?? '')),
-                DataCell(Text(Constants.studentModel!.phone ?? '')),
+                DataCell(Text(studentModel.name ?? '')),
+                DataCell(Text(studentModel.id ?? '')),
+                DataCell(Text(studentModel.phone ?? '')),
               ])
             ]),
       ],
