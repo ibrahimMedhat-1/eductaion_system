@@ -9,7 +9,7 @@ class CourseModel {
   String? price;
   String? image;
   DocumentReference<Map<String, dynamic>>? teacher;
-  Map<String, dynamic>? studyPlan;
+  List<Map<String, dynamic>>? studyPlan;
   List<String>? years;
 
   CourseModel(
@@ -33,7 +33,7 @@ class CourseModel {
     teacherName = json['teacher name'];
     image = json['image'];
     teacher = json['teacher'];
-    studyPlan = json['study plan'];
+    studyPlan = List.generate(json['study plan'].length, (index) => json['study plan'][index]);
   }
 
   Map<String, dynamic> toMap() => {

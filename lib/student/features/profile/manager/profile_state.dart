@@ -15,4 +15,14 @@ final class UpdateDataLoading extends ProfileState {}
 
 final class UpdateDataSuccessfully extends ProfileState {}
 
-final class CheckIsNubmer extends ProfileState {}
+final class CheckIsNumber extends ProfileState {}
+
+final class AddPlan extends ProfileState {}
+
+final class RemovePlan extends ProfileState {}
+
+final class SavePlanLoading extends ProfileState {}
+
+final class SavePlanSuccessfully extends ProfileState {}
+
+final class SavePlanError extends ProfileState {}

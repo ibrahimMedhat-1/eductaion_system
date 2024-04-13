@@ -1,5 +1,7 @@
+import 'package:education_system/auth/login/login%20page.dart';
 import 'package:education_system/auth/register/manager/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -72,6 +74,9 @@ class RegisterPage extends StatelessWidget {
                                 Row(children: [
                                   Flexible(
                                     child: MainTextField(
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ا-ي]'))
+                                      ],
                                       textInputType: TextInputType.text,
                                       controller: cubit.fullNameController,
                                       hintText: "الاسم بالكامل",
@@ -83,12 +88,9 @@ class RegisterPage extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: MainTextField(
-                                      onChanged: (value) {
-                                        if (!isNumber(value)) {
-                                          cubit.parentPhoneController.clear();
-                                          cubit.emit(CheckIsNubmer());
-                                        }
-                                      },
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                                      ],
                                       textInputType: TextInputType.phone,
                                       controller: cubit.phoneController,
                                       hintText: "رقم الهاتف",
@@ -135,6 +137,9 @@ class RegisterPage extends StatelessWidget {
                                 Row(children: [
                                   Flexible(
                                     child: MainTextField(
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                                      ],
                                       onChanged: (value) {
                                         if (!isNumber(value)) {
                                           cubit.parentPhoneController.clear();
@@ -163,6 +168,9 @@ class RegisterPage extends StatelessWidget {
                                   ),
                                   Flexible(
                                     child: MainTextField(
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ا-ي]'))
+                                      ],
                                       textInputType: TextInputType.name,
                                       controller: cubit.parentNameController,
                                       hintText: "الاسم",
@@ -206,7 +214,7 @@ class RegisterPage extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => const RegisterPage(),
+                                      builder: (context) => const LoginPage(),
                                     ));
                                   },
                                   child: const Row(

@@ -80,7 +80,7 @@ class EditInfoPage extends StatelessWidget {
                       onChanged: (value) {
                         if (!isNumber(value)) {
                           cubit.phoneController.clear();
-                          cubit.emit(CheckIsNubmer());
+                          cubit.emit(CheckIsNumber());
                         }
                       },
                       controller: cubit.phoneController,
@@ -151,7 +151,7 @@ class EditInfoPage extends StatelessWidget {
                       onChanged: (value) {
                         if (!isNumber(value)) {
                           cubit.parentPhoneController.clear();
-                          cubit.emit(CheckIsNubmer());
+                          cubit.emit(CheckIsNumber());
                         }
                       },
                       controller: cubit.parentPhoneController,

@@ -16,8 +16,7 @@ class CoursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CourseDetailsCubit()..getProfessorDetails(courseModel.teacher!),
+      create: (context) => CourseDetailsCubit()..getProfessorDetails(courseModel.teacher),
       child: BlocConsumer<CourseDetailsCubit, CourseDetailsState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -46,8 +45,7 @@ class CoursePage extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
-                                          image: NetworkImage(cubit.teacherData!
-                                              .data()!['image']))),
+                                          image: NetworkImage(cubit.teacherData?.data()?['image'] ?? ''))),
                                 ),
                                 const SizedBox(
                                   width: 15,
@@ -55,13 +53,10 @@ class CoursePage extends StatelessWidget {
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             '${getLang(context, "Overview")}',
@@ -83,10 +78,8 @@ class CoursePage extends StatelessWidget {
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             '${getLang(context, "Name : ")}',
@@ -96,18 +89,15 @@ class CoursePage extends StatelessWidget {
                                                 color: ColorsAsset.kPrimary),
                                           ),
                                           Text(
-                                            cubit.teacherData!.data()!['name'],
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: ColorsAsset.kTextcolor),
+                                            cubit.teacherData?.data()?['name'] ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             '${getLang(context, "Certificate: ")}',
@@ -117,19 +107,15 @@ class CoursePage extends StatelessWidget {
                                                 color: ColorsAsset.kPrimary),
                                           ),
                                           Text(
-                                            cubit.teacherData!
-                                                .data()!['degree'],
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: ColorsAsset.kTextcolor),
+                                            cubit.teacherData?.data()?['degree'] ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             '${getLang(context, "Experience: ")}',
@@ -139,18 +125,15 @@ class CoursePage extends StatelessWidget {
                                                 color: ColorsAsset.kPrimary),
                                           ),
                                           Text(
-                                            cubit.teacherData!.data()!['bio'],
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: ColorsAsset.kTextcolor),
+                                            cubit.teacherData?.data()?['bio'] ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             '${getLang(context, "Center Name: ")}',
@@ -160,19 +143,15 @@ class CoursePage extends StatelessWidget {
                                                 color: ColorsAsset.kPrimary),
                                           ),
                                           Text(
-                                            cubit.teacherData!
-                                                .data()!['centerName'],
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: ColorsAsset.kTextcolor),
+                                            cubit.teacherData?.data()?['centerName'] ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             '${getLang(context, "Center Number: ")}',
@@ -182,11 +161,9 @@ class CoursePage extends StatelessWidget {
                                                 color: ColorsAsset.kPrimary),
                                           ),
                                           Text(
-                                            cubit.teacherData!
-                                                .data()!['centerNo'],
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: ColorsAsset.kTextcolor),
+                                            cubit.teacherData?.data()?['centerNo'] ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 20, color: ColorsAsset.kTextcolor),
                                           ),
                                         ],
                                       ),
@@ -200,18 +177,15 @@ class CoursePage extends StatelessWidget {
                         Text(
                           '${getLang(context, "See the study plan")}',
                           style: const TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: ColorsAsset.kPrimary),
+                              fontSize: 30, fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                         ),
                         const SizedBox(
                           height: 25,
                         ),
                         Column(
-                          children: courseModel.studyPlan!.entries
+                          children: courseModel.studyPlan!
                               .map((e) => SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.6,
+                                    width: MediaQuery.of(context).size.width * 0.6,
                                     child: ExpansionTile(
                                       shape: const OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -220,20 +194,16 @@ class CoursePage extends StatelessWidget {
                                       backgroundColor: ColorsAsset.kLight,
                                       expandedAlignment: Alignment.topLeft,
                                       title: Text(
-                                        e.key,
+                                        e['title'],
                                         style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: ColorsAsset.kPrimary),
+                                            fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                       ),
-                                      children: e.value
-                                          .map<Widget>(
-                                            (e) => Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(e),
-                                            ),
-                                          )
-                                          .toList(),
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(e['plan']),
+                                        ),
+                                      ],
                                     ),
                                   ))
                               .toList(),
@@ -247,8 +217,7 @@ class CoursePage extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  PaymentPage(courseModel: courseModel),
+                              builder: (context) => PaymentPage(courseModel: courseModel),
                             ));
                           },
                           style: ElevatedButton.styleFrom(
@@ -259,8 +228,7 @@ class CoursePage extends StatelessWidget {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0, vertical: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
                             child: Text('${getLang(context, "subscribe now")}'),
                           ),
                         ),

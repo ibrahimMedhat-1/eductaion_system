@@ -94,7 +94,7 @@ class SubjectsCubit extends Cubit<SubjectsState> {
       courseName: courseNameController.text,
       id: courseDoc.id,
       reference: courseDoc,
-      studyPlan: {},
+      studyPlan: [],
       years: years,
     ).toMap());
   }

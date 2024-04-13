@@ -8,9 +8,9 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
 
   DocumentSnapshot<Map<String, dynamic>>? teacherData;
   static CourseDetailsCubit get(context) => BlocProvider.of(context);
-  void getProfessorDetails(DocumentReference<Map<String, dynamic>> teacherReference) async {
+  void getProfessorDetails(DocumentReference<Map<String, dynamic>>? teacherReference) async {
     emit(GetTeacherDataLoading());
-    teacherData = await teacherReference.get();
+    teacherData = teacherReference != null ? await teacherReference.get() : null;
     emit(GetTeacherDataSuccessfully());
     print(teacherData!.data());
   }

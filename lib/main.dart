@@ -1,4 +1,4 @@
-import 'package:education_system/admin/features/home/view/home_page.dart';
+import 'package:education_system/auth/login/login%20page.dart';
 import 'package:education_system/shared/main_cubit/main_cubit.dart';
 import 'package:education_system/shared/utils/colors.dart';
 import 'package:education_system/student/features/profile/manager/profile_cubit.dart';
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
             // TeacherLayout
             // Studentlayout
             // LoginPage
-            home: const AdminHomePage(),
+            home: const LoginPage(),
           );
         },
       ),

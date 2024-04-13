@@ -167,4 +167,47 @@ class ProfileCubit extends Cubit<ProfileState> {
       print(onError);
     });
   }
+
+  List<TextEditingController> planTitles = [
+    TextEditingController(),
+  ];
+  List<TextEditingController> planSubject = [
+    TextEditingController(),
+  ];
+
+  void addMonth() {
+    planTitles.add(TextEditingController());
+    planSubject.add(TextEditingController());
+    emit(AddPlan());
+  }
+
+  void removeMonth(TextEditingController titleController, TextEditingController subjectController) {
+    planTitles.remove(titleController);
+    planSubject.remove(subjectController);
+    emit(RemovePlan());
+  }
+
+  void savePlan() async {
+    emit(SavePlanLoading());
+    List<Map<String, dynamic>> plan = [];
+    for (int i = 0; i < planTitles.length; i++) {
+      plan.add({
+        'title': planTitles[i].text,
+        'plan': planSubject[i].text,
+      });
+    }
+    await FirebaseFirestore.instance
+        .collection('secondary years')
+        .doc(Constants.teacherModel!.years!.first)
+        .collection(Constants.teacherModel!.subject!)
+        .doc(Constants.teacherModel!.courseId!.toString().trim())
+        .update({
+      'study plan': plan,
+    }).then((value) {
+      emit(SavePlanSuccessfully());
+    }).catchError((onError) {
+      emit(SavePlanError());
+      print(onError);
+    });
+  }
 }

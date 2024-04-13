@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../shared/utils/colors.dart';
 
@@ -14,7 +15,12 @@ class MainTextField extends StatelessWidget {
     this.onChanged,
     this.validationText,
     required this.textInputType,
+    this.inputFormatters,
+    this.maxLength,
+    this.enabled = true,
+    this.onTap,
   });
+  final List<TextInputFormatter>? inputFormatters;
 
   final String? labeltext;
   final String? validationText;
@@ -25,33 +31,41 @@ class MainTextField extends StatelessWidget {
   Widget? prefixIcon;
   Widget? suffixIcon;
   TextInputType textInputType;
-
+  final int? maxLength;
+  final bool enabled;
+  VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onChanged: onChanged,
-      controller: controller,
-      onFieldSubmitted: onSubmitted,
-      keyboardType: textInputType,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return validationText;
-        }
-      },
-      decoration: InputDecoration(
-        fillColor: Colors.white,
-        filled: true,
-        labelText: labeltext,
-        hintText: hintText,
-        hintStyle: const TextStyle(fontSize: 12),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorsAsset.kPrimary),
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorsAsset.kPrimary),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorsAsset.kPrimary),
+    return InkWell(
+      onTap: onTap,
+      child: TextFormField(
+        enabled: enabled,
+        maxLength: maxLength,
+        inputFormatters: inputFormatters,
+        onChanged: onChanged,
+        controller: controller,
+        onFieldSubmitted: onSubmitted,
+        keyboardType: textInputType,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return validationText;
+          }
+        },
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
+          labelText: labeltext,
+          hintText: hintText,
+          hintStyle: const TextStyle(fontSize: 12),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(color: ColorsAsset.kPrimary),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: ColorsAsset.kPrimary),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: ColorsAsset.kPrimary),
+          ),
         ),
       ),
     );
