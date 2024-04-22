@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restart_app/restart_app.dart';
 
 import '../../../auth/login/login page.dart';
+import '../../../components/locale/applocale.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import 'edit_info.dart';
@@ -29,9 +30,10 @@ class _ProfilePageState extends State<ProfilePage> {
         final ProfileCubit cubit = ProfileCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              'My Profile',
-              style: TextStyle(color: ColorsAsset.kPrimary),
+            title:  Text(
+              '${getLang(context, "My Profile")}'
+             ,
+              style: const TextStyle(color: ColorsAsset.kPrimary),
             ),
             backgroundColor: ColorsAsset.kLight2,
             actions: [
@@ -108,9 +110,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-                                child: Text('Edit Data'),
+                              child:  Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                                child: Text(
+                                    '${getLang(context, "Edit Data")}'
+                                    ),
                               ),
                             ),
                           ),
@@ -137,9 +141,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-                                child: Text('Logout'),
+                              child:  Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                                child: Text(
+                                    '${getLang(context, "Logout")}'
+                                    ),
                               ),
                             ),
                           ),

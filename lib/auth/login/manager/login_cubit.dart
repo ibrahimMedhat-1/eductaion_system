@@ -105,7 +105,7 @@ class LoginCubit extends Cubit<LoginState> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => ParentHomePage(),
+                builder: (context) => const ParentHomePage(),
               ));
         });
       } else {

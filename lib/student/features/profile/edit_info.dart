@@ -2,6 +2,7 @@ import 'package:education_system/student/features/profile/manager/profile_cubit.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import '../payment/widgets/my_text_field.dart';
@@ -20,9 +21,9 @@ class EditInfoPage extends StatelessWidget {
         final ProfileCubit cubit = ProfileCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              'Edit My Data',
-              style: TextStyle(color: ColorsAsset.kPrimary),
+            title:  Text(
+              '${getLang(context, "Edit Data")}',
+              style: const TextStyle(color: ColorsAsset.kPrimary),
             ),
             backgroundColor: ColorsAsset.kLight2,
             actions: [
@@ -37,10 +38,10 @@ class EditInfoPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const ListTile(
-                title: Text("Personal Data"),
+               ListTile(
+                title: Text( '${getLang(context,  "Personal Data")}'),
                 tileColor: ColorsAsset.kLightPurble,
-                leading: Icon(
+                leading: const Icon(
                   Icons.person,
                   color: ColorsAsset.kPrimary,
                 ),
@@ -54,7 +55,7 @@ class EditInfoPage extends StatelessWidget {
                   children: [
                     MyTextField(
                       controller: cubit.nameController,
-                      labelText: "Student Name",
+                      labelText: '${getLang(context,  "Name")}',
                     ),
                     const SizedBox(
                       width: 10,
@@ -84,14 +85,15 @@ class EditInfoPage extends StatelessWidget {
                         }
                       },
                       controller: cubit.phoneController,
-                      labelText: "Phone Number",
+                      labelText: '${getLang(context,  "Phone No.")}',
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     MyTextField(
                       controller: cubit.passwordController,
-                      labelText: "Password",
+                      labelText: '${getLang(context,  "Password")}'
+                      ,
                     ),
                     const SizedBox(width: 10),
                     // Flexible(
@@ -127,10 +129,10 @@ class EditInfoPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const ListTile(
-                title: Text("Parent Data"),
+               ListTile(
+                title: Text( '${getLang(context,  "Parent Data")}'),
                 tileColor: ColorsAsset.kLightPurble,
-                leading: Icon(
+                leading: const Icon(
                   Icons.family_restroom,
                   color: ColorsAsset.kPrimary,
                 ),
@@ -144,7 +146,7 @@ class EditInfoPage extends StatelessWidget {
                   children: [
                     MyTextField(
                       controller: cubit.parentNameController,
-                      labelText: "Name",
+                      labelText: '${getLang(context,  "Name")}',
                     ),
                     const SizedBox(width: 10),
                     MyTextField(
@@ -155,14 +157,14 @@ class EditInfoPage extends StatelessWidget {
                         }
                       },
                       controller: cubit.parentPhoneController,
-                      labelText: "Phone Number",
+                      labelText: '${getLang(context,  "Phone No.")}',
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     MyTextField(
                       controller: cubit.parentEmailController,
-                      labelText: "Email",
+                      labelText: '${getLang(context,  "Email")}',
                     ),
                   ],
                 ),
@@ -179,11 +181,12 @@ class EditInfoPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0), // Border radius
                         ),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                      child:  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                         child: Text(
-                          'Update',
-                          style: TextStyle(color: Colors.white),
+                          '${getLang(context,  "Update")}'
+                          ,
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),

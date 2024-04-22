@@ -1,6 +1,7 @@
 import 'package:education_system/models/student_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 
 class PersonalData extends StatelessWidget {
@@ -15,10 +16,12 @@ class PersonalData extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
-          child: const ListTile(
-            title: Text("Personal Data"),
+          child:  ListTile(
+            title: Text(
+                '${getLang(context,  "Personal Data")}'
+                ),
             tileColor: ColorsAsset.kLightPurble,
-            leading: Icon(
+            leading: const Icon(
               Icons.person,
               color: ColorsAsset.kPrimary,
             ),
@@ -29,10 +32,10 @@ class PersonalData extends StatelessWidget {
               horizontalInside: BorderSide(color: ColorsAsset.kLight2),
               verticalInside: BorderSide(color: ColorsAsset.kLightPurble),
             ),
-            columns: const [
-              DataColumn(label: Text('Name')),
-              DataColumn(label: Text('ID')),
-              DataColumn(label: Text('Phone Number')),
+            columns:  [
+              DataColumn(label: Text( '${getLang(context,  "Name")}')),
+              DataColumn(label: Text('${getLang(context,  "ID")}')),
+              DataColumn(label: Text('${getLang(context,  "Phone No.")}')),
             ],
             rows: [
               DataRow(cells: [

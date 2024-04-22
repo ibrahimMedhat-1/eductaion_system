@@ -2,6 +2,7 @@ import 'package:education_system/auth/login/widgets/main_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../components/locale/applocale.dart';
 import '../../shared/utils/colors.dart';
 import '../register/register_page.dart';
 import 'manager/login_cubit.dart';
@@ -51,7 +52,8 @@ class LoginPage extends StatelessWidget {
                         MainTextField(
                           textInputType: TextInputType.emailAddress,
                           controller: cubit.emailController,
-                          hintText: "البريد الالكتروني",
+                          hintText: '${getLang(context,  "Email")}'
+                         ,
                         ),
                         const SizedBox(
                           height: 10,
@@ -59,7 +61,7 @@ class LoginPage extends StatelessWidget {
                         MainTextField(
                           textInputType: TextInputType.text,
                           controller: cubit.passwordController,
-                          hintText: "كلمة السر",
+                          hintText: '${getLang(context,  "Password")}',
                         ),
                         const SizedBox(
                           height: 8,
@@ -74,7 +76,8 @@ class LoginPage extends StatelessWidget {
                                     onChanged: (value) {
                                       cubit.changeToProfessor();
                                     }),
-                                const Text('Professor'),
+                                const Text(
+                                    'Professor'),
                               ],
                             ),
                             Row(
@@ -114,11 +117,12 @@ class LoginPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8.0), // Border radius
                                   ),
                                 ),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                                child:  Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                                   child: Text(
-                                    'تسجيل الدخول',
-                                    style: TextStyle(color: Colors.white),
+
+                                    '${getLang(context,  "Sign In")}',
+                                    style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
@@ -131,17 +135,21 @@ class LoginPage extends StatelessWidget {
                               builder: (context) => const RegisterPage(),
                             ));
                           },
-                          child: const Row(
+                          child:  Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+
                               Text(
-                                "قم بانشاء حساب ",
-                                style: TextStyle(color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
-                              ),
-                              Text("ليس لديك حساب ؟ ",
-                                  style: TextStyle(
+                                  '${getLang(context,  "Don't Have Account? ")}'
+                                 ,
+                                  style: const TextStyle(
                                     color: ColorsAsset.kPrimary,
                                   )),
+                              Text(
+                                '${getLang(context,  "Create Account")}'
+                                ,
+                                style: const TextStyle(color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:education_system/models/student_model.dart';
 import 'package:education_system/shared/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 
 class FamilyDataSection extends StatelessWidget {
@@ -20,10 +21,12 @@ class FamilyDataSection extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
-          child: const ListTile(
-            title: Text("Parent Data"),
+          child:  ListTile(
+            title: Text(
+                '${getLang(context,  "Parent Data")}'
+               ),
             tileColor: ColorsAsset.kLightPurble,
-            leading: Icon(
+            leading: const Icon(
               Icons.family_restroom,
               color: ColorsAsset.kPrimary,
             ),
@@ -34,10 +37,16 @@ class FamilyDataSection extends StatelessWidget {
             horizontalInside: BorderSide(color: ColorsAsset.kLight2),
             verticalInside: BorderSide(color: ColorsAsset.kLightPurble),
           ),
-          columns: const [
-            DataColumn(label: Text('Name')),
-            DataColumn(label: Text('Email')),
-            DataColumn(label: Text('Phone No.')),
+          columns:  [
+            DataColumn(label: Text(
+                '${getLang(context,  "Name")}'
+                )),
+            DataColumn(label: Text(
+                '${getLang(context,  "Email")}'
+                )),
+            DataColumn(label: Text(
+                '${getLang(context,  "Phone No.")}'
+                )),
           ],
           rows: [
             DataRow(cells: [

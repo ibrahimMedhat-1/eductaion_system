@@ -1,6 +1,7 @@
 import 'package:education_system/student/features/chats/widgets/chat_dialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 import '../../widgets/cutom_appbar.dart';
 
@@ -73,9 +74,11 @@ class ChooseChatPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                                child: Text('Start Chat'),
+                              child:  Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                                child: Text(
+                                    '${getLang(context,  "Start Chat")}'
+                                    ),
                               ),
                             ),
                           ],

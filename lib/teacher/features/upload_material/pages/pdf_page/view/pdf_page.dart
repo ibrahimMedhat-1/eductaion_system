@@ -15,7 +15,7 @@ class ViewPdfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('PDF')),
+      appBar: AppBar(title: const Text('PDF')),
       body: Column(
         children: [
           InkWell(

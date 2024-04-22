@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../components/locale/applocale.dart';
 import '../../shared/constants.dart';
 import '../../shared/utils/colors.dart';
 import '../login/widgets/main_text_field.dart';
@@ -61,12 +62,13 @@ class RegisterPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Align(
+                                 Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                      "بيانات الطالب",
+                                      '${getLang(context,  "Student Data")}'
+                                      ,
                                       style:
-                                          TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                          const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                     )),
                                 const SizedBox(
                                   height: 10,
@@ -79,7 +81,8 @@ class RegisterPage extends StatelessWidget {
                                       ],
                                       textInputType: TextInputType.text,
                                       controller: cubit.fullNameController,
-                                      hintText: "الاسم بالكامل",
+                                      hintText: '${getLang(context,  "Full Name")}'
+                                      ,
                                       validationText: 'Please insert name',
                                     ),
                                   ),
@@ -93,7 +96,8 @@ class RegisterPage extends StatelessWidget {
                                       ],
                                       textInputType: TextInputType.phone,
                                       controller: cubit.phoneController,
-                                      hintText: "رقم الهاتف",
+                                      hintText: '${getLang(context,  "Phone No.")}'
+                                     ,
                                       validationText: 'Please insert phone',
                                     ),
                                   ),
@@ -106,7 +110,7 @@ class RegisterPage extends StatelessWidget {
                                     child: MainTextField(
                                       textInputType: TextInputType.emailAddress,
                                       controller: cubit.emailController,
-                                      hintText: "البريد الالكتروني",
+                                      hintText: '${getLang(context,  "Email")}',
                                       validationText: 'Please insert email',
                                     ),
                                   ),
@@ -117,19 +121,19 @@ class RegisterPage extends StatelessWidget {
                                     child: MainTextField(
                                       textInputType: TextInputType.text,
                                       controller: cubit.passwordController,
-                                      hintText: "كلمة السر",
+                                      hintText: '${getLang(context,  "Password")}',
                                     ),
                                   ),
                                 ]),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const Align(
+                                 Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
-                                      "بيانات ولي الامر",
+                                      '${getLang(context,  "Parent Data")}',
                                       style:
-                                          TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                          const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                     )),
                                 const SizedBox(
                                   height: 20,
@@ -147,7 +151,7 @@ class RegisterPage extends StatelessWidget {
                                         }
                                       },
                                       textInputType: TextInputType.phone,
-                                      hintText: "رقم الهاتف",
+                                      hintText: '${getLang(context,  "Phone No.")}',
                                       controller: cubit.parentPhoneController,
                                       validationText: 'Please insert phone',
                                     ),
@@ -159,7 +163,7 @@ class RegisterPage extends StatelessWidget {
                                     child: MainTextField(
                                       textInputType: TextInputType.emailAddress,
                                       controller: cubit.parentEmailController,
-                                      hintText: "البريد الالكتروني",
+                                      hintText: '${getLang(context,  "Email")}',
                                       validationText: 'Please insert email',
                                     ),
                                   ),
@@ -173,7 +177,7 @@ class RegisterPage extends StatelessWidget {
                                       ],
                                       textInputType: TextInputType.name,
                                       controller: cubit.parentNameController,
-                                      hintText: "الاسم",
+                                      hintText: '${getLang(context,  "Name")}',
                                       validationText: 'Please insert name',
                                     ),
                                   ),
@@ -200,11 +204,12 @@ class RegisterPage extends StatelessWidget {
                                             borderRadius: BorderRadius.circular(8.0), // Border radius
                                           ),
                                         ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                                        child:  Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                                           child: Text(
-                                            'انشاء حساب',
-                                            style: TextStyle(color: Colors.white),
+                                            '${getLang(context,  "Create Account")}'
+                                            ,
+                                            style: const TextStyle(color: Colors.white),
                                           ),
                                         ),
                                       ),
@@ -217,18 +222,22 @@ class RegisterPage extends StatelessWidget {
                                       builder: (context) => const LoginPage(),
                                     ));
                                   },
-                                  child: const Row(
+                                  child:  Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+
                                       Text(
-                                        "قم بتسجيل الدخول ",
-                                        style: TextStyle(
-                                            color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
-                                      ),
-                                      Text("لديك حساب بالفعل؟ ",
-                                          style: TextStyle(
+                                          '${getLang(context,  "Aready Have Account? ")}'
+                                         ,
+                                          style: const TextStyle(
                                             color: ColorsAsset.kPrimary,
                                           )),
+                                      Text(
+                                        '${getLang(context,  "Sign In")}'
+                                        ,
+                                        style: const TextStyle(
+                                            color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
+                                      ),
                                     ],
                                   ),
                                 ),

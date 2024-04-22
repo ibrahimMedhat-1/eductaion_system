@@ -70,7 +70,7 @@ class CourseDetails extends StatelessWidget {
                       },
                     ),
                   ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 DataTable(

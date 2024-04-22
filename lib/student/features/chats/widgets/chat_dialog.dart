@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 import '../chat_page.dart';
 
@@ -29,9 +30,10 @@ class ChatDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/7.png'),
-                      const Text(
-                        'Group Chat',
-                        style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
+                       Text(
+                        '${getLang(context,  "Group Chat")}'
+                        ,
+                        style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -55,9 +57,10 @@ class ChatDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/8.png'),
-                      const Text(
-                        'Private Chat',
-                        style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
+                       Text(
+                        '${getLang(context,  "Private Chat")}'
+                        ,
+                        style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -69,7 +72,9 @@ class ChatDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Close'),
+          child:  Text(
+              '${getLang(context,  "Close")}'
+              ),
           onPressed: () {
             Navigator.of(context).pop();
           },

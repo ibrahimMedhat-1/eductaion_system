@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 
 class ChatPage extends StatefulWidget {
@@ -18,9 +19,10 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Chat Page',
-          style: TextStyle(color: ColorsAsset.kPrimary),
+        title:  Text(
+          '${getLang(context,  "Chat Page")}'
+          ,
+          style: const TextStyle(color: ColorsAsset.kPrimary),
         ),
         backgroundColor: ColorsAsset.kLight2,
       ),
@@ -77,9 +79,10 @@ class ChatPageState extends State<ChatPage> {
                           Expanded(
                             child: TextField(
                               controller: textEditingController,
-                              decoration: const InputDecoration(
-                                hintText: 'Type a message...',
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                              decoration:  InputDecoration(
+                                hintText:  '${getLang(context,  "Type a message...")}'
+                                ,
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                                 border: InputBorder.none,
                               ),
                             ),

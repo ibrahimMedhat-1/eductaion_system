@@ -50,6 +50,7 @@ class MainTextField extends StatelessWidget {
           if (value == null || value.isEmpty) {
             return validationText;
           }
+          return null;
         },
         decoration: InputDecoration(
           fillColor: Colors.white,
