@@ -53,6 +53,23 @@
   "Don't Have Account? ": "Don't Have Account? ",
   "Student Data": "Student Data",
   "Full Name": "Full Name",
-  "Aready Have Account? ":  "Aready Have Account? "
+  "Aready Have Account? ":  "Aready Have Account? ",
+  "Add Lesson": "Add Lesson",
+  "Remove Video": "Remove Video",
+  "Lesson Name":  "Lesson Name",
+  "Add Pdf": "Add Pdf",
+  "Remove Pdf": "Remove Pdf",
+  "Pdf Name":  "Pdf Name",
+  "Add Questions": "Add Questions",
+  "Questions Amount": "Questions Amount",
+  "Exam Name": "Exam Name",
+  "quiz": "quiz",
+  "assignment": "assignment",
+  "Add Quiz": "Add Quiz",
+  "View Students": "View Students",
+  "Third year of secondary school": "Third year of secondary school",
+  "Second year of secondary school": "Second year of secondary school",
+  "First year of secondary school": "First year of secondary school",
+  "View Material": "View Material"
 
 }

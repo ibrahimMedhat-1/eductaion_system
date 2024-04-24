@@ -3,6 +3,7 @@ import 'package:education_system/teacher/features/add_pdf_page/manager/add_pdf_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/constants.dart';
 import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/payment/widgets/my_text_field.dart';
@@ -22,8 +23,9 @@ class AddPdfPag extends StatelessWidget {
           final AddPdfCubit cubit = AddPdfCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Add Pdf',
+              title:  Text(
+                '${getLang(context, "Add Pdf")}'
+                ,
                 style: TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
@@ -64,12 +66,16 @@ class AddPdfPag extends StatelessWidget {
                             cubit.pdfNameController.clear();
                             cubit.emit(RemovePdf());
                           },
-                          child: const Text('Remove Pdf'),
+                          child:  Text(
+                              '${getLang(context, "Remove Pdf")}'
+                              ),
                         ),
                       Row(
                         children: [
                           MyTextField(
-                            hintText: "Pdf Name",
+                            hintText:
+                            '${getLang(context,  "Pdf Name")}'
+                           ,
                             controller: cubit.pdfNameController,
                           )
                         ],
@@ -98,7 +104,9 @@ class AddPdfPag extends StatelessWidget {
                   );
                 }
               },
-              child: const Text('Add Pdf'),
+              child:  Text(
+                  '${getLang(context,  "Add Pdf")}'
+                  ),
             ),
           );
         },

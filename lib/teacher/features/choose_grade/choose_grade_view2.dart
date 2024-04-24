@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import '../upload_material/view/add_material_page.dart';
@@ -26,9 +27,9 @@ class ChooseGradePage2 extends StatelessWidget {
                     ));
                   },
                   tileColor: ColorsAsset.kLightPurble,
-                  subtitle: const Text("View Material"),
+                  subtitle:Text('${getLang(context,  "View Material")}'),
                   leading: Image.asset("assets/images/icons8-graduation-50.png"),
-                  title: const Text("First secondary"),
+                  title:  Text('${getLang(context,  "First year of secondary school")}'),
                 ),
               ),
             ),
@@ -46,9 +47,9 @@ class ChooseGradePage2 extends StatelessWidget {
                     ));
                   },
                   tileColor: ColorsAsset.kLightPurble,
-                  subtitle: const Text("View Material"),
+                  subtitle:  Text('${getLang(context,  "View Material")}'),
                   leading: Image.asset("assets/images/icons8-graduation-50.png"),
-                  title: const Text("Second secondary"),
+                  title:  Text('${getLang(context,  "Second year of secondary school")}'),
                 ),
               ),
             ),
@@ -66,9 +67,11 @@ class ChooseGradePage2 extends StatelessWidget {
                     ));
                   },
                   tileColor: ColorsAsset.kLightPurble,
-                  subtitle: const Text("View Material"),
+                  subtitle:  Text(
+                      '${getLang(context,  "View Material")}'
+                      ),
                   leading: Image.asset("assets/images/icons8-graduation-50.png"),
-                  title: const Text("Third secondary"),
+                  title:  Text( '${getLang(context,  "Third year of secondary school")}'),
                 ),
               ),
             ),

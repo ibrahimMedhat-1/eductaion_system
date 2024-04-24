@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/constants.dart';
 import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/payment/widgets/my_text_field.dart';
@@ -30,8 +31,9 @@ class _AddLessonPageState extends State<AddLessonPage> {
           final AddLessonCubit cubit = AddLessonCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Add Lesson',
+              title:  Text(
+                '${getLang(context, "Add Lesson")}'
+               ,
                 style: TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
@@ -71,12 +73,15 @@ class _AddLessonPageState extends State<AddLessonPage> {
                             cubit.videoFile = null;
                             cubit.emit(SelectLessonVideo());
                           },
-                          child: const Text('Remove Video'),
+                          child:  Text(
+                              '${getLang(context, "Remove Video")}'
+                              ),
                         ),
                       Row(
                         children: [
                           MyTextField(
-                            hintText: "Lesson Name",
+                            hintText: '${getLang(context, "Lesson Name")}'
+                           ,
                             controller: cubit.lessonNameController,
                           )
                         ],
@@ -104,7 +109,9 @@ class _AddLessonPageState extends State<AddLessonPage> {
                   );
                 }
               },
-              child: const Text('Add Lesson'),
+              child:  Text(
+
+                  '${getLang(context, "Add Lesson")}'),
             ),
           );
         },
@@ -133,8 +140,6 @@ class _LessonVideoState extends State<LessonVideo> {
       });
     _chewieController = ChewieController(
       videoPlayerController: controller,
-
-      // Prepare the video to be played and display the first frame
       autoInitialize: true,
       allowFullScreen: false,
       aspectRatio: 16 / 9,

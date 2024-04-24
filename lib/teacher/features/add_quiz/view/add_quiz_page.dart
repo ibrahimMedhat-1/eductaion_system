@@ -3,6 +3,7 @@ import 'package:education_system/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 import '../manager/add_quiz_cubit.dart';
 import '../widgets/question_widget.dart';
@@ -30,8 +31,9 @@ class QuestionPageState extends State<QuestionPage> {
           final AddQuizCubit cubit = AddQuizCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Add Questions',
+              title:  Text(
+                '${getLang(context,  "Add Questions")}'
+                ,
                 style: TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
@@ -61,7 +63,9 @@ class QuestionPageState extends State<QuestionPage> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: TextFormField(
-                            decoration: const InputDecoration(hintText: 'Questions Amount'),
+                            decoration:  InputDecoration(hintText:
+                            '${getLang(context,  "Questions Amount")}'
+                            ),
                             onChanged: (value) {
                               if (value.isEmpty) {
                                 cubit.selectedQuantity = 0;
@@ -85,7 +89,9 @@ class QuestionPageState extends State<QuestionPage> {
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: TextFormField(
-                            decoration: const InputDecoration(hintText: 'Exam Name'),
+                            decoration: InputDecoration(hintText:
+                            '${getLang(context,  "Exam Name")}'
+                            ),
                             controller: cubit.lessonNameController,
                           ),
                         ),
@@ -98,9 +104,11 @@ class QuestionPageState extends State<QuestionPage> {
                               cubit.typeValue = value!;
                               cubit.emit(AddQuizInitial());
                             },
-                            items: const [
-                              DropdownMenuItem(value: 'quiz', child: Text('quiz')),
-                              DropdownMenuItem(value: 'assignment', child: Text('assignment')),
+                            items:  [
+                              DropdownMenuItem(value: 'quiz', child: Text(
+                                  '${getLang(context,  "quiz")}'
+                                  )),
+                              DropdownMenuItem(value: 'assignment', child: Text('${getLang(context,  "assignment")}')),
                             ]),
                       ),
                     ],
@@ -139,7 +147,9 @@ class QuestionPageState extends State<QuestionPage> {
                   );
                 }
               },
-              child: const Text('Add Quiz'),
+              child:  Text(
+                  '${getLang(context,  "Add Quiz")}'
+                  ),
             ),
           );
         },

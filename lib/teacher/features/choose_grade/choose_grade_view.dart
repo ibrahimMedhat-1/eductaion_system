@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import '../view_students/view/view_students_page.dart';
@@ -25,9 +26,11 @@ class ChooseGradePage extends StatelessWidget {
                   ));
                 },
                 tileColor: ColorsAsset.kLightPurble,
-                subtitle: const Text("View Students"),
+                subtitle:  Text('${getLang(context,  "View Students")}'),
                 leading: Image.asset("assets/images/icons8-graduation-50.png"),
-                title: const Text("First year of secondary school"),
+                title:  Text(
+                    '${getLang(context,  "First year of secondary school")}'
+                    ),
               ),
             ),
           ),
@@ -45,9 +48,11 @@ class ChooseGradePage extends StatelessWidget {
                   ));
                 },
                 tileColor: ColorsAsset.kLightPurble,
-                subtitle: const Text("View Students"),
+                subtitle:  Text( '${getLang(context,  "View Students")}'),
                 leading: Image.asset("assets/images/icons8-graduation-50.png"),
-                title: const Text("Second year of secondary school"),
+                title:  Text(
+                    '${getLang(context,  "Second year of secondary school")}'
+                    ),
               ),
             ),
           ),
@@ -65,9 +70,13 @@ class ChooseGradePage extends StatelessWidget {
                   ));
                 },
                 tileColor: ColorsAsset.kLightPurble,
-                subtitle: const Text("View Students"),
+                subtitle:  Text(
+                    '${getLang(context,  "View Students")}'
+                    ),
                 leading: Image.asset("assets/images/icons8-graduation-50.png"),
-                title: const Text("Third year of secondary school"),
+                title:  Text(
+                    '${getLang(context,  "Third year of secondary school")}'
+                    ),
               ),
             ),
           ),

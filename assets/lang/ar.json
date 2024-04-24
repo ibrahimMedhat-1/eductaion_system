@@ -52,6 +52,23 @@
  "Don't Have Account? ":  "ليس لديك حساب ؟ ",
  "Student Data": "بيانات الطالب",
  "Full Name": "الاسم بالكامل",
- "Aready Have Account? ":  "لديك حساب بالفعل؟ "
+ "Aready Have Account? ":  "لديك حساب بالفعل؟ ",
+ "Add Lesson": "إضافة درس",
+ "Remove Video": "ازالة الفيديو",
+ "Lesson Name": "اسم الدرس",
+ "Add Pdf": "اضافة Pdf",
+ "Remove Pdf": "ازالة الPdf",
+ "Pdf Name": "اسم الPdf",
+ "Add Questions": "اضافة اسألة",
+ "Questions Amount": "عدد الاسالة",
+ "Exam Name": "اسم الامتحان",
+ "quiz": "امتحان",
+ "assignment": "اسايمنت",
+ "Add Quiz": "اضافة الاسالة",
+ "View Students": "عرض الطلبة",
+ "Third year of secondary school": "الصف الثالث الثانوي",
+ "Second year of secondary school": "الصف الثاني الثانوي",
+ "First year of secondary school": "الصف الاول الثانوي",
+ "View Material": "عرض المادة"
 
 }
