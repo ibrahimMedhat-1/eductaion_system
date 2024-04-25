@@ -26,7 +26,7 @@ class AddPdfPag extends StatelessWidget {
               title:  Text(
                 '${getLang(context, "Add Pdf")}'
                 ,
-                style: TextStyle(color: ColorsAsset.kPrimary),
+                style: const TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
               actions: [

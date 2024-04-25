@@ -2,6 +2,7 @@ import 'package:education_system/models/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 import '../manager/course_quiz_cubit.dart';
 
@@ -41,12 +42,12 @@ class ParentCourseQuizPage extends StatelessWidget {
                                 backgroundColor: ColorsAsset.kLight,
                                 expandedAlignment: Alignment.topLeft,
                                 title: Text(
-                                  'Quiz ${indexx + 1}',
+                                  '${getLang(context,  "Quiz")} ${indexx + 1}',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                 ),
                                 trailing: Text(
-                                    "Grade = ${cubit.quizzes[indexx]['myGrade']}/${cubit.quizzes[indexx]['totalGrade']}"),
+                                    "${getLang(context,  "Grade")} = ${cubit.quizzes[indexx]['myGrade']}/${cubit.quizzes[indexx]['totalGrade']}"),
                                 children: <Widget>[
                                   Column(
                                     children:
@@ -66,24 +67,24 @@ class ParentCourseQuizPage extends StatelessWidget {
                                           Column(
                                             children: List.generate(3, (optionIndex) {
                                               print(cubit.quizzes[indexx]['questions'][index]
-                                                  ['answer${optionIndex + 1}']);
+                                                  ['${getLang(context,  "answer")}${optionIndex + 1}']);
                                               print(cubit.selectedAnswers[indexx][index]);
                                               return RadioListTile(
                                                 title: Text(
                                                   cubit.quizzes[indexx]['questions'][index]
-                                                      ['answer${optionIndex + 1}'],
+                                                      ['${getLang(context,  "answer")}${optionIndex + 1}'],
                                                   style: const TextStyle(color: ColorsAsset.kTextcolor),
                                                 ),
                                                 value: cubit.selectedAnswers[indexx][index],
                                                 groupValue: cubit.quizzes[indexx]['questions'][index]
-                                                    ['answer${optionIndex + 1}'],
+                                                    ['${getLang(context,  "answer")}${optionIndex + 1}'],
                                                 onChanged: (value) {},
                                               );
                                             }),
                                           ),
                                           Row(
                                             children: [
-                                              const Text("Model Answer : "),
+                                               Text('${getLang(context,  "Model Answer : ")}'),
                                               Text(cubit.quizzes[indexx]['questions'][index]['modelAnswer'],
                                                   style: const TextStyle(
                                                       fontSize: 16.0,

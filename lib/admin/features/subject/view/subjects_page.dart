@@ -5,6 +5,7 @@ import 'package:education_system/shared/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../course_details/view/course_details.dart';
 
 class SubjectsPage extends StatelessWidget {
@@ -34,13 +35,15 @@ class SubjectsPage extends StatelessWidget {
                         height: 60,
                         child: DropdownButtonFormField<String>(
                           value: cubit.selectedSubject,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
+                          decoration:  InputDecoration(
+                            border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: ColorsAsset.kPrimary,
                               ),
                             ),
-                            labelText: "Choose Subject",
+                            labelText:
+                            '${getLang(context,  "Choose Subject")}'
+                            ,
                           ),
                           items: cubit.subjects.map((String value) {
                             return DropdownMenuItem<String>(

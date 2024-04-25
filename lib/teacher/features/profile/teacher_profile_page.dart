@@ -3,6 +3,7 @@ import 'package:education_system/student/features/profile/manager/profile_cubit.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../components/locale/applocale.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
 import '../../../student/features/payment/widgets/my_text_field.dart';
@@ -21,9 +22,10 @@ class TeacherProfilePage extends StatelessWidget {
         final ProfileCubit cubit = ProfileCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              'My Profile',
-              style: TextStyle(color: ColorsAsset.kPrimary),
+            title:  Text(
+              '${getLang(context, "My Profile")}'
+              ,
+              style: const TextStyle(color: ColorsAsset.kPrimary),
             ),
             backgroundColor: ColorsAsset.kLight2,
             actions: [
@@ -74,10 +76,12 @@ class TeacherProfilePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const ListTile(
-                  title: Text("Personal Data"),
+                 ListTile(
+                  title: Text(
+                      '${getLang(context, "Personal Data")}'
+                      ),
                   tileColor: ColorsAsset.kLightPurble,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.person,
                     color: ColorsAsset.kPrimary,
                   ),
@@ -91,21 +95,26 @@ class TeacherProfilePage extends StatelessWidget {
                     children: [
                       MyTextField(
                         controller: cubit.nameController,
-                        labelText: "Name",
+                        labelText:
+                        '${getLang(context, "Name")}'
+                        ,
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       MyTextField(
                         controller: cubit.passwordController,
-                        labelText: "Certificate",
+                        labelText: '${getLang(context, "Certificate")}'
+                        ,
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       MyTextField(
                         controller: cubit.parentPhoneController,
-                        labelText: "Experience",
+                        labelText:
+                        '${getLang(context,  "Experience")}'
+                       ,
                       ),
                     ],
                   ),
@@ -119,7 +128,9 @@ class TeacherProfilePage extends StatelessWidget {
                     children: [
                       MyTextField(
                         controller: cubit.parentNameController,
-                        labelText: "Center Name",
+                        labelText:
+                        '${getLang(context,  "Center Name")}'
+                        ,
                       ),
                       const SizedBox(
                         width: 10,
@@ -132,7 +143,8 @@ class TeacherProfilePage extends StatelessWidget {
                           }
                         },
                         controller: cubit.phoneController,
-                        labelText: "Center Number",
+                        labelText: '${getLang(context,  "Center Number")}'
+                        ,
                       ),
                     ],
                   ),
@@ -152,11 +164,12 @@ class TeacherProfilePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0), // Border radius
                           ),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                        child:  Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                           child: Text(
-                            'Update',
-                            style: TextStyle(color: Colors.white),
+                            '${getLang(context,  "Update")}'
+                            ,
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -171,7 +184,8 @@ class TeacherProfilePage extends StatelessWidget {
                           child: TextFormField(
                         controller: cubit.planTitles[index],
                         decoration: InputDecoration(
-                          hintText: 'Title',
+                          hintText: '${getLang(context,  "Title")}'
+                          ,
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                         ),
                       )),
@@ -181,7 +195,8 @@ class TeacherProfilePage extends StatelessWidget {
                           child: TextFormField(
                             controller: cubit.planSubject[index],
                             decoration: InputDecoration(
-                              hintText: 'Plan',
+                              hintText: '${getLang(context,  "Study Plan")}'
+                              ,
                               border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                             ),
                           )),
@@ -214,11 +229,12 @@ class TeacherProfilePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0), // Border radius
                           ),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                        child:  Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                           child: Text(
-                            'Save Plan',
-                            style: TextStyle(color: Colors.white),
+                            '${getLang(context,  "Save Study Plan")}'
+                            ,
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),

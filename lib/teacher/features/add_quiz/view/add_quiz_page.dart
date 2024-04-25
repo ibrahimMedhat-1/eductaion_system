@@ -34,7 +34,7 @@ class QuestionPageState extends State<QuestionPage> {
               title:  Text(
                 '${getLang(context,  "Add Questions")}'
                 ,
-                style: TextStyle(color: ColorsAsset.kPrimary),
+                style: const TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
               actions: [

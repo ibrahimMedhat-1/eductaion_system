@@ -4,6 +4,7 @@ import 'package:education_system/teacher/features/upload_material/pages/view_les
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 import '../pages/question_page/view/question_page.dart';
 import '../widgets/material_dialog.dart';
@@ -29,9 +30,10 @@ class AddMaterialPage extends StatelessWidget {
               final AddMaterialCubit cubit = AddMaterialCubit.get(context);
               return Scaffold(
                 appBar: AppBar(
-                  title: const Text(
-                    'Add Material',
-                    style: TextStyle(color: ColorsAsset.kPrimary),
+                  title:  Text(
+                    '${getLang(context,  "Add Material")}'
+                    ,
+                    style: const TextStyle(color: ColorsAsset.kPrimary),
                   ),
                   backgroundColor: ColorsAsset.kLight2,
                   actions: [
@@ -109,7 +111,7 @@ class AddMaterialPage extends StatelessWidget {
                             },
                           );
                         },
-                        child: const Text("Add Material"))
+                        child:  Text('${getLang(context,  "Add Material")}'))
                   ],
                 ),
               );

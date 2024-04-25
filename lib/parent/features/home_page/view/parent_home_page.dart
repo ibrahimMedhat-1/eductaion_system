@@ -16,9 +16,10 @@ class ParentHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Student details',
-          style: TextStyle(color: ColorsAsset.kPrimary),
+        title:  Text(
+          '${getLang(context,  "Student details")}'
+          ,
+          style: const TextStyle(color: ColorsAsset.kPrimary),
         ),
         backgroundColor: ColorsAsset.kLight2,
         actions: [
@@ -65,8 +66,10 @@ class ParentHomePage extends StatelessWidget {
                                   child: CircularProgressIndicator(),
                                 )
                               : cubit.courses.isEmpty
-                                  ? const Center(
-                                      child: Text('No Quizzes taken yet'),
+                                  ?  Center(
+                                      child: Text(
+                                          '${getLang(context,  "No Quizzes taken yet")}'
+                                          ),
                                     )
                                   : ListView.builder(
                                       itemCount: cubit.courses.length,
@@ -112,7 +115,9 @@ class ParentHomePage extends StatelessWidget {
                                                                 color: ColorsAsset.kTextcolor),
                                                           ),
                                                           Text(
-                                                            '${getLang(context, "Enrolled")}',
+                                                            '${getLang(context,
+                                                                '${getLang(context,   "Enrolled")}'
+                                                               )}',
                                                             style: const TextStyle(
                                                                 fontSize: 16,
                                                                 fontWeight: FontWeight.bold,

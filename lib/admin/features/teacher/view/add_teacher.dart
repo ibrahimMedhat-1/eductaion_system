@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../auth/login/widgets/main_text_field.dart';
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 
 class AddTeacher extends StatelessWidget {
@@ -20,9 +21,10 @@ class AddTeacher extends StatelessWidget {
           final AddTeacherCubit cubit = AddTeacherCubit.get(context);
           return Scaffold(
               appBar: AppBar(
-                title: const Text(
-                  'Add Teacher',
-                  style: TextStyle(color: ColorsAsset.kPrimary),
+                title:  Text(
+                  '${getLang(context,  "Add Teacher")}'
+                  ,
+                  style: const TextStyle(color: ColorsAsset.kPrimary),
                 ),
                 centerTitle: true,
               ),
@@ -44,7 +46,9 @@ class AddTeacher extends StatelessWidget {
                       MainTextField(
                         textInputType: TextInputType.name,
                         controller: cubit.teacherNameController,
-                        hintText: "Teacher Name",
+                        hintText:
+                        '${getLang(context,  "Teacher Name")}'
+                        ,
                       ),
                       const SizedBox(
                         height: 15,
@@ -52,7 +56,9 @@ class AddTeacher extends StatelessWidget {
                       MainTextField(
                         textInputType: TextInputType.emailAddress,
                         controller: cubit.teacherEmailController,
-                        hintText: "Teacher Email",
+                        hintText:
+                        '${getLang(context,   "Teacher Email")}'
+                       ,
                       ),
                       const SizedBox(
                         height: 15,
@@ -60,7 +66,9 @@ class AddTeacher extends StatelessWidget {
                       MainTextField(
                         textInputType: TextInputType.text,
                         controller: cubit.teacherPasswordController,
-                        hintText: "Teacher Password",
+                        hintText:
+                        '${getLang(context,   "Teacher Password")}'
+                        ,
                       ),
                       const SizedBox(
                         height: 15,
@@ -70,13 +78,15 @@ class AddTeacher extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.3,
                         child: DropdownButtonFormField<String>(
                           value: cubit.selectedSubject,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
+                          decoration:  InputDecoration(
+                            border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: ColorsAsset.kPrimary,
                               ),
                             ),
-                            labelText: "Choose Subject",
+                            labelText:
+                            '${getLang(context,  "Choose Subject")}'
+                            ,
                           ),
                           items: cubit.subjects.map((String value) {
                             return DropdownMenuItem<String>(
@@ -104,7 +114,7 @@ class AddTeacher extends StatelessWidget {
                                     cubit.emit(ChangeValue());
                                     cubit.selectYear(value, 'first Secondary');
                                   }),
-                              const Text('First Year'),
+                               Text('${getLang(context,  "First year of secondary school")}'),
                             ],
                           ),
                           Row(
@@ -116,7 +126,7 @@ class AddTeacher extends StatelessWidget {
                                     cubit.emit(ChangeValue());
                                     cubit.selectYear(value, 'second Secondary');
                                   }),
-                              const Text('Second Year'),
+                               Text('${getLang(context,  "Second year of secondary school")}'),
                             ],
                           ),
                           Row(
@@ -128,7 +138,7 @@ class AddTeacher extends StatelessWidget {
                                     cubit.emit(ChangeValue());
                                     cubit.selectYear(value, 'third Secondary');
                                   }),
-                              const Text('Third Year'),
+                               Text('${getLang(context,  "Third year of secondary school")}'),
                             ],
                           ),
                         ],
@@ -148,11 +158,12 @@ class AddTeacher extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8.0), // Border radius
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                              child:  Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                                 child: Text(
-                                  'Add teacher',
-                                  style: TextStyle(color: Colors.white),
+                                  '${getLang(context,  "Add Teacher")}'
+                                  ,
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ),
                             )

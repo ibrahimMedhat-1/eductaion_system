@@ -1,6 +1,7 @@
 import 'package:education_system/admin/features/subject/view/subjects_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../teacher/view/add_teacher.dart';
 
 class AdminHomePage extends StatelessWidget {
@@ -13,8 +14,12 @@ class AdminHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Choose what you want to do",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
-            const Text("If you want to edit or add to the teacher or subject",style: TextStyle(fontSize: 20)),
+             Text(
+              '${getLang(context,  "Choose what you want to do")}'
+              ,style: const TextStyle(fontWeight: FontWeight.w400,fontSize: 30),),
+             Text(
+                '${getLang(context,  "If you want to edit or add teacher or subject")}'
+                ,style: const TextStyle(fontSize: 20)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +37,9 @@ class AdminHomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset("assets/images/Cream and Black Simple Education Logo (5).png",height: 300,),
-                        const Text("Subject",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
+                         Text(
+                          '${getLang(context,  "Subject")}'
+                          ,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
                       ],
                     ),
                   ),
@@ -50,7 +57,9 @@ class AdminHomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset("assets/images/Cream and Black Simple Education Logo (6).png",height: 300,),
-                        const Text("Teacher",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
+                         Text(
+                          '${getLang(context,  "Teacher")}'
+                          ,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
                       ],
                     ),
                   ),

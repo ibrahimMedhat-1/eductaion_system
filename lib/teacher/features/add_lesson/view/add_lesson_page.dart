@@ -34,7 +34,7 @@ class _AddLessonPageState extends State<AddLessonPage> {
               title:  Text(
                 '${getLang(context, "Add Lesson")}'
                ,
-                style: TextStyle(color: ColorsAsset.kPrimary),
+                style: const TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
               actions: [

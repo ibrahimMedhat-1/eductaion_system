@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../components/locale/applocale.dart';
 import '../../../../../../shared/utils/colors.dart';
 
 class TeacherQuestionPage extends StatelessWidget {
@@ -39,7 +40,7 @@ class TeacherQuestionPage extends StatelessWidget {
                       );
                     }),
                   ),
-                  Text('Model answer : ${question['questions'][index]['modelAnswer']}'),
+                  Text('${getLang(context,  "Model Answer : ")}${question['questions'][index]['modelAnswer']}'),
                   const Divider(),
                 ],
               );

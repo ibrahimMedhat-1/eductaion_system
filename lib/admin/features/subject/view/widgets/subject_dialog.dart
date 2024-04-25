@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../auth/login/widgets/main_text_field.dart';
+import '../../../../../components/locale/applocale.dart';
 import '../../../../../shared/utils/colors.dart';
 import '../../manager/subjects_cubit.dart';
 
@@ -14,15 +15,21 @@ class SubjectDialog extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add Subject'),
+          title:  Text(
+              '${getLang(context,  "Add Subject")}'
+              ),
           content: MainTextField(
             textInputType: TextInputType.text,
-            hintText: "Subject Name",
+            hintText:
+            '${getLang(context,  "Subject Name")}'
+            ,
             controller: subjectName,
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Add'),
+              child:  Text(
+                  '${getLang(context,  "Add")}'
+                  ),
               onPressed: () async {
                 DocumentReference<Map<String, dynamic>> subjectsDoc =
                     FirebaseFirestore.instance.collection('secondary years').doc('first Secondary');

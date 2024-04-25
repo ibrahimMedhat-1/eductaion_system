@@ -4,6 +4,7 @@ import 'package:education_system/models/teacher_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 
 class CourseDetails extends StatelessWidget {
@@ -38,9 +39,10 @@ class CourseDetails extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                const Text(
-                  "Please Assign Teacher to This Course",
-                  style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold, fontSize: 20),
+                 Text(
+                  '${getLang(context,  "Please Assign Teacher to This Course")}'
+                  ,
+                  style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(
                   height: 35,
@@ -51,13 +53,15 @@ class CourseDetails extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: DropdownButtonFormField<TeacherModel>(
                       value: cubit.selectedTeacher,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(
+                      decoration:  InputDecoration(
+                        border: const OutlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsAsset.kPrimary,
                           ),
                         ),
-                        labelText: "Choose Teacher",
+                        labelText:
+                        '${getLang(context,  "Choose Teacher")}'
+                        ,
                       ),
                       items: cubit.teachers.map((teacher) {
                         return DropdownMenuItem<TeacherModel>(
@@ -75,13 +79,25 @@ class CourseDetails extends StatelessWidget {
                 ),
                 DataTable(
                   dataTextStyle: const TextStyle(color: ColorsAsset.kPrimary),
-                  columns: const [
-                    DataColumn(label: Expanded(child: Text('Course Name'))),
-                    DataColumn(label: Expanded(child: Text('Course ID'))),
-                    DataColumn(label: Expanded(child: Text('Course Reference'))),
-                    DataColumn(label: Expanded(child: Text('Teacher Name'))),
-                    DataColumn(label: Expanded(child: Text('Teacher ID'))),
-                    DataColumn(label: Expanded(child: Text('Teacher Reference'))),
+                  columns:  [
+                    DataColumn(label: Expanded(child: Text(
+                        '${getLang(context,  "Course Name")}'
+                        ))),
+                    DataColumn(label: Expanded(child: Text(
+                        '${getLang(context,  "Course ID")}'
+                        ))),
+                    DataColumn(label: Expanded(child: Text(
+                        '${getLang(context,  "Course Reference")}'
+                        ))),
+                    DataColumn(label: Expanded(child: Text(
+                        '${getLang(context,  "Teacher Name")}'
+                        ))),
+                    DataColumn(label: Expanded(child: Text(
+                        '${getLang(context,  "Teacher ID")}'
+                        ))),
+                    DataColumn(label: Expanded(child: Text(
+                        '${getLang(context,  "Teacher Reference")}'
+                        ))),
                   ],
                   rows: [
                     DataRow(cells: [
@@ -104,19 +120,21 @@ class CourseDetails extends StatelessWidget {
                       value: courseModel.years?.contains('first Secondary'),
                       onChanged: null,
                     ),
-                    const Text('First Secondary Year'),
+                     Text(
+                         '${getLang(context,  "First year of secondary school")}'
+                        ),
                     const SizedBox(width: 16.0),
                     Checkbox(
                       value: courseModel.years?.contains('second Secondary'),
                       onChanged: null,
                     ),
-                    const Text('Second Secondary Year'),
+                     Text('${getLang(context,  "Second year of secondary school")}'),
                     const SizedBox(width: 16.0),
                     Checkbox(
                       value: courseModel.years?.contains('third Secondary'),
                       onChanged: null,
                     ),
-                    const Text('Third Secondary Year'),
+                     Text('${getLang(context,  "Third year of secondary school")}'),
                   ],
                 ),
                 const SizedBox(
@@ -137,11 +155,12 @@ class CourseDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0), // Border radius
                             ),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                          child:  Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                             child: Text(
-                              'Save',
-                              style: TextStyle(color: Colors.white),
+                              '${getLang(context,  "Save")}'
+                              ,
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         )

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../auth/login/widgets/main_text_field.dart';
+import '../../../../components/locale/applocale.dart';
 import '../../../../shared/utils/colors.dart';
 import '../../student_view/view/student_page.dart';
 
@@ -26,7 +27,8 @@ class ViewStudentsPage extends StatelessWidget {
               title: Row(
                 children: [
                   Text(
-                    'total students = ${cubit.students.length}',
+
+                    '${getLang(context,  "Total Students")} = ${cubit.students.length}',
                     style: const TextStyle(color: ColorsAsset.kPrimary),
                   ),
                   const SizedBox(
@@ -35,7 +37,7 @@ class ViewStudentsPage extends StatelessWidget {
                   Expanded(
                     child: MainTextField(
                       textInputType: TextInputType.text,
-                      hintText: "Search",
+                      hintText: '${getLang(context,  "Search")}',
                       prefixIcon: const Icon(Icons.search),
                     ),
                   ),
