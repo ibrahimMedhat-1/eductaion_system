@@ -39,15 +39,29 @@ class CoursePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                cubit.teacherData?.data()?['image'] ==""?
+                                Container(
+                                  height: 200,
+                                  width: 230,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image:
+                                          // cubit.teacherData?.data()?['image'] ==""?
+                                          AssetImage("assets/images/no-image-icon-6.png")
+
+                                          // NetworkImage(cubit.teacherData?.data()?['image']))),
+                                ),),):
                                 Container(
                                   height: 200,
                                   width: 230,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
-                                          image: NetworkImage(cubit.teacherData?.data()?['image'] ?? ''))),
-                                ),
-                                const SizedBox(
+                                          image:
+                                          NetworkImage(cubit.teacherData?.data()?['image']),
+                                ),),),
+                                  const SizedBox(
                                   width: 15,
                                 ),
                                 Expanded(
@@ -170,7 +184,7 @@ class CoursePage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                              ],
+                                  ],
                             ),
                           ),
                         ),
@@ -192,16 +206,40 @@ class CoursePage extends StatelessWidget {
                                         color: ColorsAsset.kPrimary,
                                       )),
                                       backgroundColor: ColorsAsset.kLight,
-                                      expandedAlignment: Alignment.topLeft,
+
                                       title: Text(
                                         e['title'],
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
                                       ),
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(e['plan']),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(e['plan']),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(e['plan2']),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(e['plan3']),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(e['plan4']),
+                                          ),
                                         ),
                                       ],
                                     ),

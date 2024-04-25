@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../chats/view/chats_page.dart';
 import '../choose_grade/choose_grade_view.dart';
 import '../choose_grade/choose_grade_view2.dart';
 
@@ -35,6 +36,13 @@ class TeacherRowList {
       title: "View Students",
       onTap: (context) {},
     ),
+    TeacherRowList(
+      widgetBuilder: () => const ChatsPage(),
+      icon: Icons.chat_bubble_outline,
+      title: "Chats",
+      onTap: (context) {},
+    ),
+
 
 
   ];

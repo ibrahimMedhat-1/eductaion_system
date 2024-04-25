@@ -169,6 +169,7 @@ class EditInfoPage extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 15,),
               state is UpdateDataLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(

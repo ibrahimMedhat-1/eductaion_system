@@ -22,9 +22,8 @@ class TeacherProfilePage extends StatelessWidget {
         final ProfileCubit cubit = ProfileCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title:  Text(
-              '${getLang(context, "My Profile")}'
-              ,
+            title: Text(
+              '${getLang(context, "My Profile")}',
               style: const TextStyle(color: ColorsAsset.kPrimary),
             ),
             backgroundColor: ColorsAsset.kLight2,
@@ -53,7 +52,8 @@ class TeacherProfilePage extends StatelessWidget {
                       errorWidget: (context, url, error) => const CircleAvatar(
                         radius: 80,
                         backgroundColor: Color(0xFF6E85B7),
-                        backgroundImage: NetworkImage("assets/images/profile purple.png"),
+                        backgroundImage:
+                            NetworkImage("assets/images/profile purple.png"),
                       ),
                     ),
                     InkWell(
@@ -76,10 +76,8 @@ class TeacherProfilePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                 ListTile(
-                  title: Text(
-                      '${getLang(context, "Personal Data")}'
-                      ),
+                ListTile(
+                  title: Text('${getLang(context, "Personal Data")}'),
                   tileColor: ColorsAsset.kLightPurble,
                   leading: const Icon(
                     Icons.person,
@@ -95,26 +93,21 @@ class TeacherProfilePage extends StatelessWidget {
                     children: [
                       MyTextField(
                         controller: cubit.nameController,
-                        labelText:
-                        '${getLang(context, "Name")}'
-                        ,
+                        labelText: '${getLang(context, "Name")}',
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       MyTextField(
                         controller: cubit.passwordController,
-                        labelText: '${getLang(context, "Certificate")}'
-                        ,
+                        labelText: '${getLang(context, "Certificate")}',
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       MyTextField(
                         controller: cubit.parentPhoneController,
-                        labelText:
-                        '${getLang(context,  "Experience")}'
-                       ,
+                        labelText: '${getLang(context, "Experience")}',
                       ),
                     ],
                   ),
@@ -128,9 +121,7 @@ class TeacherProfilePage extends StatelessWidget {
                     children: [
                       MyTextField(
                         controller: cubit.parentNameController,
-                        labelText:
-                        '${getLang(context,  "Center Name")}'
-                        ,
+                        labelText: '${getLang(context, "Center Name")}',
                       ),
                       const SizedBox(
                         width: 10,
@@ -143,8 +134,7 @@ class TeacherProfilePage extends StatelessWidget {
                           }
                         },
                         controller: cubit.phoneController,
-                        labelText: '${getLang(context,  "Center Number")}'
-                        ,
+                        labelText: '${getLang(context, "Center Number")}',
                       ),
                     ],
                   ),
@@ -161,14 +151,15 @@ class TeacherProfilePage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ColorsAsset.kPrimary,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0), // Border radius
+                            borderRadius:
+                                BorderRadius.circular(8.0), // Border radius
                           ),
                         ),
-                        child:  Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30.0, vertical: 8),
                           child: Text(
-                            '${getLang(context,  "Update")}'
-                            ,
+                            '${getLang(context, "Update")}',
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),
@@ -178,45 +169,95 @@ class TeacherProfilePage extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: cubit.planTitles.length,
-                  itemBuilder: (context, index) => Row(
-                    children: [
-                      Expanded(
-                          child: TextFormField(
-                        controller: cubit.planTitles[index],
-                        decoration: InputDecoration(
-                          hintText: '${getLang(context,  "Title")}'
-                          ,
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                        ),
-                      )),
-                      const SizedBox(width: 10),
-                      Expanded(
-                          flex: 4,
-                          child: TextFormField(
-                            controller: cubit.planSubject[index],
-                            decoration: InputDecoration(
-                              hintText: '${getLang(context,  "Study Plan")}'
-                              ,
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              controller: cubit.planTitles[index],
+                              decoration: InputDecoration(
+                                hintText: '${getLang(context, "Title")}',
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
                             ),
-                          )),
-                      MaterialButton(
-                        shape: const CircleBorder(),
-                        onPressed: () {
-                          if (cubit.planTitles.length - 1 == index) {
-                            cubit.addMonth();
-                          } else {
-                            cubit.removeMonth(cubit.planTitles[index], cubit.planSubject[index]);
-                          }
-                        },
-                        child: cubit.planTitles.length - 1 == index
-                            ? const Icon(Icons.add)
-                            : const Icon(Icons.remove),
-                      ),
-                    ],
+                          ],
+                        )),
+                        const SizedBox(width: 10),
+                        Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: cubit.planSubject1[index],
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        '${getLang(context, "Study Plan")}',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6)),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  controller: cubit.planSubject2[index],
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        '${getLang(context, "Study Plan")}',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6)),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  controller: cubit.planSubject3[index],
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        '${getLang(context, "Study Plan")}',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6)),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                TextFormField(
+                                  controller: cubit.planSubject4[index],
+                                  decoration: InputDecoration(
+                                    hintText:
+                                        '${getLang(context, "Study Plan")}',
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(6)),
+                                  ),
+                                ),
+                              ],
+                            )),
+                        const SizedBox(height: 10),
+                        MaterialButton(
+                          shape: const CircleBorder(),
+                          onPressed: () {
+                            if (cubit.planTitles.length - 1 == index) {
+                              cubit.addMonth();
+                            } else {
+                              cubit.removeMonth(cubit.planTitles[index],
+                                  cubit.planSubject1[index]);
+                            }
+                          },
+                          child: cubit.planTitles.length - 1 == index
+                              ? const Icon(Icons.add)
+                              : const Icon(Icons.remove),
+                        ),
+                      ],
+                    ),
                   ),
-                  separatorBuilder: (context, index) => const SizedBox(height: 10),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
                 ),
+                const SizedBox(height: 20),
                 state is SavePlanLoading
                     ? const Center(child: CircularProgressIndicator())
                     : ElevatedButton(
@@ -226,18 +267,20 @@ class TeacherProfilePage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ColorsAsset.kPrimary,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0), // Border radius
+                            borderRadius:
+                                BorderRadius.circular(8.0), // Border radius
                           ),
                         ),
-                        child:  Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30.0, vertical: 8),
                           child: Text(
-                            '${getLang(context,  "Save Study Plan")}'
-                            ,
+                            '${getLang(context, "Save Study Plan")}',
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
+                const SizedBox(height: 50),
               ],
             ),
           ),

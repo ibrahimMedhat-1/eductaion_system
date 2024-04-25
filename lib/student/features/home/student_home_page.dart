@@ -267,6 +267,7 @@ class StudentLayoutState extends State<StudentLayout> {
                                 },
                               ),
                             ),
+                  const SizedBox(height: 100,),
                 ],
               ),
             ),

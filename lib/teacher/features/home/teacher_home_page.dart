@@ -118,7 +118,7 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                                           ));
                                       Restart.restartApp();
                                     },
-                                    child: const Text("Logout"),
+                                    child:  Text('${getLang(context,  "Logout")}'),
                                   ),
                                 ],
                               ),

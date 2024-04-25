@@ -126,6 +126,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
       ImageCropper().cropImage(sourcePath: value!.path, cropStyle: CropStyle.circle, uiSettings: [
         WebUiSettings(
+          viewPort: CroppieViewPort(
+              height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *0.5).toInt()
+
+          ),
+          boundary: CroppieBoundary(
+            height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *1).toInt()
+          ),
           context: context,
         )
       ]).then((value) async {
@@ -171,19 +178,34 @@ class ProfileCubit extends Cubit<ProfileState> {
   List<TextEditingController> planTitles = [
     TextEditingController(),
   ];
-  List<TextEditingController> planSubject = [
+  List<TextEditingController> planSubject1 = [
+    TextEditingController(),
+  ];
+  List<TextEditingController> planSubject2 = [
+    TextEditingController(),
+  ];
+  List<TextEditingController> planSubject3 = [
+    TextEditingController(),
+  ];
+  List<TextEditingController> planSubject4 = [
     TextEditingController(),
   ];
 
   void addMonth() {
     planTitles.add(TextEditingController());
-    planSubject.add(TextEditingController());
+    planSubject1.add(TextEditingController());
+    planSubject2.add(TextEditingController());
+    planSubject3.add(TextEditingController());
+    planSubject4.add(TextEditingController());
     emit(AddPlan());
   }
 
   void removeMonth(TextEditingController titleController, TextEditingController subjectController) {
     planTitles.remove(titleController);
-    planSubject.remove(subjectController);
+    planSubject1.remove(subjectController);
+    planSubject2.remove(subjectController);
+    planSubject3.remove(subjectController);
+    planSubject4.remove(subjectController);
     emit(RemovePlan());
   }
 
@@ -193,7 +215,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     for (int i = 0; i < planTitles.length; i++) {
       plan.add({
         'title': planTitles[i].text,
-        'plan': planSubject[i].text,
+        'plan': planSubject1[i].text,
+        'plan2':planSubject2[i].text,
+        'plan3':planSubject3[i].text,
+        'plan4':planSubject4[i].text,
       });
     }
     await FirebaseFirestore.instance
