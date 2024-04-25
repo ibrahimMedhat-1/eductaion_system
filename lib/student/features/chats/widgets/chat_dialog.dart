@@ -1,3 +1,4 @@
+import 'package:education_system/models/course_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../components/locale/applocale.dart';
@@ -5,8 +6,8 @@ import '../../../../shared/utils/colors.dart';
 import '../chat_page.dart';
 
 class ChatDialog extends StatelessWidget {
-  const ChatDialog({super.key});
-
+  const ChatDialog({super.key, required this.courseModel});
+  final CourseModel courseModel;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -18,7 +19,9 @@ class ChatDialog extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () {
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const QuestionPage(),));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ChatPage(isGroupChat: true, courseModel: courseModel),
+                  ));
                 },
                 child: Container(
                   width: 200,
@@ -30,9 +33,8 @@ class ChatDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/7.png'),
-                       Text(
-                        '${getLang(context,  "Group Chat")}'
-                        ,
+                      Text(
+                        '${getLang(context, "Group Chat")}',
                         style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -45,7 +47,11 @@ class ChatDialog extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  const ChatPage(),));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ChatPage(
+                      courseModel: courseModel,
+                    ),
+                  ));
                 },
                 child: Container(
                   width: 200,
@@ -57,9 +63,8 @@ class ChatDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/8.png'),
-                       Text(
-                        '${getLang(context,  "Private Chat")}'
-                        ,
+                      Text(
+                        '${getLang(context, "Private Chat")}',
                         style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -72,9 +77,7 @@ class ChatDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          child:  Text(
-              '${getLang(context,  "Close")}'
-              ),
+          child: Text('${getLang(context, "Close")}'),
           onPressed: () {
             Navigator.of(context).pop();
           },

@@ -1,11 +1,13 @@
+import 'package:education_system/models/course_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
-
+  const ChatPage({super.key, this.isGroupChat = false, required this.courseModel});
+  final bool isGroupChat;
+  final CourseModel courseModel;
   @override
   ChatPageState createState() => ChatPageState();
 }
@@ -19,9 +21,8 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(
-          '${getLang(context,  "Chat Page")}'
-          ,
+        title: Text(
+          '${getLang(context, "Chat Page")}',
           style: const TextStyle(color: ColorsAsset.kPrimary),
         ),
         backgroundColor: ColorsAsset.kLight2,
@@ -79,9 +80,8 @@ class ChatPageState extends State<ChatPage> {
                           Expanded(
                             child: TextField(
                               controller: textEditingController,
-                              decoration:  InputDecoration(
-                                hintText:  '${getLang(context,  "Type a message...")}'
-                                ,
+                              decoration: InputDecoration(
+                                hintText: '${getLang(context, "Type a message...")}',
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                                 border: InputBorder.none,
                               ),
@@ -94,6 +94,11 @@ class ChatPageState extends State<ChatPage> {
                             ),
                             onPressed: () {
                               setState(() {
+                                if (widget.isGroupChat) {
+                                  // widget.courseModel.reference!.collection('groupChat').add(data)
+                                } else {
+                                  // widget.courseModel.teacher!.collection('chat').add(data);
+                                }
                                 messages.add(textEditingController.text);
                                 textEditingController.clear();
                               });
