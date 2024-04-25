@@ -20,9 +20,8 @@ class ParentHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Row(
+        title: Row(
           children: [
-
             GestureDetector(
               onTap: () {
                 if (MainCubit.get(context).lang == "en") {
@@ -48,7 +47,9 @@ class ParentHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 30,),
+            const SizedBox(
+              width: 30,
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -60,7 +61,7 @@ class ParentHomePage extends StatelessWidget {
               onPressed: () {
                 Constants.teacherModel = null;
                 Constants.studentModel = null;
-                Constants.parentModel=null;
+                Constants.parentModel = null;
                 FirebaseAuth.instance.signOut();
                 Navigator.pushReplacement(
                     context,
@@ -69,15 +70,15 @@ class ParentHomePage extends StatelessWidget {
                     ));
                 Restart.restartApp();
               },
-              child:  Text('${getLang(context,  "Logout")}'),
+              child: Text('${getLang(context, "Logout")}'),
             ),
-            const SizedBox(width: 30,),
+            const SizedBox(
+              width: 30,
+            ),
             Text(
-              '${getLang(context,  "Student details")}'
-              ,
+              '${getLang(context, "Student details")}',
               style: const TextStyle(color: ColorsAsset.kPrimary),
             ),
-
           ],
         ),
         backgroundColor: ColorsAsset.kLight2,
@@ -88,7 +89,6 @@ class ParentHomePage extends StatelessWidget {
           ),
         ],
       ),
-
       body: BlocProvider(
         create: (context) => ParentHomePageCubit()
           ..getStudentDetails(Constants.parentModel!.studentReference!)
@@ -126,10 +126,8 @@ class ParentHomePage extends StatelessWidget {
                                   child: CircularProgressIndicator(),
                                 )
                               : cubit.courses.isEmpty
-                                  ?  Center(
-                                      child: Text(
-                                          '${getLang(context,  "No Quizzes taken yet")}'
-                                          ),
+                                  ? Center(
+                                      child: Text('${getLang(context, "No Quizzes taken yet")}'),
                                     )
                                   : ListView.builder(
                                       itemCount: cubit.courses.length,
@@ -175,9 +173,7 @@ class ParentHomePage extends StatelessWidget {
                                                                 color: ColorsAsset.kTextcolor),
                                                           ),
                                                           Text(
-                                                            '${getLang(context,
-                                                                '${getLang(context,   "Enrolled")}'
-                                                               )}',
+                                                            '${getLang(context, "Enrolled")}',
                                                             style: const TextStyle(
                                                                 fontSize: 16,
                                                                 fontWeight: FontWeight.bold,

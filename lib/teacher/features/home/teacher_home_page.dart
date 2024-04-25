@@ -118,7 +118,7 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                                           ));
                                       Restart.restartApp();
                                     },
-                                    child:  Text('${getLang(context,  "Logout")}'),
+                                    child: Text('${getLang(context, "Logout")}'),
                                   ),
                                 ],
                               ),
@@ -143,7 +143,7 @@ class _TeacherLayoutState extends State<TeacherLayout> {
                               color: ColorsAsset.kbackgorund,
                             ),
                             title: Text(
-                              item.title,
+                              getLang(context, item.title),
                               style: const TextStyle(),
                             ),
                             onTap: () {
