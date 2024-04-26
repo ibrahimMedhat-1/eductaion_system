@@ -1,8 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/course_model.dart';
+import 'package:education_system/student/features/chats/widgets/message_bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../components/locale/applocale.dart';
+import '../../../models/message_model.dart';
+import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
+import 'manager/student_chat_cubit.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key, this.isGroupChat = false, required this.courseModel});
@@ -13,12 +20,20 @@ class ChatPage extends StatefulWidget {
 }
 
 class ChatPageState extends State<ChatPage> {
-  List<String> messages = [];
 
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    StudentChatCubit.get(context).getMessages(widget.isGroupChat? widget.courseModel.id:widget.courseModel.teacher!.id);
+
+    return BlocConsumer<StudentChatCubit, StudentChatState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+
+    StudentChatCubit cubit = StudentChatCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,31 +55,14 @@ class ChatPageState extends State<ChatPage> {
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: messages.length,
+                        reverse: true,
+                        controller: cubit.scrollController,
+                        itemCount: cubit.reversedChatMessage.length,
                         itemBuilder: (context, index) {
-                          return Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 16),
-                              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                                borderRadius: const BorderRadius.only(
-                                    topRight: Radius.circular(18),
-                                    topLeft: Radius.circular(18),
-                                    bottomLeft: Radius.circular(18)),
-                                color: ColorsAsset.kLight2.withOpacity(0.6),
-                              ),
-                              child: Text(messages[index],
-                                  style: const TextStyle(color: ColorsAsset.kTextcolor)),
-                            ),
+                          final message = cubit.reversedChatMessage[index];
+                          return ChatBubble(
+                            text: message.text!,
+                            isUser: message.senderId == Constants.studentModel!.id ? true : false,
                           );
                         },
                       ),
@@ -79,7 +77,7 @@ class ChatPageState extends State<ChatPage> {
                         children: [
                           Expanded(
                             child: TextField(
-                              controller: textEditingController,
+                              controller: cubit.messageController,
                               decoration: InputDecoration(
                                 hintText: '${getLang(context, "Type a message...")}',
                                 contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
@@ -88,20 +86,52 @@ class ChatPageState extends State<ChatPage> {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(
+                            icon: const
+                            Icon(
                               Icons.send,
                               color: ColorsAsset.kPrimary,
                             ),
                             onPressed: () {
-                              setState(() {
+                              MessageModel message = MessageModel(
+                                date: DateTime.now().toString(),
+                                text: cubit.messageController.text,
+                                sender: Constants.studentModel!.name,
+                                receiverId: widget.isGroupChat? widget.courseModel.id:  widget.courseModel.teacher!.id,
+                                senderId: Constants.studentModel!.id,
+                              );
+                              cubit.messageController.clear();
                                 if (widget.isGroupChat) {
-                                  // widget.courseModel.reference!.collection('groupChat').add(data)
+                                  FirebaseFirestore.instance
+                                      .collection('Students')
+                                      .doc(message.senderId)
+                                      .collection('chat')
+                                      .doc(message.receiverId)
+                                      .set({
+                                    'lastMessage': message.text,
+                                    'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
+                                  });
+
+                                  var inDoctorDocument = FirebaseFirestore.instance
+                                      .collection('Students')
+                                      .doc(message.senderId)
+                                      .collection('chat')
+                                      .doc(message.receiverId)
+                                      .collection('messages')
+                                      .doc();
+                                  inDoctorDocument.set(message.toMap(inDoctorDocument.id));
+                                  widget.courseModel.reference!.collection('groupChat')
+                                      .doc()
+                                      .set({
+                                    'lastMessage': message.text,
+                                    'name': Constants.studentModel!.name,
+                                    'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
+                                    'id': Constants.studentModel!.id,
+                                  });
                                 } else {
-                                  // widget.courseModel.teacher!.collection('chat').add(data);
+                                  cubit.sendMessage(message);
                                 }
-                                messages.add(textEditingController.text);
-                                textEditingController.clear();
-                              });
+
+
                             },
                           ),
                         ],
@@ -122,5 +152,7 @@ class ChatPageState extends State<ChatPage> {
         ],
       ),
     );
+  },
+);
   }
 }

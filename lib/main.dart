@@ -1,6 +1,7 @@
 import 'package:education_system/auth/login/login%20page.dart';
 import 'package:education_system/shared/main_cubit/main_cubit.dart';
 import 'package:education_system/shared/utils/colors.dart';
+import 'package:education_system/student/features/chats/manager/student_chat_cubit.dart';
 import 'package:education_system/student/features/profile/manager/profile_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => SubjectsCubit()..getSubjects()),
         BlocProvider(create: (context) => MainCubit()),
         BlocProvider(create: (context) => ProfileCubit()),
+        BlocProvider(create: (context) => StudentChatCubit()),
       ],
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
