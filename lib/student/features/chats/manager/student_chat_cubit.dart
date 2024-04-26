@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../models/course_model.dart';
 import '../../../../models/message_model.dart';
@@ -30,7 +29,6 @@ class StudentChatCubit extends Cubit<StudentChatState> {
       emit(GetMyCoursesSuccessfully());
     });
   }
-
 
   void sendMessage(MessageModel message) {
     FirebaseFirestore.instance
@@ -70,30 +68,46 @@ class StudentChatCubit extends Cubit<StudentChatState> {
       'id': Constants.studentModel!.id,
     });
   }
-  void getMessages(userId) {
-    print(Constants.studentModel!.id);
-    print(userId);
-    FirebaseFirestore.instance
-        .collection('Students')
-        .doc(Constants.studentModel!.id)
-        .collection('chat')
-        .doc(userId)
-        .collection('messages')
-        .orderBy('date')
-        .snapshots()
-        .listen((event) {
-      chatMessage.clear();
-      for (var element in event.docs) {
-        chatMessage.add(MessageModel.fromJson(element.data()));
-      }
-      reversedChatMessage = chatMessage.reversed.toList();
-      emit(GetAllMessagesSuccessfully());
-      scrollController.animateTo(
-        double.minPositive,
-        duration: const Duration(microseconds: 1),
-        curve: Curves.bounceIn,
-      );
-    });
-  }
 
+  void getMessages(DocumentReference<Map<String, dynamic>> reference, bool isGroupChat) {
+    print(Constants.studentModel!.id);
+
+    if (isGroupChat) {
+      reference.collection('groupChat').orderBy('date').snapshots().listen((event) {
+        chatMessage.clear();
+        for (var element in event.docs) {
+          chatMessage.add(MessageModel.fromJson(element.data()));
+        }
+        reversedChatMessage = chatMessage.reversed.toList();
+        emit(GetAllMessagesSuccessfully());
+        scrollController.animateTo(
+          double.minPositive,
+          duration: const Duration(microseconds: 1),
+          curve: Curves.bounceIn,
+        );
+      });
+    } else {
+      FirebaseFirestore.instance
+          .collection('Students')
+          .doc(Constants.studentModel!.id)
+          .collection('chat')
+          .doc(reference.id)
+          .collection('messages')
+          .orderBy('date')
+          .snapshots()
+          .listen((event) {
+        chatMessage.clear();
+        for (var element in event.docs) {
+          chatMessage.add(MessageModel.fromJson(element.data()));
+        }
+        reversedChatMessage = chatMessage.reversed.toList();
+        emit(GetAllMessagesSuccessfully());
+        scrollController.animateTo(
+          double.minPositive,
+          duration: const Duration(microseconds: 1),
+          curve: Curves.bounceIn,
+        );
+      });
+    }
+  }
 }
