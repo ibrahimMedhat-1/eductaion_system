@@ -15,26 +15,26 @@ class ChatsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
+    return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-
-              Tab(text: '${getLang(context, "Students")}'
-              ),
-              Tab(text: '${getLang(context, "Group Chat")}'
-              ),
+              Tab(text: '${getLang(context, "Students")}'),
+              Tab(text: '${getLang(context, "Group Chat")}'),
               Tab(text: '${getLang(context, "Parents")}'),
             ],
           ),
         ),
-        body:  TabBarView(
+        body: TabBarView(
           children: [
-
-            StudentsPage(year:year,),
-            ChatPageTeacherGroup(year: year,),
+            StudentsPage(
+              year: year,
+            ),
+            ChatPageTeacherGroup(
+              year: year,
+            ),
             ParentsPage(),
           ],
         ),
@@ -49,47 +49,49 @@ class ParentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TeacherChatCubit, TeacherChatState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state) {
-    final TeacherChatCubit cubit = TeacherChatCubit.get(context);
-    return FutureBuilder<List<Map<String, dynamic>>>(
-      future: cubit.getParents(Constants.teacherModel!.id),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text('Error: ${snapshot.error}'),
-          );
-        } else {
-          List<Map<String, dynamic>> users = snapshot.data!;
-          return ListView.builder(
-            itemCount: users.length,
-            itemBuilder: (BuildContext context, int index) {
-              Map<String, dynamic> user = users[index];
-              return ListTile(
-                title: Text(user['name']),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatPageTeacherParent(userId: user['id']),
-                    ),
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        final TeacherChatCubit cubit = TeacherChatCubit.get(context);
+        return FutureBuilder<List<Map<String, dynamic>>>(
+          future: cubit.getParents(Constants.teacherModel!.id),
+          builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              List<Map<String, dynamic>> parents = snapshot.data!;
+              return ListView.builder(
+                itemCount: parents.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Map<String, dynamic> user = parents[index];
+                  return ListTile(
+                    title: Text('${getLang(context, 'parentOf')} ${user['name']}'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatPageTeacherParent(
+                            userId: user['id'],
+                            userName: user['name'],
+                          ),
+                        ),
+                      );
+                    },
                   );
                 },
               );
-            },
-          );
-        }
+            }
+          },
+        );
       },
     );
-  },
-);
   }
 }
 
@@ -107,7 +109,6 @@ class StudentsPage extends StatelessWidget {
       builder: (context, state) {
         final TeacherChatCubit cubit = TeacherChatCubit.get(context);
         return Scaffold(
-
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -122,7 +123,8 @@ class StudentsPage extends StatelessWidget {
                         child: ListTile(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ChatPageTeacherStudents(studentModel: cubit.students[index]),
+                              builder: (context) =>
+                                  ChatPageTeacherStudents(studentModel: cubit.students[index]),
                             ));
                           },
                           leading: cubit.students[index].image == ''
@@ -132,7 +134,7 @@ class StudentsPage extends StatelessWidget {
                           title: Text(
                             cubit.students[index].name ?? '',
                             style:
-                            const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
+                                const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                           ),
                         ),
                       );
@@ -147,5 +149,3 @@ class StudentsPage extends StatelessWidget {
     );
   }
 }
-
-

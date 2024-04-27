@@ -24,11 +24,26 @@ class SubjectsCubit extends Cubit<SubjectsState> {
   bool thirdYear = false;
 
   void selectYear(bool value, String year) {
-    if (value) {
+    years.clear();
+    if (year == 'first Secondary') {
+      firstYear = true;
+      secondYear = false;
+      thirdYear = false;
+      years.add(year);
+    } else if (year == 'second Secondary') {
+      firstYear = false;
+      secondYear = true;
+      thirdYear = false;
+
       years.add(year);
     } else {
-      years.remove(year);
+      firstYear = false;
+      secondYear = false;
+      thirdYear = true;
+
+      years.add(year);
     }
+    emit(ChangeValue());
   }
 
   final List<String> subjects = [];

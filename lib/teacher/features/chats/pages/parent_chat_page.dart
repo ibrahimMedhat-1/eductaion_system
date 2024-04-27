@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +10,12 @@ import '../manager/teacher_chat_cubit.dart';
 
 class ChatPageTeacherParent extends StatefulWidget {
   final String userId;
-  const ChatPageTeacherParent({super.key, required this.userId, });
+  final String userName;
+  const ChatPageTeacherParent({
+    super.key,
+    required this.userId,
+    required this.userName,
+  });
 
   @override
   ChatPageState createState() => ChatPageState();
@@ -22,7 +26,6 @@ class ChatPageState extends State<ChatPageTeacherParent> {
 
   @override
   Widget build(BuildContext context) {
-
     TeacherChatCubit.get(context).getMessagesParent(widget.userId);
     return BlocConsumer<TeacherChatCubit, TeacherChatState>(
       listener: (context, state) {},
@@ -75,7 +78,7 @@ class ChatPageState extends State<ChatPageTeacherParent> {
                                   decoration: InputDecoration(
                                     hintText: '${getLang(context, "Type a message...")}',
                                     contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                                     border: InputBorder.none,
                                   ),
                                 ),
@@ -94,8 +97,7 @@ class ChatPageState extends State<ChatPageTeacherParent> {
                                     senderId: Constants.teacherModel!.id,
                                   );
                                   cubit.messageController.clear();
-                                  cubit.sendMessageToParent(message,widget.userId,widget.userId);
-
+                                  cubit.sendMessageToParent(message, widget.userId, widget.userName);
                                 },
                               ),
                             ],
@@ -107,7 +109,7 @@ class ChatPageState extends State<ChatPageTeacherParent> {
                 ),
               ),
               Positioned(
-                // top: 200,
+                  // top: 200,
                   left: MediaQuery.of(context).size.width * 0.1,
                   child: Image.asset(
                     "assets/images/White and Blue Modern Business Online Courses Instagram Post.png",

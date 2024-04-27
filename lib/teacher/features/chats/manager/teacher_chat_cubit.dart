@@ -102,12 +102,17 @@ class TeacherChatCubit extends Cubit<TeacherChatState> {
       );
     });
   }
+
   void getMessagesGroup(year) {
     FirebaseFirestore.instance
         .collection('secondary years')
         .doc(year)
         .collection(Constants.teacherModel!.subject!)
-        .doc(Constants.teacherModel!.courseId!).collection('groupChat').orderBy('date').snapshots().listen((event) {
+        .doc(Constants.teacherModel!.courseId!)
+        .collection('groupChat')
+        .orderBy('date')
+        .snapshots()
+        .listen((event) {
       chatMessage.clear();
       for (var element in event.docs) {
         chatMessage.add(MessageModel.fromJson(element.data()));
@@ -121,23 +126,32 @@ class TeacherChatCubit extends Cubit<TeacherChatState> {
       );
     });
   }
+
   Future<List<Map<String, dynamic>>> getParents(teacherId) async {
     QuerySnapshot querySnapshot =
-    await FirebaseFirestore.instance.collection('teachers').doc(teacherId).collection("chatparent").get();
+        await FirebaseFirestore.instance.collection('teachers').doc(teacherId).collection("chatparent").get();
+    String name = '';
 
     List<Map<String, dynamic>> parents = [];
 
-    querySnapshot.docs.forEach((document) {
+    for (var document in querySnapshot.docs) {
       Map<String, dynamic> userData = document.data() as Map<String, dynamic>;
       String userId = document.id;
+      await FirebaseFirestore.instance.collection('parents').doc(userId).get().then((value) async {
+        print(value.data());
+        await value.data()!['studentReference'].get().then((value) async {
+          name = await value.data()!['name'];
+        });
+      });
       parents.add({
         'id': userId,
-        'name': userData['id'],
+        'name': name,
       });
-    });
+    }
 
     return parents;
   }
+
   void getMessagesParent(parentId) {
     FirebaseFirestore.instance
         .collection('teachers')
@@ -161,14 +175,14 @@ class TeacherChatCubit extends Cubit<TeacherChatState> {
       );
     });
   }
-  void sendMessageToParent(MessageModel message,id,name) {
+
+  void sendMessageToParent(MessageModel message, id, name) {
     FirebaseFirestore.instance
         .collection('teachers')
         .doc(message.senderId)
         .collection('chatparent')
         .doc(message.receiverId)
         .set({
-
       'id': id,
       'name': name,
       'lastMessage': message.text,
@@ -203,5 +217,4 @@ class TeacherChatCubit extends Cubit<TeacherChatState> {
         .doc();
     inDoctorDocument.set(message.toMap(inDoctorDocument.id));
   }
-
 }

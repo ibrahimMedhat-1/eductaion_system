@@ -21,9 +21,8 @@ class AddTeacher extends StatelessWidget {
           final AddTeacherCubit cubit = AddTeacherCubit.get(context);
           return Scaffold(
               appBar: AppBar(
-                title:  Text(
-                  '${getLang(context,  "Add Teacher")}'
-                  ,
+                title: Text(
+                  '${getLang(context, "Add Teacher")}',
                   style: const TextStyle(color: ColorsAsset.kPrimary),
                 ),
                 centerTitle: true,
@@ -46,9 +45,7 @@ class AddTeacher extends StatelessWidget {
                       MainTextField(
                         textInputType: TextInputType.name,
                         controller: cubit.teacherNameController,
-                        hintText:
-                        '${getLang(context,  "Teacher Name")}'
-                        ,
+                        hintText: '${getLang(context, "Teacher Name")}',
                       ),
                       const SizedBox(
                         height: 15,
@@ -56,9 +53,7 @@ class AddTeacher extends StatelessWidget {
                       MainTextField(
                         textInputType: TextInputType.emailAddress,
                         controller: cubit.teacherEmailController,
-                        hintText:
-                        '${getLang(context,   "Teacher Email")}'
-                       ,
+                        hintText: '${getLang(context, "Teacher Email")}',
                       ),
                       const SizedBox(
                         height: 15,
@@ -66,9 +61,7 @@ class AddTeacher extends StatelessWidget {
                       MainTextField(
                         textInputType: TextInputType.text,
                         controller: cubit.teacherPasswordController,
-                        hintText:
-                        '${getLang(context,   "Teacher Password")}'
-                        ,
+                        hintText: '${getLang(context, "Teacher Password")}',
                       ),
                       const SizedBox(
                         height: 15,
@@ -78,15 +71,13 @@ class AddTeacher extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.3,
                         child: DropdownButtonFormField<String>(
                           value: cubit.selectedSubject,
-                          decoration:  InputDecoration(
+                          decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: ColorsAsset.kPrimary,
                               ),
                             ),
-                            labelText:
-                            '${getLang(context,  "Choose Subject")}'
-                            ,
+                            labelText: '${getLang(context, "Choose Subject")}',
                           ),
                           items: cubit.subjects.map((String value) {
                             return DropdownMenuItem<String>(
@@ -110,11 +101,9 @@ class AddTeacher extends StatelessWidget {
                               Checkbox(
                                   value: cubit.firstYear,
                                   onChanged: (value) {
-                                    cubit.firstYear = value!;
-                                    cubit.emit(ChangeValue());
-                                    cubit.selectYear(value, 'first Secondary');
+                                    cubit.selectYear(value!, 'first Secondary');
                                   }),
-                               Text('${getLang(context,  "First year of secondary school")}'),
+                              Text('${getLang(context, "First year of secondary school")}'),
                             ],
                           ),
                           Row(
@@ -122,11 +111,9 @@ class AddTeacher extends StatelessWidget {
                               Checkbox(
                                   value: cubit.secondYear,
                                   onChanged: (value) {
-                                    cubit.secondYear = value!;
-                                    cubit.emit(ChangeValue());
-                                    cubit.selectYear(value, 'second Secondary');
+                                    cubit.selectYear(value!, 'second Secondary');
                                   }),
-                               Text('${getLang(context,  "Second year of secondary school")}'),
+                              Text('${getLang(context, "Second year of secondary school")}'),
                             ],
                           ),
                           Row(
@@ -134,11 +121,9 @@ class AddTeacher extends StatelessWidget {
                               Checkbox(
                                   value: cubit.thirdYear,
                                   onChanged: (value) {
-                                    cubit.thirdYear = value!;
-                                    cubit.emit(ChangeValue());
-                                    cubit.selectYear(value, 'third Secondary');
+                                    cubit.selectYear(value!, 'third Secondary');
                                   }),
-                               Text('${getLang(context,  "Third year of secondary school")}'),
+                              Text('${getLang(context, "Third year of secondary school")}'),
                             ],
                           ),
                         ],
@@ -158,11 +143,10 @@ class AddTeacher extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8.0), // Border radius
                                 ),
                               ),
-                              child:  Padding(
+                              child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                                 child: Text(
-                                  '${getLang(context,  "Add Teacher")}'
-                                  ,
+                                  '${getLang(context, "Add Teacher")}',
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ),

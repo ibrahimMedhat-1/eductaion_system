@@ -19,9 +19,7 @@ class CourseDialog extends StatelessWidget {
           builder: (context, state) {
             final SubjectsCubit cubit = SubjectsCubit.get(context);
             return AlertDialog(
-              title:  Text(
-                  '${getLang(context,  "Add Course")}'
-                  ),
+              title: Text('${getLang(context, "Add Course")}'),
               content: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.8,
                 child: SingleChildScrollView(
@@ -63,15 +61,13 @@ class CourseDialog extends StatelessWidget {
                       ),
                       MainTextField(
                         textInputType: TextInputType.text,
-                        hintText: '${getLang(context,  "Course Name")}'
-                        ,
+                        hintText: '${getLang(context, "Course Name")}',
                         controller: cubit.courseNameController,
                       ),
                       const SizedBox(height: 20),
                       MainTextField(
                         textInputType: TextInputType.number,
-                        hintText: '${getLang(context,  "Course Price")}'
-                        ,
+                        hintText: '${getLang(context, "Course Price")}',
                         controller: cubit.coursePriceController,
                       ),
                       const SizedBox(height: 20),
@@ -79,14 +75,13 @@ class CourseDialog extends StatelessWidget {
                         height: 60,
                         child: DropdownButtonFormField<String>(
                           value: cubit.selectedSubject,
-                          decoration:  InputDecoration(
+                          decoration: InputDecoration(
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: ColorsAsset.kPrimary,
                               ),
                             ),
-                            labelText: '${getLang(context,  "Choose Subject")}'
-                            ,
+                            labelText: '${getLang(context, "Choose Subject")}',
                           ),
                           items: cubit.subjects.map((String value) {
                             return DropdownMenuItem<String>(
@@ -104,11 +99,9 @@ class CourseDialog extends StatelessWidget {
                           Checkbox(
                               value: cubit.firstYear,
                               onChanged: (value) {
-                                cubit.firstYear = value!;
-                                cubit.emit(ChangeValue());
-                                cubit.selectYear(value, 'first Secondary');
+                                cubit.selectYear(value!, 'first Secondary');
                               }),
-                           Text('${getLang(context,  "First year of secondary school")}'),
+                          Text('${getLang(context, "First year of secondary school")}'),
                         ],
                       ),
                       Row(
@@ -116,11 +109,9 @@ class CourseDialog extends StatelessWidget {
                           Checkbox(
                               value: cubit.secondYear,
                               onChanged: (value) {
-                                cubit.secondYear = value!;
-                                cubit.emit(ChangeValue());
-                                cubit.selectYear(value, 'second Secondary');
+                                cubit.selectYear(value!, 'second Secondary');
                               }),
-                           Text('${getLang(context,  "Second year of secondary school")}'),
+                          Text('${getLang(context, "Second year of secondary school")}'),
                         ],
                       ),
                       Row(
@@ -128,11 +119,9 @@ class CourseDialog extends StatelessWidget {
                           Checkbox(
                               value: cubit.thirdYear,
                               onChanged: (value) {
-                                cubit.thirdYear = value!;
-                                cubit.emit(ChangeValue());
-                                cubit.selectYear(value, 'third Secondary');
+                                cubit.selectYear(value!, 'third Secondary');
                               }),
-                           Text('${getLang(context,  "Third year of secondary school")}'),
+                          Text('${getLang(context, "Third year of secondary school")}'),
                         ],
                       ),
                     ],
@@ -141,9 +130,7 @@ class CourseDialog extends StatelessWidget {
               ),
               actions: <Widget>[
                 TextButton(
-                  child:  Text(
-                      '${getLang(context,  "Add")}'
-                      ),
+                  child: Text('${getLang(context, "Add")}'),
                   onPressed: () async {
                     cubit.addCourse().then((value) {
                       cubit.getCourses(cubit.selectedSubject);
@@ -165,7 +152,7 @@ class CourseDialog extends StatelessWidget {
         onPressed: () {
           _showAddDialog(context);
         },
-        icon:  Row(
+        icon: Row(
           children: [
             const Icon(
               Icons.add_box,
@@ -173,9 +160,7 @@ class CourseDialog extends StatelessWidget {
               color: ColorsAsset.kPrimary,
             ),
             const SizedBox(width: 20),
-            Text(
-                '${getLang(context,  "Add Course")}'
-                )
+            Text('${getLang(context, "Add Course")}')
           ],
         ));
   }
