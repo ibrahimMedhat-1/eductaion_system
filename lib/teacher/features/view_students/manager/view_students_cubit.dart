@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/student_model.dart';
 import 'package:education_system/shared/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'view_students_state.dart';
 
@@ -11,6 +11,7 @@ class ViewStudentsCubit extends Cubit<ViewStudentsState> {
   static ViewStudentsCubit get(context) => BlocProvider.of(context);
 
   List<StudentModel> students = [];
+  List<StudentModel> viewStudentsList = [];
   void getCourseStudents(String year) async {
     await FirebaseFirestore.instance
         .collection('secondary years')
@@ -27,7 +28,27 @@ class ViewStudentsCubit extends Cubit<ViewStudentsState> {
         });
         print(students.length);
       }
+      viewStudentsList = students;
       emit(GetCourseStudents());
     });
+  }
+
+  TextEditingController searchController = TextEditingController();
+  List<StudentModel> searchStudentsList = [];
+
+  void searchStudent(String name) {
+    searchStudentsList.clear();
+    for (StudentModel studentModel in students) {
+      if (studentModel.name.toString().toLowerCase().startsWith(name.toLowerCase())) {
+        searchStudentsList.add(studentModel);
+      }
+    }
+    viewStudentsList = searchStudentsList;
+    emit(IsSearching());
+  }
+
+  void isNotSearching() {
+    viewStudentsList = students;
+    emit(IsNotSearching());
   }
 }

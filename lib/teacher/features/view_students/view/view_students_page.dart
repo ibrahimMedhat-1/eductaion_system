@@ -24,21 +24,27 @@ class ViewStudentsPage extends StatelessWidget {
           final ViewStudentsCubit cubit = ViewStudentsCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title :SizedBox(
+              title: SizedBox(
                 height: 30,
                 width: 300,
                 child: MainTextField(
+                  controller: cubit.searchController,
+                  onChanged: (value) {
+                    if (value.isNotEmpty) {
+                      cubit.searchStudent(value);
+                    } else {
+                      cubit.isNotSearching();
+                    }
+                  },
                   textInputType: TextInputType.text,
-                  hintText: '${getLang(context,  "Search")}',
+                  hintText: '${getLang(context, "Search")}',
                   prefixIcon: const Icon(Icons.search),
                 ),
               ),
-
               backgroundColor: ColorsAsset.kLight2,
               actions: [
                 Text(
-
-                  '${getLang(context,  "Total Students")} = ${cubit.students.length}',
+                  '${getLang(context, "Total Students")} = ${cubit.students.length}',
                   style: const TextStyle(color: ColorsAsset.kPrimary),
                 ),
                 Padding(
@@ -54,22 +60,23 @@ class ViewStudentsPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      itemCount: cubit.students.length,
+                      itemCount: cubit.viewStudentsList.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ListTile(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => StudentPage(studentModel: cubit.students[index]),
+                                builder: (context) =>
+                                    StudentPage(studentModel: cubit.viewStudentsList[index]),
                               ));
                             },
-                            leading: cubit.students[index].image == ''
+                            leading: cubit.viewStudentsList[index].image == ''
                                 ? Image.asset("assets/images/icons8-student-50.png")
-                                : Image.network(cubit.students[index].image!),
+                                : Image.network(cubit.viewStudentsList[index].image!),
                             tileColor: ColorsAsset.kLightPurble,
                             title: Text(
-                              cubit.students[index].name ?? '',
+                              cubit.viewStudentsList[index].name ?? '',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                             ),
