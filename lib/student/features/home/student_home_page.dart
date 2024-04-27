@@ -225,42 +225,60 @@ class StudentLayoutState extends State<StudentLayout> {
                                       },
                                       child: SizedBox(
                                         width: MediaQuery.of(context).size.width * 0.2,
-                                        child: Card(
-                                          clipBehavior:Clip.antiAlias,
-                                          elevation: 2,
-                                          color: ColorsAsset.kLight2,
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-
-                                                height: 180,
-                                                width: double.infinity,
-
-                                                child: Expanded(
-                                                  child: Image.network(
-                                                    fit: BoxFit.fill,
-                                                    state is IsSearching
-                                                        ? cubit.searchList[index].image!
-                                                        : cubit.courses[index].image!,),
+                                        child:Card(
+                                          color: Colors.transparent,
+                                          elevation: 1,
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width * 0.3,
+                                            padding: const EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                                color: ColorsAsset.kLight, borderRadius: BorderRadius.circular(12)),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: MediaQuery.of(context).size.height * 0.2,
+                                                  width: MediaQuery.of(context).size.width * 0.15,
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          fit: BoxFit.cover,
+                                                          image: NetworkImage( state is IsSearching
+                                                              ? cubit.searchList[index].image!
+                                                              : cubit.courses[index].image!,))),
                                                 ),
-
-                                              ),
-
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(state is IsSearching
-                                                  ? cubit.searchList[index].teacherName ?? ''
-                                                  : cubit.courses[index].teacherName ?? ''),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(state is IsSearching
-                                                  ? cubit.searchList[index].courseName ?? ''
-                                                  : cubit.courses[index].courseName ?? ''),
-                                            ],
+                                                const SizedBox(
+                                                  width: 15,
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      Text(
+                                                        state is IsSearching
+                                                            ? "${getLang(context, "Teacher Name")} : ${cubit.searchList[index].teacherName ?? ''}"
+                                                            : "${getLang(context, "Teacher Name")} : ${cubit.courses[index].teacherName ?? ''}",
+                                                        style: const TextStyle(
+                                                            fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 15,
+                                                      ),
+                                                      Text(
+                                                        state is IsSearching
+                                                            ? "${getLang(context, "Course Name")} : ${cubit.searchList[index].courseName ?? ''}"
+                                                            : "${getLang(context, "Course Name")} : ${cubit.courses[index].courseName ?? ''}",
+                                                        style: const TextStyle(
+                                                            fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
+                                        )
                                       ),
                                     ),
                                   );

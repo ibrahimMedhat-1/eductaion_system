@@ -35,7 +35,7 @@ class ChatsPage extends StatelessWidget {
             ChatPageTeacherGroup(
               year: year,
             ),
-            ParentsPage(),
+            const ParentsPage(),
           ],
         ),
       ),
@@ -58,7 +58,7 @@ class ParentsPage extends StatelessWidget {
           future: cubit.getParents(Constants.teacherModel!.id),
           builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {

@@ -6,6 +6,7 @@ abstract class SubjectsState {}
 class SubjectsInitial extends SubjectsState {}
 
 class ChangeValue extends SubjectsState {}
+class ImageLoading extends SubjectsState {}
 
 class GetSubjects extends SubjectsState {}
 

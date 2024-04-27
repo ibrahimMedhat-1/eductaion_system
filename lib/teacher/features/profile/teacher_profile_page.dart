@@ -60,7 +60,12 @@ class TeacherProfilePage extends StatelessWidget {
                       onTap: () {
                         cubit.changeProfileImage(context, isTeacher: true);
                       },
-                      child: const CircleAvatar(
+                      child:
+                          state is ImageLoading?
+                      const Center(
+                        child: CircularProgressIndicator(),
+                    ):
+                      const CircleAvatar(
                         radius: 30,
                         backgroundColor: ColorsAsset.kLight2,
                         child: Center(

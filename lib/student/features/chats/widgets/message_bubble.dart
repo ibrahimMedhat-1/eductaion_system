@@ -6,8 +6,10 @@ import '../../../../shared/utils/colors.dart';
 class ChatBubble extends StatelessWidget {
   final String text;
   final bool isUser;
+  final String name1;
+  final String name2;
 
-  const ChatBubble({super.key, required this.text, required this.isUser});
+  const ChatBubble({super.key, required this.text, required this.isUser,required this.name1,required this.name2});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +18,17 @@ class ChatBubble extends StatelessWidget {
       child: Row(
         mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
+          const Column(
+            children: [
+
+            ],
+          ),
           if (!isUser)
-            const Padding(
-              padding: EdgeInsets.only(top: 25.0),
-              child: CircleAvatar(
-                backgroundColor: ColorsAsset.kPrimary,
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
+             Padding(
+              padding: const EdgeInsets.only(top: 25.0),
+              child:  Tooltip(
+                message:name2 ,
+                child: CircleAvatar(child: Text(name2.substring(0, 1).toUpperCase())),
               ),
             ),
           const SizedBox(
@@ -57,14 +61,11 @@ class ChatBubble extends StatelessWidget {
             ),
           ),
           if (isUser)
-            const Padding(
-              padding: EdgeInsets.only(bottom: 40.0, left: 5),
-              child: CircleAvatar(
-                backgroundColor: ColorsAsset.kLightPurble,
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
+             Padding(
+              padding: const EdgeInsets.only(bottom: 40.0, left: 5),
+              child: Tooltip(
+                message: name1,
+                child: CircleAvatar(child: Text(name1.substring(0, 1).toUpperCase())),
               ),
             )
         ],

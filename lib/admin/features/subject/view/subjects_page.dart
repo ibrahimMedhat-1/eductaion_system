@@ -92,6 +92,8 @@ class SubjectsPage extends StatelessWidget {
                                         color: ColorsAsset.kLight2,
                                         child: Column(
                                           children: [
+                                            cubit.courses[index].image == ""?
+                                            Image.asset("assets/images/no-image-icon-6.png"):
                                             Image.network(
                                               cubit.courses[index].image ?? '',
                                               height: MediaQuery.of(context).size.height * 0.35,

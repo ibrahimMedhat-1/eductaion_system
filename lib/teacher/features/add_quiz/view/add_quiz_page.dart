@@ -50,6 +50,7 @@ class QuestionPageState extends State<QuestionPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+
                     children: [
                       Expanded(
                         child: Container(
@@ -77,6 +78,7 @@ class QuestionPageState extends State<QuestionPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 15,),
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -96,6 +98,7 @@ class QuestionPageState extends State<QuestionPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 15,),
                       Expanded(
                         child: DropdownButton<String>(
                             value: cubit.typeValue,
@@ -129,28 +132,39 @@ class QuestionPageState extends State<QuestionPage> {
                 ],
               ),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (cubit.selectedQuantity != 0) {
-                  cubit.addQuiz(
-                    context,
-                    courseId: Constants.teacherModel!.courseId!,
-                    year: widget.year,
-                    name: cubit.lessonNameController.text,
-                    subject: Constants.teacherModel!.subject!,
-                    type: cubit.typeValue,
-                    courseReference: FirebaseFirestore.instance
-                        .collection('secondary years')
-                        .doc(widget.year)
-                        .collection(Constants.teacherModel!.subject!)
-                        .doc(Constants.teacherModel!.courseId.toString().trim()),
-                  );
-                }
-              },
-              child:  Text(
-                  '${getLang(context,  "Add Quiz")}'
-                  ),
-            ),
+            floatingActionButton: SizedBox(
+              width: 150,
+              child: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0), // Adjust the radius as needed
+                ),
+
+                onPressed: () {
+                  if (cubit.selectedQuantity != 0) {
+                    cubit.addQuiz(
+                      context,
+                      courseId: Constants.teacherModel!.courseId!,
+                      year: widget.year,
+                      name: cubit.lessonNameController.text,
+                      subject: Constants.teacherModel!.subject!,
+                      type: cubit.typeValue,
+                      courseReference: FirebaseFirestore.instance
+                          .collection('secondary years')
+                          .doc(widget.year)
+                          .collection(Constants.teacherModel!.subject!)
+                          .doc(Constants.teacherModel!.courseId.toString().trim()),
+                    );
+                  }
+                },
+                 child:   Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0), // Adjust the padding as needed
+                      child:
+                 Text(
+                    '${getLang(context,  "Add Quiz")}'
+                    ),
+              ),
+              ),
+            )
           );
         },
       ),

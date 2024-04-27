@@ -131,11 +131,12 @@ class ProfileCubit extends Cubit<ProfileState> {
 
           ),
           boundary: CroppieBoundary(
-            height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *1).toInt()
+            height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *0.5).toInt()
           ),
           context: context,
         )
       ]).then((value) async {
+        emit(ImageLoading());
         final image = await value!.readAsBytes();
         await FirebaseStorage.instance
             .ref()

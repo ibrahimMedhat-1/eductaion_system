@@ -30,26 +30,40 @@ class CourseDialog extends StatelessWidget {
                         children: [
                           CachedNetworkImage(
                             imageUrl: cubit.courseImage,
-                            imageBuilder: (context, imageProvider) => CircleAvatar(
-                              radius: 80,
-                              backgroundColor: const Color(0xFF6E85B7),
-                              backgroundImage: imageProvider,
-                            ),
-                            errorWidget: (context, url, error) => const CircleAvatar(
-                              radius: 80,
-                              backgroundColor: Color(0xFF6E85B7),
-                              backgroundImage: NetworkImage("assets/images/profile purple.png"),
+                            imageBuilder: (context, imageProvider) =>
+                                Container(
+                                  height: 150,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(image:imageProvider ),
+
+                                  ),
+                                ),
+                            errorWidget: (context, url, error) =>  Container(
+                              height: 150,
+                              width: 200,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(image: AssetImage("assets/images/no-image-icon-6.png"),),
+
+                              ),
                             ),
                           ),
+
                           InkWell(
                             onTap: () {
                               cubit.changeCourseImage();
                               cubit.getCourses(cubit.selectedSubject);
                             },
-                            child: const CircleAvatar(
+                            child:  CircleAvatar(
                               radius: 30,
                               backgroundColor: ColorsAsset.kLight2,
-                              child: Center(
+                              child:
+                              state is ImageLoading?
+                              const Center(
+                                  child:CircularProgressIndicator()
+                              ):
+
+                              const Center(
                                 child: Icon(
                                   Icons.edit,
                                   color: ColorsAsset.kPrimary,
@@ -59,6 +73,7 @@ class CourseDialog extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 10,),
                       MainTextField(
                         textInputType: TextInputType.text,
                         hintText: '${getLang(context, "Course Name")}',
@@ -133,7 +148,15 @@ class CourseDialog extends StatelessWidget {
                   child: Text('${getLang(context, "Add")}'),
                   onPressed: () async {
                     cubit.addCourse().then((value) {
+
                       cubit.getCourses(cubit.selectedSubject);
+                      cubit.secondYear=false;
+                      cubit.firstYear=false;
+                      cubit.thirdYear=false;
+                      cubit.coursePriceController.clear();
+                      cubit.courseNameController.clear();
+                      cubit.courseImage ="";
+
                       Navigator.pop(context);
                     });
                   },

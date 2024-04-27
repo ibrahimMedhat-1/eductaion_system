@@ -115,8 +115,10 @@ class SubjectsCubit extends Cubit<SubjectsState> {
   }
 
   void changeCourseImage() async {
+
     await ImagePicker().pickImage(source: ImageSource.gallery).then((value) async {
       final image = await value!.readAsBytes();
+      emit(ImageLoading());
       await FirebaseStorage.instance
           .ref()
           .child('courses/${DateTime.now()}')

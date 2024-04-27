@@ -24,27 +24,23 @@ class ViewStudentsPage extends StatelessWidget {
           final ViewStudentsCubit cubit = ViewStudentsCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: Row(
-                children: [
-                  Text(
-
-                    '${getLang(context,  "Total Students")} = ${cubit.students.length}',
-                    style: const TextStyle(color: ColorsAsset.kPrimary),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Expanded(
-                    child: MainTextField(
-                      textInputType: TextInputType.text,
-                      hintText: '${getLang(context,  "Search")}',
-                      prefixIcon: const Icon(Icons.search),
-                    ),
-                  ),
-                ],
+              title :SizedBox(
+                height: 30,
+                width: 300,
+                child: MainTextField(
+                  textInputType: TextInputType.text,
+                  hintText: '${getLang(context,  "Search")}',
+                  prefixIcon: const Icon(Icons.search),
+                ),
               ),
+
               backgroundColor: ColorsAsset.kLight2,
               actions: [
+                Text(
+
+                  '${getLang(context,  "Total Students")} = ${cubit.students.length}',
+                  style: const TextStyle(color: ColorsAsset.kPrimary),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Image.asset("assets/images/logo2.png"),

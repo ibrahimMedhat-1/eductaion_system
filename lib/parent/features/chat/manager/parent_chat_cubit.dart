@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../models/message_model.dart';
 import '../../../../shared/constants.dart';
@@ -17,13 +15,21 @@ class ParentChatCubit extends Cubit<ParentChatState> {
   List<MessageModel> chatMessage = [];
   List<MessageModel> reversedChatMessage = [];
   ScrollController scrollController = ScrollController();
-  void sendMessage(MessageModel message) {
+  String? name;
+  void sendMessage(MessageModel message,teacherName) async{
+    await FirebaseFirestore.instance.collection('parents').doc(Constants.parentModel!.id).get().then((value) async {
+      print(value.data());
+      await value.data()!['studentReference'].get().then((value) async {
+        name = await value.data()!['name'];
+      });
+    });
     FirebaseFirestore.instance
         .collection('parents')
         .doc(message.senderId)
         .collection('chat')
         .doc(message.receiverId)
         .set({
+      'teacherName':teacherName,
       'lastMessage': message.text,
       'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
     });
@@ -50,7 +56,7 @@ class ParentChatCubit extends Cubit<ParentChatState> {
         .doc(message.senderId)
         .set({
       'lastMessage': message.text,
-      'name': Constants.parentModel!.id,
+      'name': name,
       'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
       'id': Constants.parentModel!.id,
     });

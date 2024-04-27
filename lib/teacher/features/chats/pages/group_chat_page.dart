@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:education_system/models/student_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../components/locale/applocale.dart';
-import '../../../../models/course_model.dart';
 import '../../../../models/message_model.dart';
 import '../../../../shared/constants.dart';
 import '../../../../shared/utils/colors.dart';
@@ -51,6 +49,8 @@ class ChatPageState extends State<ChatPageTeacherGroup> {
                             itemBuilder: (context, index) {
                               final message = cubit.reversedChatMessage[index];
                               return ChatBubble(
+                                name1:Constants.teacherModel!.name! ,
+                                name2: message.sender!,
                                 text: message.text!,
                                 isUser: message.senderId == Constants.teacherModel!.id ? true : false,
                               );
@@ -116,7 +116,7 @@ class ChatPageState extends State<ChatPageTeacherGroup> {
                                       .doc(Constants.teacherModel!.courseId!).collection('groupChat').doc().set({
                                       'lastMessage': message.text,
                                       'text': message.text,
-                                      'name': Constants.teacherModel!.name,
+                                      'sender': Constants.teacherModel!.name,
                                       'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
                                       'senderId': Constants.teacherModel!.id,
                                       'date': DateTime.now().toString(),

@@ -92,26 +92,34 @@ class _AddLessonPageState extends State<AddLessonPage> {
                 if (state is LessonAddedLoading) const Center(child: CircularProgressIndicator())
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (cubit.videoFile != null) {
-                  cubit.addLesson(
-                    context,
-                    courseId: Constants.teacherModel!.courseId!,
-                    year: widget.year,
-                    name: cubit.lessonNameController.text,
-                    subject: Constants.teacherModel!.subject!,
-                    courseReference: FirebaseFirestore.instance
-                        .collection('secondary years')
-                        .doc(widget.year)
-                        .collection(Constants.teacherModel!.subject!)
-                        .doc(Constants.teacherModel!.courseId.toString().trim()),
-                  );
-                }
-              },
-              child:  Text(
+            floatingActionButton: SizedBox(
+              width: 150,
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (cubit.videoFile != null) {
+                    cubit.addLesson(
+                      context,
+                      courseId: Constants.teacherModel!.courseId!,
+                      year: widget.year,
+                      name: cubit.lessonNameController.text,
+                      subject: Constants.teacherModel!.subject!,
+                      courseReference: FirebaseFirestore.instance
+                          .collection('secondary years')
+                          .doc(widget.year)
+                          .collection(Constants.teacherModel!.subject!)
+                          .doc(Constants.teacherModel!.courseId.toString().trim()),
+                    );
+                  }
+                },
+                child:  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
 
-                  '${getLang(context, "Add Lesson")}'),
+                        '${getLang(context, "Add Lesson")}'),
+                  ),
+                ),
+              ),
             ),
           );
         },

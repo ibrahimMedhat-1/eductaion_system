@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/locale/applocale.dart';
+import '../../shared/main_cubit/main_cubit.dart';
 import '../../shared/utils/colors.dart';
 import '../register/register_page.dart';
 import 'manager/login_cubit.dart';
@@ -32,6 +33,35 @@ class LoginPage extends StatelessWidget {
                 )),
               ),
               Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  title: GestureDetector(
+                    onTap: () {
+                      if (MainCubit.get(context).lang == "en") {
+                        MainCubit.get(context).changeLang('ar');
+                      } else {
+                        MainCubit.get(context).changeLang('en');
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: ColorsAsset.kPrimary),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '${getLang(context, "EN")}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: ColorsAsset.kPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ),
                 backgroundColor: Colors.transparent,
                 body: Center(
                   child: Container(

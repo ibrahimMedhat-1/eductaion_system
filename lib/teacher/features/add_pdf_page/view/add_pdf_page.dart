@@ -86,27 +86,32 @@ class AddPdfPag extends StatelessWidget {
                 if (state is PdfAddedLoading) const Center(child: CircularProgressIndicator())
               ],
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (cubit.pdfFile != null) {
-                  cubit.addPdf(
-                    context,
-                    file: cubit.pdfFile,
-                    courseId: Constants.teacherModel!.courseId!,
-                    year: year,
-                    name: cubit.pdfNameController.text,
-                    subject: Constants.teacherModel!.subject!,
-                    courseReference: FirebaseFirestore.instance
-                        .collection('secondary years')
-                        .doc(year)
-                        .collection(Constants.teacherModel!.subject!)
-                        .doc(Constants.teacherModel!.courseId.toString().trim()),
-                  );
-                }
-              },
-              child:  Text(
-                  '${getLang(context,  "Add Pdf")}'
-                  ),
+            floatingActionButton: SizedBox(
+              width: 150,
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (cubit.pdfFile != null) {
+                    cubit.addPdf(
+                      context,
+                      file: cubit.pdfFile,
+                      courseId: Constants.teacherModel!.courseId!,
+                      year: year,
+                      name: cubit.pdfNameController.text,
+                      subject: Constants.teacherModel!.subject!,
+                      courseReference: FirebaseFirestore.instance
+                          .collection('secondary years')
+                          .doc(year)
+                          .collection(Constants.teacherModel!.subject!)
+                          .doc(Constants.teacherModel!.courseId.toString().trim()),
+                    );
+                  }
+                },
+                child:  Center(
+                  child: Text(
+                      '${getLang(context,  "Add Pdf")}'
+                      ),
+                ),
+              ),
             ),
           );
         },

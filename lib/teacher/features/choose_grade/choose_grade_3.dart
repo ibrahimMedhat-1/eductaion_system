@@ -27,7 +27,7 @@ class ChooseGradePage3 extends StatelessWidget {
                     ));
                   },
                   tileColor: ColorsAsset.kLightPurble,
-                  subtitle:Text('${getLang(context,  "View Material")}'),
+                  subtitle:Text( '${getLang(context,  "View Chats")}'),
                   leading: Image.asset("assets/images/icons8-graduation-50.png"),
                   title:  Text('${getLang(context,  "First year of secondary school")}'),
                 ),
@@ -47,7 +47,7 @@ class ChooseGradePage3 extends StatelessWidget {
                     ));
                   },
                   tileColor: ColorsAsset.kLightPurble,
-                  subtitle:  Text('${getLang(context,  "View Material")}'),
+                  subtitle:  Text( '${getLang(context,  "View Chats")}'),
                   leading: Image.asset("assets/images/icons8-graduation-50.png"),
                   title:  Text('${getLang(context,  "Second year of secondary school")}'),
                 ),
@@ -68,7 +68,7 @@ class ChooseGradePage3 extends StatelessWidget {
                   },
                   tileColor: ColorsAsset.kLightPurble,
                   subtitle:  Text(
-                      '${getLang(context,  "View Material")}'
+                      '${getLang(context,  "View Chats")}'
                   ),
                   leading: Image.asset("assets/images/icons8-graduation-50.png"),
                   title:  Text( '${getLang(context,  "Third year of secondary school")}'),

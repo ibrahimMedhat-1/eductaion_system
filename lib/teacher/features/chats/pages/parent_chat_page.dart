@@ -58,6 +58,8 @@ class ChatPageState extends State<ChatPageTeacherParent> {
                             itemBuilder: (context, index) {
                               final message = cubit.reversedChatMessage[index];
                               return ChatBubble(
+                                name2: "${getLang(context, 'parentOf')} ${widget.userName}",
+                                name1: Constants.teacherModel!.name!,
                                 text: message.text!,
                                 isUser: message.senderId == Constants.teacherModel!.id ? true : false,
                               );

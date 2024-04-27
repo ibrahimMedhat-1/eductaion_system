@@ -68,7 +68,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             onTap: () {
                               cubit.changeProfileImage(context);
                             },
-                            child: const CircleAvatar(
+                            child:
+                            state is ImageLoading?
+                            const Center(
+                              child: CircularProgressIndicator(),
+                            ):
+                            const CircleAvatar(
                               radius: 22,
                               backgroundColor: ColorsAsset.kLight2,
                               child: Center(

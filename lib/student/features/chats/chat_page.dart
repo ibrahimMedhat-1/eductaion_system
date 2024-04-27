@@ -60,6 +60,10 @@ class ChatPageState extends State<ChatPage> {
                             itemBuilder: (context, index) {
                               final message = cubit.reversedChatMessage[index];
                               return ChatBubble(
+                                name1: Constants.studentModel!.name! ,
+                                name2:
+                                widget.isGroupChat? message.sender??"" :
+                                widget.courseModel.teacherName!,
                                 text: message.text!,
                                 isUser: message.senderId == Constants.studentModel!.id ? true : false,
                               );
@@ -123,7 +127,7 @@ class ChatPageState extends State<ChatPage> {
                                     widget.courseModel.reference!.collection('groupChat').doc().set({
                                       'lastMessage': message.text,
                                       'text': message.text,
-                                      'name': Constants.studentModel!.name,
+                                      'sender': Constants.studentModel!.name,
                                       'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
                                       'senderId': Constants.studentModel!.id,
                                       'date': DateTime.now().toString(),

@@ -62,7 +62,7 @@ class ChooseChatPage extends StatelessWidget {
                                 Text(
                                   cubit.myCourses[index].courseName ?? '',
                                   style:
-                                      TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
+                                      const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                                 ),
                                 const SizedBox(
                                   height: 15,

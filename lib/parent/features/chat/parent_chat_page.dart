@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/student/features/chats/widgets/message_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../../components/locale/applocale.dart';
 import '../../../models/message_model.dart';
@@ -59,6 +57,8 @@ class ChatPageParentState extends State<ChatPageParent> {
                             itemBuilder: (context, index) {
                               final message = cubit.reversedChatMessage[index];
                               return ChatBubble(
+                                name1: "Me",
+                                name2: widget.courseModel.teacherName!,
                                 text: message.text!,
                                 isUser: message.senderId == Constants.parentModel!.id ? true : false,
                               );
@@ -99,7 +99,7 @@ class ChatPageParentState extends State<ChatPageParent> {
                                   );
                                   cubit.messageController.clear();
 
-                                    cubit.sendMessage(message);
+                                    cubit.sendMessage(message,widget.courseModel.teacherName);
 
                                 },
                               ),
