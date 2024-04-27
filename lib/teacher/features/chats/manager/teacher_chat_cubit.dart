@@ -18,7 +18,7 @@ class TeacherChatCubit extends Cubit<TeacherChatState> {
   ScrollController scrollController = ScrollController();
 
   List<StudentModel> students = [];
-  void getCourseStudents(String year) async {
+  Future<void> getCourseStudents(String year) async {
     await FirebaseFirestore.instance
         .collection('secondary years')
         .doc(year)
@@ -31,7 +31,7 @@ class TeacherChatCubit extends Cubit<TeacherChatState> {
       for (var element in value.docs) {
         DocumentReference<Map<String, dynamic>> reference = await element.data()['reference'];
         await reference.get().then((value) {
-          students.add(StudentModel.fromJson(value.data()));
+            students.add(StudentModel.fromJson(value.data()));
         });
         print(students.length);
       }

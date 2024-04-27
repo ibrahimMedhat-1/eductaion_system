@@ -6,7 +6,7 @@
   "Select the academic year": "اختر السنة الدراسية",
  "Let's Start Now": "هيا بنا نبدا",
   "A group of the most skilled professors": "مجموعة من امهر الاساتذة الموجودين حاليا",
-  "EN": "ع",
+  "EN": "En",
   "parentOf": "ولي امر",
   "Home": "الرئيسية",
   "Chats": "الدردشة",
@@ -113,5 +113,6 @@
  "Upload Material": "تحميل الملفات",
  "Chat": "محادثة",
  "View Chats": "عرض المحادثات"
+
 
 }

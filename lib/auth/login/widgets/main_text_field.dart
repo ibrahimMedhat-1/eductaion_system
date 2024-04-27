@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,22 +15,25 @@ class MainTextField extends StatelessWidget {
     this.onSubmitted,
     this.onChanged,
     this.validationText,
+    this.suffixPressed,
     required this.textInputType,
     this.inputFormatters,
     this.maxLength,
     this.enabled = true,
     this.onTap,
+    this.obscure=false,
   });
   final List<TextInputFormatter>? inputFormatters;
-
+  final bool obscure;
   final String? labeltext;
   final String? validationText;
   final String? hintText;
   final TextEditingController? controller;
   void Function(String)? onSubmitted;
   void Function(String)? onChanged;
+  Function()? suffixPressed;
   Widget? prefixIcon;
-  Widget? suffixIcon;
+  IconData? suffixIcon;
   TextInputType textInputType;
   final int? maxLength;
   final bool enabled;
@@ -39,6 +43,7 @@ class MainTextField extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: TextFormField(
+        obscureText: obscure,
         enabled: enabled,
         maxLength: maxLength,
         inputFormatters: inputFormatters,
@@ -53,6 +58,18 @@ class MainTextField extends StatelessWidget {
           return null;
         },
         decoration: InputDecoration(
+
+          suffixIcon: suffixIcon == null
+              ? null
+              : IconButton(
+            onPressed: () {
+              suffixPressed!();
+            },
+            icon: Icon(
+              suffixIcon,
+              color: Colors.grey,
+            ),
+          ),
           fillColor: Colors.white,
           filled: true,
           labelText: labeltext,

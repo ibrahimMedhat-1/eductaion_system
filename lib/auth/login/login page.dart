@@ -89,6 +89,10 @@ class LoginPage extends StatelessWidget {
                           height: 10,
                         ),
                         MainTextField(
+                          obscure: cubit.obscure,
+                          suffixPressed: cubit.suffixPressed,
+
+                          suffixIcon: cubit.suffixIcon ,
                           textInputType: TextInputType.text,
                           controller: cubit.passwordController,
                           hintText: '${getLang(context,  "Password")}',

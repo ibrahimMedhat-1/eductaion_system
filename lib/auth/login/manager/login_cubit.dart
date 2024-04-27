@@ -22,6 +22,8 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isProfessor = false;
+  IconData suffixIcon = Icons.visibility_off;
+  bool obscure = true;
   bool isAdmin = false;
 
   void changeToadmin() {
@@ -37,6 +39,16 @@ class LoginCubit extends Cubit<LoginState> {
     isAdmin = false;
     isParent = !isParent;
     emit(ChangeType());
+  }
+  void suffixPressed() {
+    obscure = !obscure;
+    if (obscure) {
+      suffixIcon = Icons.visibility_off;
+      emit(ChangeObscure());
+    } else {
+      suffixIcon = Icons.visibility;
+      emit(ChangeObscure());
+    }
   }
 
   void changeToProfessor() {

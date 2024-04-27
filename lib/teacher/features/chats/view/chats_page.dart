@@ -124,7 +124,7 @@ class StudentsPage extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  ChatPageTeacherStudents(studentModel: cubit.students[index]),
+                                  ChatPageTeacherStudents(studentModel:  cubit.students[index]),
                             ));
                           },
                           leading: cubit.students[index].image == ''

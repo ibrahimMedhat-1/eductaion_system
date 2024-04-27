@@ -12,3 +12,4 @@ final class LoginError extends LoginState {}
 final class LoginLoading extends LoginState {}
 
 final class LoginSuccessfully extends LoginState {}
+final class ChangeObscure extends LoginState {}
