@@ -20,7 +20,7 @@ class ChatBubble extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(top: 25.0),
               child: CircleAvatar(
-                backgroundColor: ColorsAsset.kLightPurble,
+                backgroundColor: ColorsAsset.kPrimary,
                 child: Icon(
                   Icons.person,
                   color: Colors.white,
@@ -37,7 +37,7 @@ class ChatBubble extends StatelessWidget {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width + 0.7),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                    color: isUser ? Colors.black87 : ColorsAsset.kLightPurble,
+                    color: isUser ? ColorsAsset.kbackgorund : ColorsAsset.kPrimary,
                     borderRadius: !isUser
                         ? const BorderRadius.only(
                       topRight: Radius.circular(15),

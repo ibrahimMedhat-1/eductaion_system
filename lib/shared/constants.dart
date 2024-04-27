@@ -8,23 +8,7 @@ String lang = "en";
 abstract class Constants {
   static StudentModel? studentModel;
   static ParentModel? parentModel;
-  static TeacherModel? teacherModel = TeacherModel(
-    bio: 'to7fa',
-    centerName: 'stars',
-    centerNo: '345678',
-    degree: 'bachelor of math',
-    email: 'teacher@gmail.com',
-    name: 'Ibrahim',
-    id: 'cV6Qa074MduGwYC5ujcu',
-    image: '',
-    courseId: 'wwbjZNx7hD1r37PULn0g',
-    subject: 'math',
-    years: [
-      'first Secondary',
-      'second Secondary',
-      'third Secondary',
-    ],
-  );
+  static TeacherModel? teacherModel;
 }
 
 // Function to validate the number

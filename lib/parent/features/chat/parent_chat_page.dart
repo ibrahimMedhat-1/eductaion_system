@@ -9,30 +9,29 @@ import '../../../components/locale/applocale.dart';
 import '../../../models/message_model.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/colors.dart';
-import 'manager/student_chat_cubit.dart';
+import 'manager/parent_chat_cubit.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key, this.isGroupChat = false, required this.courseModel});
-  final bool isGroupChat;
+class ChatPageParent extends StatefulWidget {
+  const ChatPageParent({super.key,  required this.courseModel});
+
   final CourseModel courseModel;
   @override
-  ChatPageState createState() => ChatPageState();
+  ChatPageParentState createState() => ChatPageParentState();
 }
 
-class ChatPageState extends State<ChatPage> {
+class ChatPageParentState extends State<ChatPageParent> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    StudentChatCubit.get(context).getMessages(
-        widget.isGroupChat ? widget.courseModel.reference! : widget.courseModel.teacher!, widget.isGroupChat);
+    ParentChatCubit.get(context).getMessages(widget.courseModel.teacher!.id);
 
-    return BlocConsumer<StudentChatCubit, StudentChatState>(
+    return BlocConsumer<ParentChatCubit, ParentChatState>(
       listener: (context, state) {
         // TODO: implement listener
       },
       builder: (context, state) {
-        StudentChatCubit cubit = StudentChatCubit.get(context);
+        ParentChatCubit cubit = ParentChatCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -61,7 +60,7 @@ class ChatPageState extends State<ChatPage> {
                               final message = cubit.reversedChatMessage[index];
                               return ChatBubble(
                                 text: message.text!,
-                                isUser: message.senderId == Constants.studentModel!.id ? true : false,
+                                isUser: message.senderId == Constants.parentModel!.id ? true : false,
                               );
                             },
                           ),
@@ -80,7 +79,7 @@ class ChatPageState extends State<ChatPage> {
                                   decoration: InputDecoration(
                                     hintText: '${getLang(context, "Type a message...")}',
                                     contentPadding:
-                                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
                                     border: InputBorder.none,
                                   ),
                                 ),
@@ -94,44 +93,14 @@ class ChatPageState extends State<ChatPage> {
                                   MessageModel message = MessageModel(
                                     date: DateTime.now().toString(),
                                     text: cubit.messageController.text,
-                                    sender: Constants.studentModel!.name,
-                                    receiverId: widget.isGroupChat
-                                        ? widget.courseModel.id
-                                        : widget.courseModel.teacher!.id,
-                                    senderId: Constants.studentModel!.id,
+                                    sender: Constants.parentModel!.id,
+                                    receiverId:widget.courseModel.teacher!.id,
+                                    senderId: Constants.parentModel!.id,
                                   );
                                   cubit.messageController.clear();
-                                  if (widget.isGroupChat) {
-                                    FirebaseFirestore.instance
-                                        .collection('students')
-                                        .doc(message.senderId)
-                                        .collection('chat')
-                                        .doc(message.receiverId)
-                                        .set({
-                                      'lastMessage': message.text,
-                                      'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
-                                    });
 
-                                    var inDoctorDocument = FirebaseFirestore.instance
-                                        .collection('students')
-                                        .doc(message.senderId)
-                                        .collection('chat')
-                                        .doc(message.receiverId)
-                                        .collection('messages')
-                                        .doc();
-                                    inDoctorDocument.set(message.toMap(inDoctorDocument.id));
-                                    widget.courseModel.reference!.collection('groupChat').doc().set({
-                                      'lastMessage': message.text,
-                                      'text': message.text,
-                                      'name': Constants.studentModel!.name,
-                                      'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
-                                      'senderId': Constants.studentModel!.id,
-                                      'date': DateTime.now().toString(),
-                                      'SenderImage':Constants.studentModel!.image,
-                                    });
-                                  } else {
                                     cubit.sendMessage(message);
-                                  }
+
                                 },
                               ),
                             ],
@@ -143,7 +112,7 @@ class ChatPageState extends State<ChatPage> {
                 ),
               ),
               Positioned(
-                  // top: 200,
+                // top: 200,
                   left: MediaQuery.of(context).size.width * 0.1,
                   child: Image.asset(
                     "assets/images/White and Blue Modern Business Online Courses Instagram Post.png",

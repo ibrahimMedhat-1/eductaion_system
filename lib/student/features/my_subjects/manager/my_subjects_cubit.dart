@@ -15,6 +15,7 @@ class MySubjectsCubit extends Cubit<MySubjectsState> {
   void getMyCourses() async {
     emit(GetMyCoursesLoading());
     await Constants.studentModel!.reference!.collection('courses').get().then((value) async {
+      myCourses.clear();
       for (var element in value.docs) {
         DocumentReference<Map<String, dynamic>> course = await element.data()['reference'];
         await course.get().then((value) {

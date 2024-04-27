@@ -19,6 +19,7 @@ class MyGradesCubit extends Cubit<MyGradesState> {
         .collection('quiz')
         .get()
         .then((value) async {
+      courses.clear();
       for (var element in value.docs) {
         DocumentReference<Map<String, dynamic>> course = element.data()['reference'];
         await course.get().then((value) {

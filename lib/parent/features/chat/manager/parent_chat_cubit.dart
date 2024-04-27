@@ -1,39 +1,25 @@
+import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
-import '../../../../models/course_model.dart';
 import '../../../../models/message_model.dart';
 import '../../../../shared/constants.dart';
 
-part 'student_chat_state.dart';
+part 'parent_chat_state.dart';
 
-class StudentChatCubit extends Cubit<StudentChatState> {
-  StudentChatCubit() : super(StudentChatInitial());
-  static StudentChatCubit get(context) => BlocProvider.of(context);
+class ParentChatCubit extends Cubit<ParentChatState> {
+  ParentChatCubit() : super(ParentChatInitial());
+  static ParentChatCubit get(context) => BlocProvider.of(context);
   final TextEditingController messageController = TextEditingController();
   List<MessageModel> chatMessage = [];
   List<MessageModel> reversedChatMessage = [];
   ScrollController scrollController = ScrollController();
-  List<CourseModel> myCourses = [];
-  void getMyCourses() async {
-    emit(GetMyCoursesLoading());
-    await Constants.studentModel!.reference!.collection('courses').get().then((value) async {
-      myCourses.clear();
-      for (var element in value.docs) {
-        DocumentReference<Map<String, dynamic>> course = await element.data()['reference'];
-        await course.get().then((value) {
-          myCourses.add(CourseModel.fromJson(value.data()));
-        });
-      }
-      emit(GetMyCoursesSuccessfully());
-    });
-  }
-
   void sendMessage(MessageModel message) {
     FirebaseFirestore.instance
-        .collection('students')
+        .collection('parents')
         .doc(message.senderId)
         .collection('chat')
         .doc(message.receiverId)
@@ -44,13 +30,13 @@ class StudentChatCubit extends Cubit<StudentChatState> {
     var inUserDocument = FirebaseFirestore.instance
         .collection('teachers')
         .doc(message.receiverId)
-        .collection('chat')
+        .collection('chatparent')
         .doc(message.senderId)
         .collection('messages')
         .doc();
     inUserDocument.set(message.toMap(inUserDocument.id));
     var inDoctorDocument = FirebaseFirestore.instance
-        .collection('students')
+        .collection('parents')
         .doc(message.senderId)
         .collection('chat')
         .doc(message.receiverId)
@@ -60,39 +46,24 @@ class StudentChatCubit extends Cubit<StudentChatState> {
     FirebaseFirestore.instance
         .collection('teachers')
         .doc(message.receiverId)
-        .collection('chat')
+        .collection('chatparent')
         .doc(message.senderId)
         .set({
       'lastMessage': message.text,
-      'name': Constants.studentModel!.name,
+      'name': Constants.parentModel!.id,
       'lastMessageDate': DateFormat('hh:mm').format(DateTime.now()),
-      'id': Constants.studentModel!.id,
+      'id': Constants.parentModel!.id,
     });
   }
 
-  void getMessages(DocumentReference<Map<String, dynamic>> reference, bool isGroupChat) {
-    print(Constants.studentModel!.id);
+  void getMessages(id) {
+    print(Constants.parentModel!.id);
 
-    if (isGroupChat) {
-      reference.collection('groupChat').orderBy('date').snapshots().listen((event) {
-        chatMessage.clear();
-        for (var element in event.docs) {
-          chatMessage.add(MessageModel.fromJson(element.data()));
-        }
-        reversedChatMessage = chatMessage.reversed.toList();
-        emit(GetAllMessagesSuccessfully());
-        scrollController.animateTo(
-          double.minPositive,
-          duration: const Duration(microseconds: 1),
-          curve: Curves.bounceIn,
-        );
-      });
-    } else {
       FirebaseFirestore.instance
-          .collection('students')
-          .doc(Constants.studentModel!.id)
+          .collection('parents')
+          .doc(Constants.parentModel!.id)
           .collection('chat')
-          .doc(reference.id)
+          .doc(id)
           .collection('messages')
           .orderBy('date')
           .snapshots()
@@ -110,5 +81,7 @@ class StudentChatCubit extends Cubit<StudentChatState> {
         );
       });
     }
-  }
+
+
+
 }

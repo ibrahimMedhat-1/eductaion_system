@@ -12,6 +12,7 @@ import '../../../../shared/main_cubit/main_cubit.dart';
 import '../../../../shared/utils/colors.dart';
 import '../../../../student/features/profile/widgets/parent_data.dart';
 import '../../../../student/features/profile/widgets/personal_data.dart';
+import '../../chat/parent_chat_page.dart';
 
 class ParentHomePage extends StatelessWidget {
   const ParentHomePage({super.key});
@@ -182,26 +183,52 @@ class ParentHomePage extends StatelessWidget {
                                                           const SizedBox(
                                                             height: 15,
                                                           ),
-                                                          ElevatedButton(
-                                                            onPressed: () {
-                                                              Navigator.of(context).push(MaterialPageRoute(
-                                                                builder: (context) => ParentCourseQuizPage(
-                                                                    courseModel: cubit.courses[index]),
-                                                              ));
-                                                            },
-                                                            style: ElevatedButton.styleFrom(
-                                                              foregroundColor: Colors.white,
-                                                              backgroundColor: ColorsAsset.kPrimary,
-                                                              shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(10),
+                                                          Row(
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              ElevatedButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                                    builder: (context) => ParentCourseQuizPage(
+                                                                        courseModel: cubit.courses[index]),
+                                                                  ));
+                                                                },
+                                                                style: ElevatedButton.styleFrom(
+                                                                  foregroundColor: Colors.white,
+                                                                  backgroundColor: ColorsAsset.kPrimary,
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(10),
+                                                                  ),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.symmetric(
+                                                                      horizontal: 12.0, vertical: 8),
+                                                                  child: Text(
+                                                                      '${getLang(context, "See my Grades ")}'),
+                                                                ),
                                                               ),
-                                                            ),
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.symmetric(
-                                                                  horizontal: 12.0, vertical: 8),
-                                                              child: Text(
-                                                                  '${getLang(context, "See my Grades ")}'),
-                                                            ),
+                                                              ElevatedButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                                    builder: (context) => ChatPageParent(
+                                                                        courseModel: cubit.courses[index]),
+                                                                  ));
+                                                                },
+                                                                style: ElevatedButton.styleFrom(
+                                                                  foregroundColor: Colors.white,
+                                                                  backgroundColor: ColorsAsset.kPrimary,
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(10),
+                                                                  ),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.symmetric(
+                                                                      horizontal: 12.0, vertical: 8),
+                                                                  child: Text(
+                                                                      '${getLang(context, "Chat")}'),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
