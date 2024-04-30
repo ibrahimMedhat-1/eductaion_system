@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:education_system/admin/features/course_details/manager/course_details_cubit.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/models/teacher_model.dart';
@@ -40,10 +39,10 @@ class CourseDetails extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                 Text(
-                  '${getLang(context,  "Please Assign Teacher to This Course")}'
-                  ,
-                  style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold, fontSize: 20),
+                Text(
+                  '${getLang(context, "Please Assign Teacher to This Course")}',
+                  style:
+                      const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 const SizedBox(
                   height: 35,
@@ -54,15 +53,13 @@ class CourseDetails extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: DropdownButtonFormField<TeacherModel>(
                       value: cubit.selectedTeacher,
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         border: const OutlineInputBorder(
                           borderSide: BorderSide(
                             color: ColorsAsset.kPrimary,
                           ),
                         ),
-                        labelText:
-                        '${getLang(context,  "Choose Teacher")}'
-                        ,
+                        labelText: '${getLang(context, "Choose Teacher")}',
                       ),
                       items: cubit.teachers.map((teacher) {
                         return DropdownMenuItem<TeacherModel>(
@@ -75,83 +72,78 @@ class CourseDetails extends StatelessWidget {
                       },
                     ),
                   ),
-                ElevatedButton(onPressed: (){
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title:  Text(
-                            '${getLang(context,  "Add Advertisement")}'
-                        ),
-                        content:  Stack(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                              ),
-                              child: cubit.image == null?
-                              SizedBox():
-                              Image.memory(cubit.image!),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                cubit.addAdvertisement();
-                              },
-                              child:
-                              state is ImageLoading?
-                              const Center(
-                                child: CircularProgressIndicator(),
-                              ):
-                              const CircleAvatar(
-                                radius: 22,
-                                backgroundColor: ColorsAsset.kLight2,
-                                child: Center(
-                                  child: Icon(
-                                    Icons.edit,
-                                    color: ColorsAsset.kPrimary,
+                ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return BlocProvider(
+                            create: (context) => CourseDetailsCubit(),
+                            child: BlocConsumer<CourseDetailsCubit, CourseDetailsState>(
+                              listener: (context, state) {},
+                              builder: (context, state) {
+                                return AlertDialog(
+                                  title: Text('${getLang(context, "Add Advertisement")}'),
+                                  content: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(),
+                                        child: CourseDetailsCubit.get(context).image == null
+                                            ? SizedBox()
+                                            : Image.memory(CourseDetailsCubit.get(context).image!),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          CourseDetailsCubit.get(context).addAdvertisement();
+                                        },
+                                        child: state is ImageLoading
+                                            ? const Center(
+                                                child: CircularProgressIndicator(),
+                                              )
+                                            : const CircleAvatar(
+                                                radius: 22,
+                                                backgroundColor: ColorsAsset.kLight2,
+                                                child: Center(
+                                                  child: Icon(
+                                                    Icons.edit,
+                                                    color: ColorsAsset.kPrimary,
+                                                  ),
+                                                ),
+                                              ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ),
+                                  actions: <Widget>[
+                                    state is Loading
+                                        ? CircularProgressIndicator()
+                                        : TextButton(
+                                            child: Text('${getLang(context, "Add")}'),
+                                            onPressed: () async {
+                                              CourseDetailsCubit.get(context)
+                                                  .uploadBanner(courseModel.reference!, context);
+                                            },
+                                          ),
+                                  ],
+                                );
+                              },
                             ),
-                          ],
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            child:  Text(
-                                '${getLang(context,  "Add")}'
-                            ),
-                            onPressed: () async {
-                              cubit.uploadBanner( courseModel.reference!, context);
-                            },
-                          ),
-                        ],
+                          );
+                        },
                       );
                     },
-                  );
-                }, child:const Text("Add Advertisement")),
+                    child: const Text("Add Advertisement")),
                 const SizedBox(
                   height: 20,
                 ),
                 DataTable(
                   dataTextStyle: const TextStyle(color: ColorsAsset.kPrimary),
-                  columns:  [
-                    DataColumn(label: Expanded(child: Text(
-                        '${getLang(context,  "Course Name")}'
-                        ))),
-                    DataColumn(label: Expanded(child: Text(
-                        '${getLang(context,  "Course ID")}'
-                        ))),
-                    DataColumn(label: Expanded(child: Text(
-                        '${getLang(context,  "Course Reference")}'
-                        ))),
-                    DataColumn(label: Expanded(child: Text(
-                        '${getLang(context,  "Teacher Name")}'
-                        ))),
-                    DataColumn(label: Expanded(child: Text(
-                        '${getLang(context,  "Teacher ID")}'
-                        ))),
-                    DataColumn(label: Expanded(child: Text(
-                        '${getLang(context,  "Teacher Reference")}'
-                        ))),
+                  columns: [
+                    DataColumn(label: Expanded(child: Text('${getLang(context, "Course Name")}'))),
+                    DataColumn(label: Expanded(child: Text('${getLang(context, "Course ID")}'))),
+                    DataColumn(label: Expanded(child: Text('${getLang(context, "Course Reference")}'))),
+                    DataColumn(label: Expanded(child: Text('${getLang(context, "Teacher Name")}'))),
+                    DataColumn(label: Expanded(child: Text('${getLang(context, "Teacher ID")}'))),
+                    DataColumn(label: Expanded(child: Text('${getLang(context, "Teacher Reference")}'))),
                   ],
                   rows: [
                     DataRow(cells: [
@@ -174,21 +166,19 @@ class CourseDetails extends StatelessWidget {
                       value: courseModel.years?.contains('first Secondary'),
                       onChanged: null,
                     ),
-                     Text(
-                         '${getLang(context,  "First year of secondary school")}'
-                        ),
+                    Text('${getLang(context, "First year of secondary school")}'),
                     const SizedBox(width: 16.0),
                     Checkbox(
                       value: courseModel.years?.contains('second Secondary'),
                       onChanged: null,
                     ),
-                     Text('${getLang(context,  "Second year of secondary school")}'),
+                    Text('${getLang(context, "Second year of secondary school")}'),
                     const SizedBox(width: 16.0),
                     Checkbox(
                       value: courseModel.years?.contains('third Secondary'),
                       onChanged: null,
                     ),
-                     Text('${getLang(context,  "Third year of secondary school")}'),
+                    Text('${getLang(context, "Third year of secondary school")}'),
                   ],
                 ),
                 const SizedBox(
@@ -209,11 +199,10 @@ class CourseDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0), // Border radius
                             ),
                           ),
-                          child:  Padding(
+                          child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                             child: Text(
-                              '${getLang(context,  "Save")}'
-                              ,
+                              '${getLang(context, "Save")}',
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
