@@ -39,7 +39,7 @@ class CoursePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                cubit.teacherData?.data()?['image'] ?? '' == ""
+                                (cubit.teacherData?.data()?['image'] ?? '') == ""
                                     ? Container(
                                         height: 200,
                                         width: 230,
