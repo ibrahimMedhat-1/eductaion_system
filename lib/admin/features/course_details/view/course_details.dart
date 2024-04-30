@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:education_system/admin/features/course_details/manager/course_details_cubit.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/models/teacher_model.dart';
@@ -74,6 +75,59 @@ class CourseDetails extends StatelessWidget {
                       },
                     ),
                   ),
+                ElevatedButton(onPressed: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title:  Text(
+                            '${getLang(context,  "Add Advertisement")}'
+                        ),
+                        content:  Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                              ),
+                              child: cubit.image == null?
+                              SizedBox():
+                              Image.memory(cubit.image!),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                cubit.addAdvertisement();
+                              },
+                              child:
+                              state is ImageLoading?
+                              const Center(
+                                child: CircularProgressIndicator(),
+                              ):
+                              const CircleAvatar(
+                                radius: 22,
+                                backgroundColor: ColorsAsset.kLight2,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: ColorsAsset.kPrimary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child:  Text(
+                                '${getLang(context,  "Add")}'
+                            ),
+                            onPressed: () async {
+                              cubit.uploadBanner( courseModel.reference!, context);
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }, child:const Text("Add Advertisement")),
                 const SizedBox(
                   height: 20,
                 ),

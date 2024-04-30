@@ -12,5 +12,8 @@ class GetCourseDetails extends CourseDetailsState {}
 class GetTeachers extends CourseDetailsState {}
 
 class AssignTeacherLoading extends CourseDetailsState {}
+class ImageLoading extends CourseDetailsState {}
+class GetImageSuccess extends CourseDetailsState {}
+class Loading extends CourseDetailsState {}
 
 class AssignTeacherDone extends CourseDetailsState {}

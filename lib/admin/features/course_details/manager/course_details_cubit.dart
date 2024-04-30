@@ -1,7 +1,13 @@
+
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/course_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../models/teacher_model.dart';
 
@@ -62,18 +68,64 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
         });
   }
 
-  Future<void> assignTeacher(DocumentReference<Map<String, dynamic>> courseRef) async {
+  Future<void> assignTeacher(
+      DocumentReference<Map<String, dynamic>> courseRef) async {
     emit(AssignTeacherLoading());
     await courseRef.update({
       'teacher name': selectedTeacher!.name,
-      'teacher': FirebaseFirestore.instance.collection('teachers').doc(selectedTeacher!.id),
+      'teacher': FirebaseFirestore.instance
+          .collection('teachers')
+          .doc(selectedTeacher!.id),
     });
 
     await FirebaseFirestore.instance
         .collection('teachers')
         .doc(selectedTeacher!.id!.trim())
-        .update({'courseId': courseModel!.id, 'courseReference': courseModel!.reference});
+        .update({
+      'courseId': courseModel!.id,
+      'courseReference': courseModel!.reference
+    });
 
     emit(AssignTeacherDone());
+  }
+
+  Uint8List? image;
+
+  void addAdvertisement() async {
+    emit(ImageLoading());
+    await ImagePicker()
+        .pickImage(source: ImageSource.gallery)
+        .then((value) async {
+      image = await value!.readAsBytes();
+      emit(GetImageSuccess());
+    }).catchError((onError) {
+      print('1');
+      print(onError);
+    });
+  }
+
+  void uploadBanner(DocumentReference courseRef,context) async {
+    emit(Loading());
+    await FirebaseStorage.instance
+        .ref()
+        .child("Banners/${courseRef.id}/${DateTime.now()}")
+        .putData(
+          image!,
+          SettableMetadata(contentType: 'image/png'),
+        )
+        .then((p0) async {
+      await p0.ref.getDownloadURL().then((value) async {
+        await FirebaseFirestore.instance
+            .collection("Banners")
+            .add({'image': value, 'courseRef': courseRef}).then((value){
+          Navigator.pop(context);
+
+        });
+      });
+    }).catchError((onError) {
+      print('2');
+      print(onError);
+
+    });
   }
 }
