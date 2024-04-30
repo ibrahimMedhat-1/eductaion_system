@@ -12,6 +12,5 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
     emit(GetTeacherDataLoading());
     teacherData = teacherReference != null ? await teacherReference.get() : null;
     emit(GetTeacherDataSuccessfully());
-    print(teacherData!.data());
   }
 }

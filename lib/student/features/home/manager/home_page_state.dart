@@ -16,3 +16,7 @@ final class IsSearching extends HomePageState {}
 final class IsNotSearching extends HomePageState {}
 
 final class SearchCourse extends HomePageState {}
+
+final class GetBannersLoading extends HomePageState {}
+
+final class GetBannersSuccessfully extends HomePageState {}

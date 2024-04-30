@@ -39,29 +39,32 @@ class CoursePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                cubit.teacherData?.data()?['image'] ==""?
-                                Container(
-                                  height: 200,
-                                  width: 230,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image:
-                                          // cubit.teacherData?.data()?['image'] ==""?
-                                          AssetImage("assets/images/no-image-icon-6.png")
+                                cubit.teacherData?.data()?['image'] ?? '' == ""
+                                    ? Container(
+                                        height: 200,
+                                        width: 230,
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image:
+                                                  // cubit.teacherData?.data()?['image'] ==""?
+                                                  AssetImage("assets/images/no-image-icon-6.png")
 
-                                          // NetworkImage(cubit.teacherData?.data()?['image']))),
-                                ),),):
-                                Container(
-                                  height: 200,
-                                  width: 230,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image:
-                                          NetworkImage(cubit.teacherData?.data()?['image']),
-                                ),),),
-                                  const SizedBox(
+                                              // NetworkImage(cubit.teacherData?.data()?['image']))),
+                                              ),
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 200,
+                                        width: 230,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(cubit.teacherData?.data()?['image'] ?? ''),
+                                          ),
+                                        ),
+                                      ),
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Expanded(
@@ -184,7 +187,7 @@ class CoursePage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                  ],
+                              ],
                             ),
                           ),
                         ),
@@ -206,7 +209,6 @@ class CoursePage extends StatelessWidget {
                                         color: ColorsAsset.kPrimary,
                                       )),
                                       backgroundColor: ColorsAsset.kLight,
-
                                       title: Text(
                                         e['title'],
                                         style: const TextStyle(

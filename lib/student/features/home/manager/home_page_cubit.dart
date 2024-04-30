@@ -18,6 +18,19 @@ class HomePageCubit extends Cubit<HomePageState> {
   List<OfferModel> offers = [];
   List<CourseModel> searchList = [];
   String year = 'first secondary';
+  List<OfferModel> homeData = [];
+
+  void getBanners() async {
+    emit(GetBannersLoading());
+    await FirebaseFirestore.instance.collection('Banners').get().then((value) async {
+      for (var element in value.docs) {
+        await element.data()['courseRef'].get().then((value) {
+          homeData.add(OfferModel.fromJson(element.data(), CourseModel.fromJson(value.data())));
+        });
+      }
+      emit(GetBannersSuccessfully());
+    });
+  }
 
   void getCourses(value) async {
     emit(GetCoursesLoading());
@@ -62,6 +75,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   }
 
   void getOffers() {}
+
   void isSearching() {
     emit(IsSearching());
   }

@@ -19,12 +19,6 @@ class StudentLayout extends StatefulWidget {
 }
 
 class StudentLayoutState extends State<StudentLayout> {
-  final List<String> homeData = [
-    "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
-    "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
-    "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
-    "assets/images/Blue and Yellow University Etiquette Professional Presentation (6).png",
-  ];
   String dropdownValue = 'الصف الاول';
   final List<String> dropdownItems = ['الصف الاول', 'الصف الثاني', 'الصف الثالث'];
 
@@ -34,7 +28,9 @@ class StudentLayoutState extends State<StudentLayout> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomePageCubit()..getCourses('first secondary'),
+      create: (context) => HomePageCubit()
+        ..getCourses('first secondary')
+        ..getBanners(),
       child: BlocConsumer<HomePageCubit, HomePageState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -55,31 +51,46 @@ class StudentLayoutState extends State<StudentLayout> {
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          CarouselSlider(
-                            carouselController: _carouselController,
-                            items: homeData.map((imagePath) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return SizedBox(
-                                    width: MediaQuery.of(context).size.width * 0.9,
-                                    child: Image.asset(
-                                      imagePath,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
-                              );
-                            }).toList(),
-                            options: CarouselOptions(
-                                viewportFraction: 1,
-                                height: MediaQuery.of(context).size.height * .78,
-                                autoPlay: true,
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    _current = index;
-                                  });
-                                }),
-                          ),
+                          if (state is GetBannersLoading || cubit.homeData.isEmpty)
+                            const Center(child: CircularProgressIndicator())
+                          else
+                            CarouselSlider(
+                              carouselController: _carouselController,
+                              items: cubit.homeData.map((offer) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CoursePage(courseModel: offer.courseModel!),
+                                            ));
+                                      },
+                                      child: SizedBox(
+                                        width: MediaQuery.of(context).size.width * 0.9,
+                                        child: Image.network(
+                                          offer.image ?? '',
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) =>
+                                              const Center(child: Icon(Icons.error)),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }).toList(),
+                              options: CarouselOptions(
+                                  viewportFraction: 1,
+                                  height: MediaQuery.of(context).size.height * .78,
+                                  autoPlay: true,
+                                  onPageChanged: (index, reason) {
+                                    setState(() {
+                                      _current = index;
+                                    });
+                                  }),
+                            ),
                         ],
                       ),
                     ),
@@ -88,7 +99,7 @@ class StudentLayoutState extends State<StudentLayout> {
                     height: 10,
                   ),
                   CarouselIndicator(
-                    count: homeData.length,
+                    count: state is GetBannersLoading || cubit.homeData.isEmpty ? 1 : cubit.homeData.length,
                     index: _current,
                     color: Colors.grey,
                     activeColor: ColorsAsset.kPrimary,
@@ -154,8 +165,7 @@ class StudentLayoutState extends State<StudentLayout> {
                       const Spacer(),
                       MyTextField(
                         flex: 2,
-                        hintText: '${getLang(context, "Search")}'
-                       ,
+                        hintText: '${getLang(context, "Search")}',
                         prefixIcon: const Icon(Icons.search),
                         onChanged: (value) {
                           if (value.isNotEmpty) {
@@ -173,7 +183,6 @@ class StudentLayoutState extends State<StudentLayout> {
                     height: 20,
                   ),
                   Row(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
@@ -205,7 +214,7 @@ class StudentLayoutState extends State<StudentLayout> {
                   state is GetCoursesLoading
                       ? const Center(child: CircularProgressIndicator())
                       : cubit.courses.isEmpty
-                          ?  Center(
+                          ? Center(
                               child: Text('${getLang(context, "No Courses")}'),
                             )
                           : SizedBox(
@@ -224,68 +233,74 @@ class StudentLayoutState extends State<StudentLayout> {
                                         ));
                                       },
                                       child: SizedBox(
-                                        width: MediaQuery.of(context).size.width * 0.2,
-                                        child:Card(
-                                          color: Colors.transparent,
-                                          elevation: 1,
-                                          child: Container(
-                                            width: MediaQuery.of(context).size.width * 0.3,
-                                            padding: const EdgeInsets.all(12),
-                                            decoration: BoxDecoration(
-                                                color: ColorsAsset.kLight, borderRadius: BorderRadius.circular(12)),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  height: MediaQuery.of(context).size.height * 0.2,
-                                                  width: MediaQuery.of(context).size.width * 0.15,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: NetworkImage( state is IsSearching
-                                                              ? cubit.searchList[index].image!
-                                                              : cubit.courses[index].image!,))),
-                                                ),
-                                                const SizedBox(
-                                                  width: 15,
-                                                ),
-                                                Expanded(
-                                                  child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: [
-                                                      Text(
-                                                        state is IsSearching
-                                                            ? "${getLang(context, "Teacher Name")} : ${cubit.searchList[index].teacherName ?? ''}"
-                                                            : "${getLang(context, "Teacher Name")} : ${cubit.courses[index].teacherName ?? ''}",
-                                                        style: const TextStyle(
-                                                            fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 15,
-                                                      ),
-                                                      Text(
-                                                        state is IsSearching
-                                                            ? "${getLang(context, "Course Name")} : ${cubit.searchList[index].courseName ?? ''}"
-                                                            : "${getLang(context, "Course Name")} : ${cubit.courses[index].courseName ?? ''}",
-                                                        style: const TextStyle(
-                                                            fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
-                                                      ),
-                                                    ],
+                                          width: MediaQuery.of(context).size.width * 0.2,
+                                          child: Card(
+                                            color: Colors.transparent,
+                                            elevation: 1,
+                                            child: Container(
+                                              width: MediaQuery.of(context).size.width * 0.3,
+                                              padding: const EdgeInsets.all(12),
+                                              decoration: BoxDecoration(
+                                                  color: ColorsAsset.kLight,
+                                                  borderRadius: BorderRadius.circular(12)),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    height: MediaQuery.of(context).size.height * 0.2,
+                                                    width: MediaQuery.of(context).size.width * 0.15,
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            fit: BoxFit.cover,
+                                                            image: NetworkImage(
+                                                              state is IsSearching
+                                                                  ? cubit.searchList[index].image!
+                                                                  : cubit.courses[index].image!,
+                                                            ))),
                                                   ),
-                                                ),
-                                              ],
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        Text(
+                                                          state is IsSearching
+                                                              ? "${getLang(context, "Teacher Name")} : ${cubit.searchList[index].teacherName ?? ''}"
+                                                              : "${getLang(context, "Teacher Name")} : ${cubit.courses[index].teacherName ?? ''}",
+                                                          style: const TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              color: ColorsAsset.kTextcolor),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 15,
+                                                        ),
+                                                        Text(
+                                                          state is IsSearching
+                                                              ? "${getLang(context, "Course Name")} : ${cubit.searchList[index].courseName ?? ''}"
+                                                              : "${getLang(context, "Course Name")} : ${cubit.courses[index].courseName ?? ''}",
+                                                          style: const TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              color: ColorsAsset.kTextcolor),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ),
+                                          )),
                                     ),
                                   );
                                 },
                               ),
                             ),
-                  const SizedBox(height: 100,),
+                  const SizedBox(
+                    height: 100,
+                  ),
                 ],
               ),
             ),
