@@ -83,7 +83,7 @@ class StudentLayoutState extends State<StudentLayout> {
                               }).toList(),
                               options: CarouselOptions(
                                   viewportFraction: 1,
-                                  height: MediaQuery.of(context).size.height * .78,
+                                  height: MediaQuery.of(context).size.height * .9,
                                   autoPlay: true,
                                   onPageChanged: (index, reason) {
                                     setState(() {

@@ -72,7 +72,19 @@ class CourseDetails extends StatelessWidget {
                       },
                     ),
                   ),
+                const SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    shape:  MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)
+                      )
+                    ) ,
+                        backgroundColor: MaterialStateProperty.all<Color>(ColorsAsset.kPrimary),
+
+                  ),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -83,7 +95,7 @@ class CourseDetails extends StatelessWidget {
                               listener: (context, state) {},
                               builder: (context, state) {
                                 return AlertDialog(
-                                  title: Text('${getLang(context, "Add Advertisement")}'),
+                                  title: Text('${getLang(context, "Add Advertisement")}',),
                                   content: Stack(
                                     children: [
                                       Container(
@@ -131,7 +143,7 @@ class CourseDetails extends StatelessWidget {
                         },
                       );
                     },
-                    child: const Text("Add Advertisement")),
+                    child:  Text(getLang(context, "Add Advertisement"),style: TextStyle(color: Colors.white))),
                 const SizedBox(
                   height: 20,
                 ),

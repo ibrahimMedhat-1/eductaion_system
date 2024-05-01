@@ -1,3 +1,4 @@
+import 'package:education_system/components/locale/applocale.dart';
 import 'package:education_system/teacher/features/add_pdf_page/view/add_pdf_page.dart';
 import 'package:flutter/material.dart';
 
@@ -37,8 +38,9 @@ class MaterialDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/10.png'),
-                      const Text(
-                        'Add Questions',
+                       Text(
+                         getLang(context, "Add Questions")
+                       ,
                         style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -65,8 +67,9 @@ class MaterialDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/9.png'),
-                      const Text(
-                        'Add Lesson',
+                       Text(
+                        getLang(context, "Add Lesson")
+                        ,
                         style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -93,8 +96,9 @@ class MaterialDialog extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/images/pdf_image.jpeg'),
-                      const Text(
-                        'Add PDF',
+                       Text(
+                         getLang(context, "Add PDF")
+                        ,
                         style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -107,7 +111,8 @@ class MaterialDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Close'),
+          child:  Text(
+              getLang(context, "Close")),
           onPressed: () {
             Navigator.of(context).pop();
           },
