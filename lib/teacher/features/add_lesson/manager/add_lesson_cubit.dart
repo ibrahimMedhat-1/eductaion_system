@@ -33,6 +33,7 @@ class AddLessonCubit extends Cubit<AddLessonState> {
   void selectVideo() async {
     print('video');
     await ImagePicker().pickVideo(source: ImageSource.gallery).then((value) async {
+      emit(UploadVideoLoading());
       videoFile = await value!.readAsBytes();
       final sourceElement = html.SourceElement();
       sourceElement.type = mimeType;

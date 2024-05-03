@@ -47,6 +47,7 @@ class ViewCoursePage extends StatelessWidget {
                                         pdfUrl: cubit.material[cubit.index]['pdf'],
                                       )
                                     : QuizPage(
+                                        quizName: cubit.material[cubit.index]['name'],
                                         quiz: cubit.material[cubit.index]['id'],
                                         courseModel: courseModel,
                                         type: cubit.material[cubit.index]['type'],

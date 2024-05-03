@@ -31,9 +31,8 @@ class _AddLessonPageState extends State<AddLessonPage> {
           final AddLessonCubit cubit = AddLessonCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title:  Text(
-                '${getLang(context, "Add Lesson")}'
-               ,
+              title: Text(
+                '${getLang(context, "Add Lesson")}',
                 style: const TextStyle(color: ColorsAsset.kPrimary),
               ),
               backgroundColor: ColorsAsset.kLight2,
@@ -57,9 +56,11 @@ class _AddLessonPageState extends State<AddLessonPage> {
                             color: ColorsAsset.kLight,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: cubit.videoFile != null
-                                  ? HtmlElementView(viewType: cubit.id)
-                                  : Center(child: Image.asset("assets/images/icons8-add-100.png")),
+                              child: state is UploadVideoLoading
+                                  ? const Center(child: CircularProgressIndicator())
+                                  : cubit.videoFile != null
+                                      ? HtmlElementView(viewType: cubit.id)
+                                      : Center(child: Image.asset("assets/images/icons8-add-100.png")),
                             ),
                           ),
                         ),
@@ -73,15 +74,12 @@ class _AddLessonPageState extends State<AddLessonPage> {
                             cubit.videoFile = null;
                             cubit.emit(SelectLessonVideo());
                           },
-                          child:  Text(
-                              '${getLang(context, "Remove Video")}'
-                              ),
+                          child: Text('${getLang(context, "Remove Video")}'),
                         ),
                       Row(
                         children: [
                           MyTextField(
-                            hintText: '${getLang(context, "Lesson Name")}'
-                           ,
+                            hintText: '${getLang(context, "Lesson Name")}',
                             controller: cubit.lessonNameController,
                           )
                         ],
@@ -111,12 +109,10 @@ class _AddLessonPageState extends State<AddLessonPage> {
                     );
                   }
                 },
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
-                    child: Text(
-
-                        '${getLang(context, "Add Lesson")}'),
+                    child: Text('${getLang(context, "Add Lesson")}'),
                   ),
                 ),
               ),

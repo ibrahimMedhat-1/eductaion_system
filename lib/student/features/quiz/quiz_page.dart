@@ -11,6 +11,7 @@ class QuizPage extends StatefulWidget {
   final String type;
   final CourseModel courseModel;
   final String quiz;
+  final String quizName;
 
   const QuizPage({
     super.key,
@@ -18,6 +19,7 @@ class QuizPage extends StatefulWidget {
     required this.questions,
     required this.type,
     required this.quiz,
+    required this.quizName,
   });
 
   @override
@@ -41,7 +43,7 @@ class QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('English First Exam', style: TextStyle(color: ColorsAsset.kTextcolor)),
+        title: Text(widget.quizName, style: TextStyle(color: ColorsAsset.kTextcolor)),
       ),
       body: loading
           ? const Center(child: CircularProgressIndicator())

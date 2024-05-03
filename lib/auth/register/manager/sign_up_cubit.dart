@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/student_model.dart';
+import 'package:email_sender/email_sender.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,13 +69,9 @@ class SignUpCubit extends Cubit<SignUpState> {
             'id': parentEmailController.text.trim().toLowerCase(),
             'studentReference': id,
           });
-          await FirebaseAuth.instance
-              .sendSignInLinkToEmail(
-                email: parentEmailController.text.trim(),
-                actionCodeSettings: acs,
-              )
-              .catchError((onError) => print('Error sending email verification $onError'))
-              .then((value) => print('Successfully sent email verification'));
+          EmailSender emailsender = EmailSender();
+          var response = await emailsender.sendMessage(parentEmailController.text.trim(), "Education System",
+              'Education System Password', 'Your Password is 123456');
         });
         emit(SignUpSuccessfully());
         Navigator.pop(context);

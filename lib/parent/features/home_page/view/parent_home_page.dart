@@ -117,6 +117,23 @@ class ParentHomePage extends StatelessWidget {
                                   const SizedBox(height: 30),
                                   PersonalData(studentModel: cubit.studentModel!),
                                   FamilyDataSection(parentData: cubit.studentModel!.parentData!),
+                                  SizedBox(height: 10),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      cubit.changePassword(cubit.studentModel!.parentData!.email, context);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: Colors.white,
+                                      backgroundColor: ColorsAsset.kPrimary,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                                      child: Text('${getLang(context, "Change Password")}'),
+                                    ),
+                                  ),
                                 ],
                               ),
                             )),
@@ -188,9 +205,12 @@ class ParentHomePage extends StatelessWidget {
                                                             children: [
                                                               ElevatedButton(
                                                                 onPressed: () {
-                                                                  Navigator.of(context).push(MaterialPageRoute(
-                                                                    builder: (context) => ParentCourseQuizPage(
-                                                                        courseModel: cubit.courses[index]),
+                                                                  Navigator.of(context)
+                                                                      .push(MaterialPageRoute(
+                                                                    builder: (context) =>
+                                                                        ParentCourseQuizPage(
+                                                                            courseModel:
+                                                                                cubit.courses[index]),
                                                                   ));
                                                                 },
                                                                 style: ElevatedButton.styleFrom(
@@ -209,7 +229,8 @@ class ParentHomePage extends StatelessWidget {
                                                               ),
                                                               ElevatedButton(
                                                                 onPressed: () {
-                                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                                  Navigator.of(context)
+                                                                      .push(MaterialPageRoute(
                                                                     builder: (context) => ChatPageParent(
                                                                         courseModel: cubit.courses[index]),
                                                                   ));
@@ -224,8 +245,7 @@ class ParentHomePage extends StatelessWidget {
                                                                 child: Padding(
                                                                   padding: const EdgeInsets.symmetric(
                                                                       horizontal: 12.0, vertical: 8),
-                                                                  child: Text(
-                                                                      '${getLang(context, "Chat")}'),
+                                                                  child: Text('${getLang(context, "Chat")}'),
                                                                 ),
                                                               ),
                                                             ],

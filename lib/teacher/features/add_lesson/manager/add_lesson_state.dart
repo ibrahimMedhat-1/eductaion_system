@@ -10,3 +10,5 @@ final class LessonAddedSuccessfully extends AddLessonState {}
 final class LessonAddedLoading extends AddLessonState {}
 
 final class SelectLessonVideo extends AddLessonState {}
+
+final class UploadVideoLoading extends AddLessonState {}

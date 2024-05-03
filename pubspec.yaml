@@ -7,6 +7,8 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  email_sender:
+  flutter_email_sender:
   file_picker: ^8.0.0+1
   image_cropper:
   universal_html:
