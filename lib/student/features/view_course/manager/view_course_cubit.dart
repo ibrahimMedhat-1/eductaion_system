@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_system/components/locale/applocale.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,8 +56,14 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
       emit(ViewCourseInitial());
       showDialog(
         context: context,
-        builder: (context) => const AlertDialog(
-          title: Text('Submitted Successfully'),
+        builder: (context) =>  AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.check,color: Colors.green,),
+              Text(getLang(context, "Done"),style: TextStyle(color: Colors.green),),
+            ],
+          ),
         ),
       );
     });

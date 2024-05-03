@@ -127,11 +127,11 @@ class ProfileCubit extends Cubit<ProfileState> {
       ImageCropper().cropImage(sourcePath: value!.path, cropStyle: CropStyle.circle, uiSettings: [
         WebUiSettings(
           viewPort: CroppieViewPort(
-              height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *0.5).toInt()
+              height: (MediaQuery.of(context).size.height *0.8).toInt(),width: (MediaQuery.of(context).size.height *0.8).toInt()
 
           ),
           boundary: CroppieBoundary(
-            height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *0.5).toInt()
+            height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *1).toInt()
           ),
           context: context,
         )

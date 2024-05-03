@@ -53,195 +53,197 @@ class RegisterPage extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.white.withOpacity(0.8)),
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  "assets/images/logo2.png",
-                                  height: 150,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                 Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      '${getLang(context,  "Student Data")}'
-                                      ,
-                                      style:
-                                          const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
-                                    )),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(children: [
-                                  Flexible(
-                                    child: MainTextField(
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ا-ي]'))
-                                      ],
-                                      textInputType: TextInputType.text,
-                                      controller: cubit.fullNameController,
-                                      hintText: '${getLang(context,  "Full Name")}'
-                                      ,
-                                      validationText: 'Please insert name',
-                                    ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/logo2.png",
+                                    height: 150,
                                   ),
                                   const SizedBox(
-                                    width: 10,
+                                    height: 10,
                                   ),
-                                  Flexible(
-                                    child: MainTextField(
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                                      ],
-                                      textInputType: TextInputType.phone,
-                                      controller: cubit.phoneController,
-                                      hintText: '${getLang(context,  "Phone No.")}'
-                                     ,
-                                      validationText: 'Please insert phone',
-                                    ),
-                                  ),
-                                ]),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(children: [
-                                  Flexible(
-                                    child: MainTextField(
-                                      textInputType: TextInputType.emailAddress,
-                                      controller: cubit.emailController,
-                                      hintText: '${getLang(context,  "Email")}',
-                                      validationText: 'Please insert email',
-                                    ),
-                                  ),
+                                   Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '${getLang(context,  "Student Data")}'
+                                        ,
+                                        style:
+                                            const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                      )),
                                   const SizedBox(
-                                    width: 10,
+                                    height: 10,
                                   ),
-                                  Flexible(
-                                    child: MainTextField(
-                                      textInputType: TextInputType.text,
-                                      controller: cubit.passwordController,
-                                      hintText: '${getLang(context,  "Password")}',
+                                  Row(children: [
+                                    Flexible(
+                                      child: MainTextField(
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ا-ي]'))
+                                        ],
+                                        textInputType: TextInputType.text,
+                                        controller: cubit.fullNameController,
+                                        hintText: '${getLang(context,  "Full Name")}'
+                                        ,
+                                        validationText: 'Please insert name',
+                                      ),
                                     ),
-                                  ),
-                                ]),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                 Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      '${getLang(context,  "Parent Data")}',
-                                      style:
-                                          const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
-                                    )),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Row(children: [
-                                  Flexible(
-                                    child: MainTextField(
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                                      ],
-                                      onChanged: (value) {
-                                        if (!isNumber(value)) {
-                                          cubit.parentPhoneController.clear();
-                                          cubit.emit(CheckIsNubmer());
-                                        }
-                                      },
-                                      textInputType: TextInputType.phone,
-                                      hintText: '${getLang(context,  "Phone No.")}',
-                                      controller: cubit.parentPhoneController,
-                                      validationText: 'Please insert phone',
+                                    const SizedBox(
+                                      width: 10,
                                     ),
-                                  ),
+                                    Flexible(
+                                      child: MainTextField(
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                                        ],
+                                        textInputType: TextInputType.phone,
+                                        controller: cubit.phoneController,
+                                        hintText: '${getLang(context,  "Phone No.")}'
+                                       ,
+                                        validationText: 'Please insert phone',
+                                      ),
+                                    ),
+                                  ]),
                                   const SizedBox(
-                                    width: 10,
+                                    height: 10,
                                   ),
-                                  Flexible(
-                                    child: MainTextField(
-                                      textInputType: TextInputType.emailAddress,
-                                      controller: cubit.parentEmailController,
-                                      hintText: '${getLang(context,  "Email")}',
-                                      validationText: 'Please insert email',
+                                  Row(children: [
+                                    Flexible(
+                                      child: MainTextField(
+                                        textInputType: TextInputType.emailAddress,
+                                        controller: cubit.emailController,
+                                        hintText: '${getLang(context,  "Email")}',
+                                        validationText: 'Please insert email',
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      child: MainTextField(
+                                        textInputType: TextInputType.text,
+                                        controller: cubit.passwordController,
+                                        hintText: '${getLang(context,  "Password")}',
+                                      ),
+                                    ),
+                                  ]),
                                   const SizedBox(
-                                    width: 10,
+                                    height: 10,
                                   ),
-                                  Flexible(
-                                    child: MainTextField(
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ا-ي]'))
-                                      ],
-                                      textInputType: TextInputType.name,
-                                      controller: cubit.parentNameController,
-                                      hintText: '${getLang(context,  "Name")}',
-                                      validationText: 'Please insert name',
-                                    ),
+                                   Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '${getLang(context,  "Parent Data")}',
+                                        style:
+                                            const TextStyle(fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                                      )),
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                ]),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                state is SignUpLoading
-                                    ? const Center(child: CircularProgressIndicator())
-                                    : ElevatedButton(
-                                        onPressed: () {
-                                          if (formKey.currentState!.validate()) {
-                                            if (cubit.emailController.text.contains('@') &&
-                                                cubit.parentEmailController.text.contains('@')) {
-                                              cubit.signUp(context);
-                                            } else {
-                                              Fluttertoast.showToast(msg: 'Please insert valid emails');
-                                            }
+                                  Row(children: [
+                                    Flexible(
+                                      child: MainTextField(
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                                        ],
+                                        onChanged: (value) {
+                                          if (!isNumber(value)) {
+                                            cubit.parentPhoneController.clear();
+                                            cubit.emit(CheckIsNubmer());
                                           }
                                         },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: ColorsAsset.kPrimary,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(8.0), // Border radius
-                                          ),
-                                        ),
-                                        child:  Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
-                                          child: Text(
-                                            '${getLang(context,  "Create Account")}'
-                                            ,
-                                            style: const TextStyle(color: Colors.white),
-                                          ),
-                                        ),
+                                        textInputType: TextInputType.phone,
+                                        hintText: '${getLang(context,  "Phone No.")}',
+                                        controller: cubit.parentPhoneController,
+                                        validationText: 'Please insert phone',
                                       ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => const LoginPage(),
-                                    ));
-                                  },
-                                  child:  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-
-                                      Text(
-                                          '${getLang(context,  "Aready Have Account? ")}'
-                                         ,
-                                          style: const TextStyle(
-                                            color: ColorsAsset.kPrimary,
-                                          )),
-                                      Text(
-                                        '${getLang(context,  "Sign In")}'
-                                        ,
-                                        style: const TextStyle(
-                                            color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      child: MainTextField(
+                                        textInputType: TextInputType.emailAddress,
+                                        controller: cubit.parentEmailController,
+                                        hintText: '${getLang(context,  "Email")}',
+                                        validationText: 'Please insert email',
                                       ),
-                                    ],
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      child: MainTextField(
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ا-ي]'))
+                                        ],
+                                        textInputType: TextInputType.name,
+                                        controller: cubit.parentNameController,
+                                        hintText: '${getLang(context,  "Name")}',
+                                        validationText: 'Please insert name',
+                                      ),
+                                    ),
+                                  ]),
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                ),
-                              ],
+                                  state is SignUpLoading
+                                      ? const Center(child: CircularProgressIndicator())
+                                      : ElevatedButton(
+                                          onPressed: () {
+                                            if (formKey.currentState!.validate()) {
+                                              if (cubit.emailController.text.contains('@') &&
+                                                  cubit.parentEmailController.text.contains('@')) {
+                                                cubit.signUp(context);
+                                              } else {
+                                                Fluttertoast.showToast(msg: 'Please insert valid emails');
+                                              }
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: ColorsAsset.kPrimary,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(8.0), // Border radius
+                                            ),
+                                          ),
+                                          child:  Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                                            child: Text(
+                                              '${getLang(context,  "Create Account")}'
+                                              ,
+                                              style: const TextStyle(color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => const LoginPage(),
+                                      ));
+                                    },
+                                    child:  Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                              
+                                        Text(
+                                            '${getLang(context,  "Aready Have Account? ")}'
+                                           ,
+                                            style: const TextStyle(
+                                              color: ColorsAsset.kPrimary,
+                                            )),
+                                        Text(
+                                          '${getLang(context,  "Sign In")}'
+                                          ,
+                                          style: const TextStyle(
+                                              color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],

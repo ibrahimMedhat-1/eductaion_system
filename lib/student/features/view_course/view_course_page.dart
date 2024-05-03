@@ -87,7 +87,7 @@ class ViewCoursePage extends StatelessWidget {
                                               }
                                             : null,
                                         tileColor: cubit.index == index
-                                            ? Colors.blueAccent
+                                            ? ColorsAsset.kLightPurble
                                             : index == 0 || cubit.watched[index] || index == 0
                                                 ? ColorsAsset.kLightPurble
                                                 : Colors.grey,
