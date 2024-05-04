@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../shared/constants.dart';
-
 part 'add_pdf_state.dart';
 
 class AddPdfCubit extends Cubit<AddPdfState> {
@@ -56,7 +54,7 @@ class AddPdfCubit extends Cubit<AddPdfState> {
     print(quiz);
     await FirebaseStorage.instance
         .ref()
-        .child('pdf/${Constants.teacherModel!.courseId.toString().trim()}')
+        .child('pdf/${DateTime.now()}.pdf')
         .putData(
           file!,
         )

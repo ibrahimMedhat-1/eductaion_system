@@ -23,7 +23,10 @@ class ViewPdfPage extends StatelessWidget {
                 ? null
                 : () {
                     print(pdfUrl);
-                    window.open(pdfUrl!, 'PDF Viewer');
+                    window.open(
+                      pdfUrl!,
+                      'PDF Viewer',
+                    );
                     ViewCourseCubit.get(context).courseWatched(courseModel!, context);
                   },
             child: Container(
