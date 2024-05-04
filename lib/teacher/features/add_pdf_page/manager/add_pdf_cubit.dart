@@ -54,7 +54,7 @@ class AddPdfCubit extends Cubit<AddPdfState> {
     print(quiz);
     await FirebaseStorage.instance
         .ref()
-        .child('pdf/${DateTime.now()}.pdf')
+        .child('pdf/${DateTime.now()}')
         .putData(
           file!,
         )
