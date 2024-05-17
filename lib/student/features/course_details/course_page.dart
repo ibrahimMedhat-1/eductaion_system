@@ -7,6 +7,7 @@ import '../../../components/locale/applocale.dart';
 import '../../../shared/utils/colors.dart';
 import '../../widgets/cutom_appbar.dart';
 import '../payment/payment_page.dart';
+import '../view_course/view_course_page.dart';
 
 class CoursePage extends StatelessWidget {
   final CourseModel courseModel;
@@ -16,7 +17,9 @@ class CoursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CourseDetailsCubit()..getProfessorDetails(courseModel.teacher),
+      create: (context) => CourseDetailsCubit()
+        ..getProfessorDetails(courseModel.teacher)
+        ..checkIfMyCourse(courseModel),
       child: BlocConsumer<CourseDetailsCubit, CourseDetailsState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -254,24 +257,43 @@ class CoursePage extends StatelessWidget {
                         const SizedBox(
                           height: 25,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PaymentPage(courseModel: courseModel),
-                            ));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: ColorsAsset.kPrimary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
-                            child: Text('${getLang(context, "subscribe now")}'),
-                          ),
-                        ),
+                        cubit.isMyCourse
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ViewCoursePage(courseModel: courseModel),
+                                  ));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: ColorsAsset.kPrimary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                                  child: Text('${getLang(context, "Start the Course")}'),
+                                ),
+                              )
+                            : ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => PaymentPage(courseModel: courseModel),
+                                  ));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: ColorsAsset.kPrimary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+                                  child: Text('${getLang(context, "subscribe now")}'),
+                                ),
+                              ),
                       ],
                     ),
                   ),
