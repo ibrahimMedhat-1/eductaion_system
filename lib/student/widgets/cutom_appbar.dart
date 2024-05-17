@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:education_system/shared/constants.dart';
+import 'package:education_system/shared/function/function.dart';
 import 'package:education_system/student/features/profile/manager/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,44 +49,48 @@ PreferredSizeWidget customAppBar(BuildContext context) {
           ),
         ),
         const SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
-          },
-          child: BlocConsumer<ProfileCubit, ProfileState>(
+        if (Constants.studentModel != null)
+          GestureDetector(
+            onTap: () {
+              AppFunctions.checkLoggedIn(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                );
+              }, context);
+            },
+            child: BlocConsumer<ProfileCubit, ProfileState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, state) {
+                return CachedNetworkImage(
+                  imageUrl: ProfileCubit.get(context).profileImage,
+                  imageBuilder: (context, imageProvider) => CircleAvatar(
+                    backgroundColor: const Color(0xFF6E85B7),
+                    backgroundImage: imageProvider,
+                  ),
+                  errorWidget: (context, url, error) => const CircleAvatar(
+                    backgroundColor: Color(0xFF6E85B7),
+                    backgroundImage: AssetImage("assets/images/profile purple.png"),
+                  ),
+                );
+              },
+            ),
+          ),
+        const SizedBox(width: 10),
+        if (Constants.studentModel != null)
+          BlocConsumer<ProfileCubit, ProfileState>(
             listener: (context, state) {
               // TODO: implement listener
             },
             builder: (context, state) {
-              return CachedNetworkImage(
-                imageUrl: ProfileCubit.get(context).profileImage,
-                imageBuilder: (context, imageProvider) => CircleAvatar(
-                  backgroundColor: const Color(0xFF6E85B7),
-                  backgroundImage: imageProvider,
-                ),
-                errorWidget: (context, url, error) => const CircleAvatar(
-                  backgroundColor: Color(0xFF6E85B7),
-                  backgroundImage: AssetImage("assets/images/profile purple.png"),
-                ),
+              return Text(
+                ProfileCubit.get(context).name,
+                style: const TextStyle(fontSize: 12),
               );
             },
           ),
-        ),
-        const SizedBox(width: 10),
-        BlocConsumer<ProfileCubit, ProfileState>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
-          builder: (context, state) {
-            return Text(
-              ProfileCubit.get(context).name,
-              style: const TextStyle(fontSize: 12),
-            );
-          },
-        ),
         const SizedBox(width: 50),
         TextButton(
           onPressed: () {
@@ -104,9 +110,13 @@ PreferredSizeWidget customAppBar(BuildContext context) {
         const SizedBox(width: 5),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const MySubjectsPage()),
-            );
+            AppFunctions.checkLoggedIn(() {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const MySubjectsPage(),
+                ),
+              );
+            }, context);
           },
           child: Text(
             '${getLang(context, "My Subjects")}',
@@ -120,9 +130,11 @@ PreferredSizeWidget customAppBar(BuildContext context) {
         const SizedBox(width: 5),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const MyGradesPage()),
-            );
+            AppFunctions.checkLoggedIn(() {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const MyGradesPage()),
+              );
+            }, context);
           },
           child: Text(
             '${getLang(context, "My Grades")}',
@@ -136,9 +148,11 @@ PreferredSizeWidget customAppBar(BuildContext context) {
         const SizedBox(width: 5),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const MyAssigmentsPage()),
-            );
+            AppFunctions.checkLoggedIn(() {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const MyAssigmentsPage()),
+              );
+            }, context);
           },
           child: Text(
             '${getLang(context, "Assignments")}',
@@ -152,9 +166,11 @@ PreferredSizeWidget customAppBar(BuildContext context) {
         const SizedBox(width: 5),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const ChooseChatPage()),
-            );
+            AppFunctions.checkLoggedIn(() {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const ChooseChatPage()),
+              );
+            }, context);
           },
           child: Text(
             '${getLang(context, "Chats")}',
@@ -165,6 +181,21 @@ PreferredSizeWidget customAppBar(BuildContext context) {
             ),
           ),
         ),
+        const SizedBox(width: 5),
+        if (Constants.studentModel == null)
+          TextButton(
+            onPressed: () {
+              AppFunctions.checkLoggedIn(() {}, context);
+            },
+            child: Text(
+              '${getLang(context, "Sign In")}',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: ColorsAsset.kPrimary,
+              ),
+            ),
+          ),
       ],
     ),
     actions: [

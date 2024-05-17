@@ -1,8 +1,8 @@
-import 'package:education_system/auth/login/login%20page.dart';
 import 'package:education_system/parent/features/chat/manager/parent_chat_cubit.dart';
 import 'package:education_system/shared/main_cubit/main_cubit.dart';
 import 'package:education_system/shared/utils/colors.dart';
 import 'package:education_system/student/features/chats/manager/student_chat_cubit.dart';
+import 'package:education_system/student/features/home/student_home_page.dart';
 import 'package:education_system/student/features/profile/manager/profile_cubit.dart';
 import 'package:education_system/teacher/features/chats/manager/teacher_chat_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
             // TeacherLayout
             // Studentlayout
             // LoginPage
-            home: const LoginPage(),
+            home: const StudentLayout(),
           );
         },
       ),

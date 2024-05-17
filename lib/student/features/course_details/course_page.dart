@@ -1,6 +1,6 @@
-import 'package:education_system/auth/login/login%20page.dart';
 import 'package:education_system/models/course_model.dart';
 import 'package:education_system/shared/constants.dart';
+import 'package:education_system/shared/function/function.dart';
 import 'package:education_system/student/features/course_details/manager/course_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -261,7 +261,7 @@ class CoursePage extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            if (Constants.studentModel != null) {
+                            AppFunctions.checkLoggedIn(() {
                               if (cubit.isMyCourse) {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => ViewCoursePage(courseModel: courseModel),
@@ -271,11 +271,7 @@ class CoursePage extends StatelessWidget {
                                   builder: (context) => PaymentPage(courseModel: courseModel),
                                 ));
                               }
-                            } else {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const LoginPage(),
-                              ));
-                            }
+                            }, context);
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
@@ -287,7 +283,7 @@ class CoursePage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
                             child: Text(
-                                '${Constants.studentModel == null ? getLang(context, "Login") : cubit.isMyCourse ? getLang(context, "Start the Course") : getLang(context, "subscribe now")}'),
+                                '${Constants.studentModel == null ? getLang(context, "Sign In") : cubit.isMyCourse ? getLang(context, "Start the Course") : getLang(context, "subscribe now")}'),
                           ),
                         ),
                       ],
