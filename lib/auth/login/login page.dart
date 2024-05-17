@@ -60,7 +60,6 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ),
                 backgroundColor: Colors.transparent,
                 body: Center(
@@ -83,8 +82,7 @@ class LoginPage extends StatelessWidget {
                           MainTextField(
                             textInputType: TextInputType.emailAddress,
                             controller: cubit.emailController,
-                            hintText: '${getLang(context,  "Email")}'
-                           ,
+                            hintText: '${getLang(context, "Email")}',
                           ),
                           const SizedBox(
                             height: 10,
@@ -92,11 +90,10 @@ class LoginPage extends StatelessWidget {
                           MainTextField(
                             obscure: cubit.obscure,
                             suffixPressed: cubit.suffixPressed,
-                      
-                            suffixIcon: cubit.suffixIcon ,
+                            suffixIcon: cubit.suffixIcon,
                             textInputType: TextInputType.text,
                             controller: cubit.passwordController,
-                            hintText: '${getLang(context,  "Password")}',
+                            hintText: '${getLang(context, "Password")}',
                           ),
                           const SizedBox(
                             height: 8,
@@ -111,18 +108,17 @@ class LoginPage extends StatelessWidget {
                                       onChanged: (value) {
                                         cubit.changeToProfessor();
                                       }),
-                                  const Text(
-                                      'Professor'),
+                                  const Text('Professor'),
                                 ],
                               ),
                               Row(
                                 children: [
                                   Checkbox(
-                                      value: cubit.isAdmin,
+                                      value: cubit.isStudent,
                                       onChanged: (value) {
-                                        cubit.changeToadmin();
+                                        cubit.changeToStudent();
                                       }),
-                                  const Text('Admin'),
+                                  const Text('Student'),
                                 ],
                               ),
                               Row(
@@ -152,11 +148,10 @@ class LoginPage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(8.0), // Border radius
                                     ),
                                   ),
-                                  child:  Padding(
+                                  child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
                                     child: Text(
-                      
-                                      '${getLang(context,  "Sign In")}',
+                                      '${getLang(context, "Sign In")}',
                                       style: const TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -170,20 +165,17 @@ class LoginPage extends StatelessWidget {
                                 builder: (context) => const RegisterPage(),
                               ));
                             },
-                            child:  Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                      
-                                Text(
-                                    '${getLang(context,  "Don't Have Account? ")}'
-                                   ,
+                                Text('${getLang(context, "Don't Have Account? ")}',
                                     style: const TextStyle(
                                       color: ColorsAsset.kPrimary,
                                     )),
                                 Text(
-                                  '${getLang(context,  "Create Account")}'
-                                  ,
-                                  style: const TextStyle(color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
+                                  '${getLang(context, "Create Account")}',
+                                  style: const TextStyle(
+                                      color: ColorsAsset.kTextcolor, fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),

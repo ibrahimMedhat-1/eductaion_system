@@ -24,11 +24,12 @@ class LoginCubit extends Cubit<LoginState> {
   bool isProfessor = false;
   IconData suffixIcon = Icons.visibility_off;
   bool obscure = true;
-  bool isAdmin = false;
+  bool isStudent = false;
 
-  void changeToadmin() {
+  void changeToStudent() {
     isProfessor = false;
-    isAdmin = !isAdmin;
+    isParent = false;
+    isStudent = !isStudent;
     emit(ChangeType());
   }
 
@@ -36,10 +37,11 @@ class LoginCubit extends Cubit<LoginState> {
 
   void changeToParent() {
     isProfessor = false;
-    isAdmin = false;
+    isStudent = false;
     isParent = !isParent;
     emit(ChangeType());
   }
+
   void suffixPressed() {
     obscure = !obscure;
     if (obscure) {
@@ -52,7 +54,8 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void changeToProfessor() {
-    isAdmin = false;
+    isStudent = false;
+    isParent = false;
     isProfessor = !isProfessor;
     emit(ChangeType());
   }
@@ -86,7 +89,37 @@ class LoginCubit extends Cubit<LoginState> {
           print('k$onError');
           Fluttertoast.showToast(msg: 'Not a professor');
         });
-      } else if (isAdmin) {
+      } else if (isStudent) {
+        await FirebaseFirestore.instance
+            .collection('students')
+            .where('email', isEqualTo: emailController.text)
+            .get()
+            .then((value) {
+          Constants.studentModel = StudentModel.fromJson(value.docs.first.data());
+          print(Constants.studentModel!.parentData!.email);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const StudentLayout(),
+              ));
+        }).catchError((onError) {
+          emit(LoginError());
+          Fluttertoast.showToast(msg: 'Not a student');
+        });
+      } else if (isParent) {
+        await FirebaseFirestore.instance
+            .collection('parents')
+            .doc(emailController.text.trim().toLowerCase())
+            .get()
+            .then((value) {
+          Constants.parentModel = ParentModel.fromJson(value.data());
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ParentHomePage(),
+              ));
+        });
+      } else {
         await FirebaseFirestore.instance
             .collection('admin')
             .where('email', isEqualTo: emailController.text.trim())
@@ -106,36 +139,6 @@ class LoginCubit extends Cubit<LoginState> {
         }).catchError((onError) {
           emit(LoginError());
           Fluttertoast.showToast(msg: 'Not an Admin');
-        });
-      } else if (isParent) {
-        await FirebaseFirestore.instance
-            .collection('parents')
-            .doc(emailController.text.trim().toLowerCase())
-            .get()
-            .then((value) {
-          Constants.parentModel = ParentModel.fromJson(value.data());
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ParentHomePage(),
-              ));
-        });
-      } else {
-        await FirebaseFirestore.instance
-            .collection('students')
-            .where('email', isEqualTo: emailController.text)
-            .get()
-            .then((value) {
-          Constants.studentModel = StudentModel.fromJson(value.docs.first.data());
-          print(Constants.studentModel!.parentData!.email);
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const StudentLayout(),
-              ));
-        }).catchError((onError) {
-          emit(LoginError());
-          Fluttertoast.showToast(msg: 'Not a student');
         });
       }
       emit(LoginSuccessfully());
