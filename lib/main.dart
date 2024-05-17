@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Education System',
             theme: ThemeData(
               appBarTheme: const AppBarTheme(iconTheme: IconThemeData(color: ColorsAsset.kbackgorund)),
               expansionTileTheme: ExpansionTileThemeData(
