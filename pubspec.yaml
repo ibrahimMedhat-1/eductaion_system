@@ -7,7 +7,7 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
-  url_launcher:
+  url_launcher_web: ^2.3.1
   email_sender:
   flutter_email_sender:
   file_picker: ^8.0.0+1

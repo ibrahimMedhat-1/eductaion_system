@@ -5,7 +5,7 @@ import 'package:education_system/student/features/contact_us/presentation/view/c
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher_web/url_launcher_web.dart';
 
 class ContactUsFooter extends StatelessWidget {
   const ContactUsFooter({super.key});
@@ -24,7 +24,8 @@ class ContactUsFooter extends StatelessWidget {
           children: [
             ContactRowWidget(
               onTap: () {
-                launchUrl(Uri.parse('mailto:educationsystem718@gmail.com'));
+                UrlLauncherPlugin().launch('mailto:educationsystem718@gmail.com');
+                // launchUrl(Uri.parse());
               },
               label: 'educationsystem718@gmail.com',
               icon: Icons.email,
@@ -65,7 +66,8 @@ class ContactUsFooter extends StatelessWidget {
             /// linkedin
             ContactRowWidget(
               onTap: () {
-                launchUrl(Uri.parse('https://www.linkedin.com/in/muhamed-abdelkawy-73b549215'));
+                UrlLauncherPlugin().launch('https://www.linkedin.com/in/muhamed-abdelkawy-73b549215');
+                // launchUrl(Uri.parse('https://www.linkedin.com/in/muhamed-abdelkawy-73b549215'));
               },
               label: 'LinkedIn',
               icon: CustomIcons.linkedin_squared,
@@ -74,8 +76,11 @@ class ContactUsFooter extends StatelessWidget {
             /// facebook
             ContactRowWidget(
               onTap: () {
-                launchUrl(
-                    Uri.parse('https://www.facebook.com/profile.php?id=61559738794281&mibextid=ZbWKwL'));
+                UrlLauncherPlugin()
+                    .launch('https://www.facebook.com/profile.php?id=61559738794281&mibextid=ZbWKwL');
+
+                // launchUrl(
+                //     Uri.parse('https://www.facebook.com/profile.php?id=61559738794281&mibextid=ZbWKwL'));
               },
               label: 'FaceBook',
               icon: CustomIcons.facebook_squared,
@@ -84,7 +89,10 @@ class ContactUsFooter extends StatelessWidget {
             /// instgram
             ContactRowWidget(
               onTap: () {
-                launchUrl(Uri.parse('https://www.instagram.com/education_system5?igsh=Ymh5ZDIxc3dlNjBz'));
+                UrlLauncherPlugin()
+                    .launch('https://www.instagram.com/education_system5?igsh=Ymh5ZDIxc3dlNjBz');
+
+                // launchUrl(Uri.parse('https://www.instagram.com/education_system5?igsh=Ymh5ZDIxc3dlNjBz'));
               },
               label: 'instagram',
               icon: CustomIcons.instagram,
@@ -93,7 +101,9 @@ class ContactUsFooter extends StatelessWidget {
             /// twitter
             ContactRowWidget(
               onTap: () {
-                launchUrl(Uri.parse('https://x.com/Education_s5?t=6yBToj7dQCCePZFL74lBcA&s=09'));
+                UrlLauncherPlugin().launch('https://x.com/Education_s5?t=6yBToj7dQCCePZFL74lBcA&s=09');
+
+                // launchUrl(Uri.parse('https://x.com/Education_s5?t=6yBToj7dQCCePZFL74lBcA&s=09'));
               },
               label: 'Twitter',
               icon: CustomIcons.twitter_squared,
