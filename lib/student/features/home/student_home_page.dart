@@ -1,5 +1,6 @@
 import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:education_system/student/features/contact_us/presentation/view/widget/contact_us_footer.dart';
 import 'package:education_system/student/features/home/manager/home_page_cubit.dart';
 import 'package:education_system/student/features/home/widgets/subject_container.dart';
 import 'package:flutter/material.dart';
@@ -301,6 +302,7 @@ class StudentLayoutState extends State<StudentLayout> {
                   const SizedBox(
                     height: 100,
                   ),
+                  const ContactUsFooter(),
                 ],
               ),
             ),
