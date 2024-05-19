@@ -86,7 +86,7 @@ class ContactUsFooter extends StatelessWidget {
               icon: CustomIcons.facebook_squared,
             ),
 
-            /// instgram
+            /// instagram
             ContactRowWidget(
               onTap: () {
                 UrlLauncherPlugin()
