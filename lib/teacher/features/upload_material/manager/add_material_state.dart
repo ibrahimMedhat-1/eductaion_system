@@ -9,3 +9,4 @@ final class GetMaterialLoading extends AddMaterialState {}
 final class GetMaterialSuccessfully extends AddMaterialState {}
 
 final class GetMaterialError extends AddMaterialState {}
+final class DeleteMAterial extends AddMaterialState {}

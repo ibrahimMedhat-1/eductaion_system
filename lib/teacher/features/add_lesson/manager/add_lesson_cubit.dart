@@ -20,15 +20,10 @@ class AddLessonCubit extends Cubit<AddLessonState> {
 
   TextEditingController lessonNameController = TextEditingController();
   VideoPlayerController? videoPlayerController;
-  // unique id
+
   final String id = '1';
-
-  // mimetype like video/mp4, video/webm
   final String mimeType = 'video/mp4';
-
-  // video data
   Uint8List? bytes;
-
   var videoFile;
   void selectVideo() async {
     print('video');

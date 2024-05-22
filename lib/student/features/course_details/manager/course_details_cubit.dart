@@ -27,7 +27,6 @@ class CourseDetailsCubit extends Cubit<CourseDetailsState> {
           print(isMyCourse);
           emit(GetTeacherDataSuccessfully());
         }
-        ;
       }
     });
   }

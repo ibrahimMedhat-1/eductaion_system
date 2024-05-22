@@ -77,12 +77,12 @@ class CourseDetails extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
-                    shape:  MaterialStateProperty.all<RoundedRectangleBorder>(
+                    shape:  WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)
                       )
                     ) ,
-                        backgroundColor: MaterialStateProperty.all<Color>(ColorsAsset.kPrimary),
+                        backgroundColor: WidgetStateProperty.all<Color>(ColorsAsset.kPrimary),
 
                   ),
                     onPressed: () {
@@ -99,9 +99,9 @@ class CourseDetails extends StatelessWidget {
                                   content: Stack(
                                     children: [
                                       Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: CourseDetailsCubit.get(context).image == null
-                                            ? SizedBox()
+                                            ? const SizedBox()
                                             : Image.memory(CourseDetailsCubit.get(context).image!),
                                       ),
                                       InkWell(
@@ -127,7 +127,7 @@ class CourseDetails extends StatelessWidget {
                                   ),
                                   actions: <Widget>[
                                     state is Loading
-                                        ? CircularProgressIndicator()
+                                        ? const CircularProgressIndicator()
                                         : TextButton(
                                             child: Text('${getLang(context, "Add")}'),
                                             onPressed: () async {
@@ -143,7 +143,7 @@ class CourseDetails extends StatelessWidget {
                         },
                       );
                     },
-                    child:  Text(getLang(context, "Add Advertisement"),style: TextStyle(color: Colors.white))),
+                    child:  Text(getLang(context, "Add Advertisement"),style: const TextStyle(color: Colors.white))),
                 const SizedBox(
                   height: 20,
                 ),

@@ -15,13 +15,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
 
   static ProfileCubit get(context) => BlocProvider.of(context);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController idController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController   = TextEditingController();
+  TextEditingController idController      = TextEditingController();
+  TextEditingController phoneController    = TextEditingController();
+  TextEditingController passwordController  = TextEditingController();
   TextEditingController parentNameController = TextEditingController();
   TextEditingController parentPhoneController = TextEditingController();
-  TextEditingController parentEmailController = TextEditingController();
+  TextEditingController parentEmailController  = TextEditingController();
 
   void initializeControllers() {
     nameController.text = Constants.studentModel?.name ?? Constants.teacherModel!.name!;
@@ -127,11 +127,11 @@ class ProfileCubit extends Cubit<ProfileState> {
       ImageCropper().cropImage(sourcePath: value!.path, cropStyle: CropStyle.circle, uiSettings: [
         WebUiSettings(
           viewPort: CroppieViewPort(
-              height: (MediaQuery.of(context).size.height *0.8).toInt(),width: (MediaQuery.of(context).size.height *0.8).toInt()
+              height: (MediaQuery.of(context).size.height *0.6).toInt(),width: (MediaQuery.of(context).size.height *0.6).toInt()
 
           ),
           boundary: CroppieBoundary(
-            height: (MediaQuery.of(context).size.height *0.5).toInt(),width: (MediaQuery.of(context).size.height *1).toInt()
+            height: (MediaQuery.of(context).size.height *0.55).toInt(),width: (MediaQuery.of(context).size.height *0.6).toInt()
           ),
           context: context,
         )

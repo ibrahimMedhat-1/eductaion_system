@@ -43,7 +43,7 @@ class QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.quizName, style: TextStyle(color: ColorsAsset.kTextcolor)),
+        title: Text(widget.quizName, style: const TextStyle(color: ColorsAsset.kTextcolor)),
       ),
       body: loading
           ? const Center(child: CircularProgressIndicator())

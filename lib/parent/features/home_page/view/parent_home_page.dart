@@ -117,7 +117,7 @@ class ParentHomePage extends StatelessWidget {
                                   const SizedBox(height: 30),
                                   PersonalData(studentModel: cubit.studentModel!),
                                   FamilyDataSection(parentData: cubit.studentModel!.parentData!),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   ElevatedButton(
                                     onPressed: () {
                                       cubit.changePassword(cubit.studentModel!.parentData!.email, context);

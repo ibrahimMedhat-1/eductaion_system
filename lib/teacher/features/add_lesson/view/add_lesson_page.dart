@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -125,7 +124,7 @@ class _AddLessonPageState extends State<AddLessonPage> {
 }
 
 class LessonVideo extends StatefulWidget {
-  final File videoFile;
+  final dynamic videoFile;
   const LessonVideo({super.key, required this.videoFile});
 
   @override

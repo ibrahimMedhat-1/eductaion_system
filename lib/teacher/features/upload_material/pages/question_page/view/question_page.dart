@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../components/locale/applocale.dart';
 import '../../../../../../shared/utils/colors.dart';
+import '../manager/question_view_cubit.dart';
 
 class TeacherQuestionPage extends StatelessWidget {
   final Map<String, dynamic> question;
@@ -14,6 +16,14 @@ class TeacherQuestionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(question);
+    return BlocProvider(
+  create: (context) => QuestionViewCubit(),
+  child: BlocConsumer<QuestionViewCubit, QuestionViewState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    final QuestionViewCubit cubit = QuestionViewCubit.get(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -24,23 +34,42 @@ class TeacherQuestionPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    question['questions'][index]['question']!,
-                    style: const TextStyle(
-                        fontSize: 16.0, fontWeight: FontWeight.bold, color: ColorsAsset.kPrimary),
+                  Text("Question"),
+                  const SizedBox(height: 8.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText:  question['questions'][index]['question']!,
+                      border: OutlineInputBorder(
+
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 8.0),
                   Column(
                     children: List.generate(3, (optionIndex) {
-                      return ListTile(
-                        title: Text(
-                          question['questions'][index]['answer${optionIndex + 1}']!,
-                          style: const TextStyle(color: ColorsAsset.kTextcolor),
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                              hintText:  question['questions'][index]['answer${optionIndex + 1}']!,
+                              border: OutlineInputBorder(
+
+                              )
+                          ),
                         ),
                       );
                     }),
                   ),
-                  Text('${getLang(context,  "Model Answer : ")}${question['questions'][index]['modelAnswer']}'),
+                  const SizedBox(height: 8.0),
+                  Text("Model Answer"),
+                  const SizedBox(height: 8.0),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText:  '${getLang(context,  "Model Answer : ")}${question['questions'][index]['modelAnswer']}',
+                      border: OutlineInputBorder(
+                      ),
+                    ),
+                  ),
                   const Divider(),
                 ],
               );
@@ -49,5 +78,8 @@ class TeacherQuestionPage extends StatelessWidget {
         ),
       ),
     );
+  },
+),
+);
   }
 }

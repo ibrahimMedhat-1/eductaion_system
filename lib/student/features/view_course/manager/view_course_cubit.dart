@@ -60,8 +60,8 @@ class ViewCourseCubit extends Cubit<ViewCourseState> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.check,color: Colors.green,),
-              Text(getLang(context, "Done"),style: TextStyle(color: Colors.green),),
+              const Icon(Icons.check,color: Colors.green,),
+              Text(getLang(context, "Done"),style: const TextStyle(color: Colors.green),),
             ],
           ),
         ),

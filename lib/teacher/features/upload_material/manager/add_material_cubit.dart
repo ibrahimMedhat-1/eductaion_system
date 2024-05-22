@@ -45,4 +45,20 @@ class AddMaterialCubit extends Cubit<AddMaterialState> {
       'reference': doc,
     });
   }
+  void deleteMaterial(String year,String materialID) async{
+     FirebaseFirestore.instance
+        .collection('secondary years')
+        .doc(year)
+        .collection(Constants.teacherModel!.subject!)
+        .doc(Constants.teacherModel!.courseId!)
+        .collection('material')
+        .doc(materialID).delete().then((onValue){
+       getCourseMaterial(year);
+     });
+
+    emit(DeleteMAterial());
+
+  }
+
+
 }

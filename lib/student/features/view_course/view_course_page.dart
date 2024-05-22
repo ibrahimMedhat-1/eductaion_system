@@ -113,7 +113,7 @@ class ViewCoursePage extends StatelessWidget {
 }
 
 class VideoLecturePage extends StatefulWidget {
-  final String videoLink;
+  final dynamic videoLink;
   final DocumentReference<Map<String, dynamic>>? lesson;
   final CourseModel? courseModel;
   const VideoLecturePage({

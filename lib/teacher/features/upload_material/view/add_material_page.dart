@@ -58,6 +58,8 @@ class AddMaterialPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ViewLesson(
+                                          videoID:cubit.material[index]['id'],
+                                          year: year,
                                           videoLink: cubit.material[index]['video'],
                                           lessonTitle: cubit.material[index]['name'],
                                         ),
@@ -88,6 +90,7 @@ class AddMaterialPage extends StatelessWidget {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                               ),
+                              trailing: IconButton(onPressed: (){cubit.deleteMaterial(year,cubit.material[index]['id']);},icon: const Icon(Icons.delete,color: Colors.red,),),
                             ),
                           );
                         },

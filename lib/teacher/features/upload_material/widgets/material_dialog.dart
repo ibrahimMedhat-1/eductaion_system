@@ -41,7 +41,7 @@ class MaterialDialog extends StatelessWidget {
                        Text(
                          getLang(context, "Add Questions")
                        ,
-                        style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
+                        style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -70,7 +70,7 @@ class MaterialDialog extends StatelessWidget {
                        Text(
                         getLang(context, "Add Lesson")
                         ,
-                        style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
+                        style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -99,7 +99,7 @@ class MaterialDialog extends StatelessWidget {
                        Text(
                          getLang(context, "Add PDF")
                         ,
-                        style: TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
+                        style: const TextStyle(color: ColorsAsset.kPrimary, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
