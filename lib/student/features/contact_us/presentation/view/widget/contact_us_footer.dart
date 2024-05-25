@@ -35,7 +35,7 @@ class ContactUsFooter extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ContactUsView(),
+                      builder: (context) => ContactUsView(),
                     ));
               },
               style: ElevatedButton.styleFrom(

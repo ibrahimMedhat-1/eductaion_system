@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:education_system/models/student_model.dart';
-import 'package:email_sender/email_sender.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 part 'sign_up_state.dart';
 
@@ -69,10 +71,26 @@ class SignUpCubit extends Cubit<SignUpState> {
             'id': parentEmailController.text.trim().toLowerCase(),
             'studentReference': id,
           });
-          EmailSender emailsender = EmailSender();
-          var response = await emailsender.sendMessage(parentEmailController.text.trim(), "Education System",
-              'Education System Password', 'Your Password is 123456');
         });
+        var response = await http.post(
+          Uri.parse('https://api.emailjs.com/api/v1.0/email/send'),
+          headers: {
+            'Content-Type': "application/json",
+          },
+          body: json.encode({
+            'service_id': "service_hz76xfb",
+            'template_id': "template_1ro0yvz",
+            'user_id': "2QByaSzIidfViDpTb",
+            'template_params': {
+              'from_name': 'Education System',
+              'from_email': emailController.text,
+              'from_number': phoneController.text,
+              'from_subject': 'Your password is : 123456',
+              'reply_to': 'doha.kroz0@gmail.com',
+              'to_email': parentEmailController.text,
+            },
+          }),
+        );
         emit(SignUpSuccessfully());
         Navigator.pop(context);
       }).catchError((onError) {

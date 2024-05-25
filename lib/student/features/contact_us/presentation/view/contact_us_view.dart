@@ -1,12 +1,21 @@
+import 'dart:convert';
+
 import 'package:education_system/auth/login/widgets/main_text_field.dart';
-import 'package:email_sender/email_sender.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../../../components/locale/applocale.dart';
 import '../../../../../shared/utils/colors.dart';
 
 class ContactUsView extends StatelessWidget {
-  const ContactUsView({super.key});
+  ContactUsView({super.key});
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController subjectController = TextEditingController();
+  TextEditingController cvController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +24,11 @@ class ContactUsView extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-            const Row(
+            Row(
               children: [
                 Expanded(
                   child: MainTextField(
+                    controller: nameController,
                     textInputType: TextInputType.name,
                     hintText: 'Name',
                   ),
@@ -26,6 +36,7 @@ class ContactUsView extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: MainTextField(
+                    controller: phoneController,
                     textInputType: TextInputType.name,
                     hintText: 'Phone',
                   ),
@@ -33,10 +44,11 @@ class ContactUsView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               children: [
                 Expanded(
                   child: MainTextField(
+                    controller: emailController,
                     textInputType: TextInputType.name,
                     hintText: 'Email',
                   ),
@@ -44,6 +56,7 @@ class ContactUsView extends StatelessWidget {
                 SizedBox(width: 10),
                 Expanded(
                   child: MainTextField(
+                    controller: subjectController,
                     textInputType: TextInputType.name,
                     hintText: 'Subject',
                   ),
@@ -51,13 +64,14 @@ class ContactUsView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               children: [
                 Expanded(
                   child: MainTextField(
+                    controller: cvController,
                     minLines: 6,
                     textInputType: TextInputType.name,
-                    hintText: 'Letter',
+                    hintText: 'CV',
                   ),
                 ),
               ],
@@ -65,10 +79,29 @@ class ContactUsView extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () async {
-                EmailSender emailSender = EmailSender();
-                var response = await emailSender.sendMessage('doha.kroz0@gmail.com', "Education System",
-                    'Education System Password', 'Your Password is 123456');
-                debugPrint(response);
+                var response = await http.post(
+                  Uri.parse('https://api.emailjs.com/api/v1.0/email/send'),
+                  headers: {
+                    'Content-Type': "application/json",
+                  },
+                  body: json.encode({
+                    'service_id': "service_hz76xfb",
+                    'template_id': "template_1ro0yvz",
+                    'user_id': "2QByaSzIidfViDpTb",
+                    'template_params': {
+                      'from_name': nameController.text,
+                      'from_email': emailController.text,
+                      'from_number': phoneController.text,
+                      'from_subject': subjectController.text,
+                      'from_cv': cvController.text,
+                      'reply_to': 'doha.kroz0@gmail.com',
+                      'to_email': 'doha.kroz0@gmail.com',
+                    },
+                  }),
+                );
+                Fluttertoast.showToast(msg: 'Email Sent');
+                Navigator.pop(context);
+                print(response.body);
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,

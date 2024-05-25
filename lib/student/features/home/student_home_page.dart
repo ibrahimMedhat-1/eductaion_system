@@ -190,21 +190,19 @@ class StudentLayoutState extends State<StudentLayout> {
                           onTap: () {
                             cubit.getCourses("first Secondary");
                           },
-                          child: const SubjectContainer(subjectName: "all")),
+                          child: SubjectContainer(subjectName: getLang(context, "all"))),
                       SizedBox(
                         height: 55,
                         child: ListView(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          children: cubit.subjects
-                              .map(
-                                (e) => InkWell(
-                                    onTap: () {
-                                      cubit.getCoursesOfSubject(e, cubit.year);
-                                    },
-                                    child: SubjectContainer(subjectName: e)),
-                              )
-                              .toList(),
+                          children: cubit.subjects.map((e) {
+                            return InkWell(
+                                onTap: () {
+                                  cubit.getCoursesOfSubject(e, cubit.year);
+                                },
+                                child: SubjectContainer(subjectName: e));
+                          }).toList(),
                         ),
                       ),
                     ],
