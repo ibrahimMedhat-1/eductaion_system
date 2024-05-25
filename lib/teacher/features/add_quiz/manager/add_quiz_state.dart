@@ -9,3 +9,5 @@ class AllQuizQuestionsGenerated extends AddQuizState {}
 class QuizAddedSuccessfully extends AddQuizState {}
 
 class QuizAddedLoading extends AddQuizState {}
+
+class GetQuizDataSuccessfully extends AddQuizState {}

@@ -17,6 +17,14 @@ class QuestionWidgetState extends State<QuestionWidget> {
   bool option2 = false;
   bool option3 = false;
   @override
+  void initState() {
+    super.initState();
+    option1 = widget.addQuestionModel.modelAnswerNo == 1;
+    option2 = widget.addQuestionModel.modelAnswerNo == 2;
+    option3 = widget.addQuestionModel.modelAnswerNo == 3;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16.0),
@@ -59,6 +67,7 @@ class QuestionWidgetState extends State<QuestionWidget> {
                       option2 = false;
                       option3 = false;
                       widget.addQuestionModel.modelAnswer = widget.addQuestionModel.option1Controller.text;
+                      widget.addQuestionModel.modelAnswerNo = 1;
                       print(widget.addQuestionModel.modelAnswer);
                     } else {
                       widget.addQuestionModel.modelAnswer = null;
@@ -77,6 +86,7 @@ class QuestionWidgetState extends State<QuestionWidget> {
                       option1 = false;
                       option3 = false;
                       widget.addQuestionModel.modelAnswer = widget.addQuestionModel.option2Controller.text;
+                      widget.addQuestionModel.modelAnswerNo = 2;
                       print(widget.addQuestionModel.modelAnswer);
                     } else {
                       widget.addQuestionModel.modelAnswer = null;
@@ -95,6 +105,7 @@ class QuestionWidgetState extends State<QuestionWidget> {
                       option1 = false;
                       option2 = false;
                       widget.addQuestionModel.modelAnswer = widget.addQuestionModel.option3Controller.text;
+                      widget.addQuestionModel.modelAnswerNo = 3;
                       print(widget.addQuestionModel.modelAnswer);
                     } else {
                       widget.addQuestionModel.modelAnswer = null;

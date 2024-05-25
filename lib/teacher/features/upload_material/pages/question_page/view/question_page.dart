@@ -1,85 +1,258 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:education_system/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../components/locale/applocale.dart';
 import '../../../../../../shared/utils/colors.dart';
-import '../manager/question_view_cubit.dart';
+import '../../../../add_quiz/manager/add_quiz_cubit.dart';
+import '../../../../add_quiz/widgets/question_widget.dart';
 
-class TeacherQuestionPage extends StatelessWidget {
-  final Map<String, dynamic> question;
+class TeacherQuestionPage extends StatefulWidget {
+  final String year;
+  final String quizId;
 
   const TeacherQuestionPage({
     super.key,
-    required this.question,
+    required this.year,
+    required this.quizId,
   });
 
   @override
+  TeacherQuestionPageState createState() => TeacherQuestionPageState();
+}
+
+class TeacherQuestionPageState extends State<TeacherQuestionPage> {
+  @override
   Widget build(BuildContext context) {
-    print(question);
     return BlocProvider(
-  create: (context) => QuestionViewCubit(),
-  child: BlocConsumer<QuestionViewCubit, QuestionViewState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state) {
-    final QuestionViewCubit cubit = QuestionViewCubit.get(context);
-    return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: List.generate(question['questions'].length, (index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Question"),
-                  const SizedBox(height: 8.0),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText:  question['questions'][index]['question']!,
-                      border: OutlineInputBorder(
-
-                      ),
-                    ),
+      create: (context) => AddQuizCubit()
+        ..getAllQuestions(
+          courseId: Constants.teacherModel!.courseId!,
+          year: widget.year,
+          subject: Constants.teacherModel!.subject!,
+          quizId: widget.quizId,
+        ),
+      child: BlocConsumer<AddQuizCubit, AddQuizState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          final AddQuizCubit cubit = AddQuizCubit.get(context);
+          return Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  '${getLang(context, "Add Questions")}',
+                  style: const TextStyle(color: ColorsAsset.kPrimary),
+                ),
+                backgroundColor: ColorsAsset.kLight2,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Image.asset("assets/images/logo2.png"),
                   ),
-                  const SizedBox(height: 8.0),
-                  Column(
-                    children: List.generate(3, (optionIndex) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText:  question['questions'][index]['answer${optionIndex + 1}']!,
-                              border: OutlineInputBorder(
-
-                              )
+                ],
+              ),
+              body: Container(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: ColorsAsset.kPrimary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: TextFormField(
+                              controller: cubit.amountController,
+                              decoration:
+                                  InputDecoration(hintText: '${getLang(context, "Questions Amount")}'),
+                              onChanged: (value) {
+                                if (value.isEmpty) {
+                                  cubit.selectedQuantity = 0;
+                                  cubit.editGenerateQuestions();
+                                } else {
+                                  cubit.selectedQuantity = int.parse(value);
+                                  cubit.editGenerateQuestions();
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      );
-                    }),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text("Model Answer"),
-                  const SizedBox(height: 8.0),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText:  '${getLang(context,  "Model Answer : ")}${question['questions'][index]['modelAnswer']}',
-                      border: OutlineInputBorder(
-                      ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: ColorsAsset.kPrimary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: TextFormField(
+                              decoration: InputDecoration(hintText: '${getLang(context, "Exam Name")}'),
+                              controller: cubit.lessonNameController,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: DropdownButton<String>(
+                              value: cubit.typeValue,
+                              hint: const Text('Select Type'),
+                              onChanged: (value) {
+                                cubit.typeValue = value!;
+                                cubit.emit(AddQuizInitial());
+                              },
+                              items: [
+                                DropdownMenuItem(value: 'quiz', child: Text('${getLang(context, "quiz")}')),
+                                DropdownMenuItem(
+                                    value: 'assignment', child: Text('${getLang(context, "assignment")}')),
+                              ]),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 16.0),
+                    Expanded(
+                      child: state is QuizAddedLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                              itemCount: cubit.editQuestions.length,
+                              itemBuilder: (context, index) {
+                                return QuestionWidget(
+                                  addQuestionModel: cubit.editQuestions[index],
+                                );
+                              },
+                            ),
+                    ),
+                  ],
+                ),
+              ),
+              floatingActionButton: SizedBox(
+                width: 150,
+                child: FloatingActionButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0), // Adjust the radius as needed
                   ),
-                  const Divider(),
-                ],
-              );
-            }),
-          ),
-        ),
+                  onPressed: () {
+                    if (cubit.selectedQuantity != 0) {
+                      cubit.addQuiz(
+                        context,
+                        courseId: Constants.teacherModel!.courseId!,
+                        year: widget.year,
+                        name: cubit.lessonNameController.text,
+                        subject: Constants.teacherModel!.subject!,
+                        type: cubit.typeValue,
+                        quizId: widget.quizId,
+                        courseReference: FirebaseFirestore.instance
+                            .collection('secondary years')
+                            .doc(widget.year)
+                            .collection(Constants.teacherModel!.subject!)
+                            .doc(Constants.teacherModel!.courseId.toString().trim()),
+                      );
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    // Adjust the padding as needed
+                    child: Text('${getLang(context, "Add Quiz")}'),
+                  ),
+                ),
+              ));
+        },
       ),
     );
-  },
-),
-);
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+//
+// import '../../../../../../components/locale/applocale.dart';
+// import '../manager/question_view_cubit.dart';
+//
+// class TeacherQuestionPage extends StatelessWidget {
+//   final Map<String, dynamic> question;
+//
+//   const TeacherQuestionPage({
+//     super.key,
+//     required this.question,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     print(question);
+//     return BlocProvider(
+//       create: (context) => QuestionViewCubit(),
+//       child: BlocConsumer<QuestionViewCubit, QuestionViewState>(
+//         listener: (context, state) {
+//           // TODO: implement listener
+//         },
+//         builder: (context, state) {
+//           final QuestionViewCubit cubit = QuestionViewCubit.get(context);
+//           return Scaffold(
+//             appBar: AppBar(),
+//             body: SingleChildScrollView(
+//               child: Container(
+//                 padding: const EdgeInsets.all(16.0),
+//                 child: Column(
+//                   children: List.generate(question['editQuestions'].length, (index) {
+//                     return Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         const Text("Question"),
+//                         const SizedBox(height: 8.0),
+//                         TextField(
+//                           decoration: InputDecoration(
+//                             hintText: question['editQuestions'][index]['question']!,
+//                             border: const OutlineInputBorder(),
+//                           ),
+//                         ),
+//                         const SizedBox(height: 8.0),
+//                         Column(
+//                           children: List.generate(3, (optionIndex) {
+//                             return Padding(
+//                               padding: const EdgeInsets.all(8.0),
+//                               child: TextField(
+//                                 decoration: InputDecoration(
+//                                     hintText: question['editQuestions'][index]['answer${optionIndex + 1}']!,
+//                                     border: const OutlineInputBorder()),
+//                               ),
+//                             );
+//                           }),
+//                         ),
+//                         const SizedBox(height: 8.0),
+//                         const Text("Model Answer"),
+//                         const SizedBox(height: 8.0),
+//                         TextField(
+//                           decoration: InputDecoration(
+//                             hintText:
+//                                 '${getLang(context, "Model Answer : ")}${question['editQuestions'][index]['modelAnswer']}',
+//                             border: const OutlineInputBorder(),
+//                           ),
+//                         ),
+//                         const Divider(),
+//                       ],
+//                     );
+//                   }),
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }

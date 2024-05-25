@@ -30,9 +30,8 @@ class AddMaterialPage extends StatelessWidget {
               final AddMaterialCubit cubit = AddMaterialCubit.get(context);
               return Scaffold(
                 appBar: AppBar(
-                  title:  Text(
-                    '${getLang(context,  "Add Material")}'
-                    ,
+                  title: Text(
+                    '${getLang(context, "Add Material")}',
                     style: const TextStyle(color: ColorsAsset.kPrimary),
                   ),
                   backgroundColor: ColorsAsset.kLight2,
@@ -58,7 +57,7 @@ class AddMaterialPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ViewLesson(
-                                          videoID:cubit.material[index]['id'],
+                                          videoID: cubit.material[index]['id'],
                                           year: year,
                                           videoLink: cubit.material[index]['video'],
                                           lessonTitle: cubit.material[index]['name'],
@@ -70,7 +69,8 @@ class AddMaterialPage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => TeacherQuestionPage(
-                                          question: cubit.material[index],
+                                          year: year,
+                                          quizId: cubit.material[index]['id'],
                                         ),
                                       ));
                                 } else {
@@ -90,7 +90,15 @@ class AddMaterialPage extends StatelessWidget {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, color: ColorsAsset.kTextcolor),
                               ),
-                              trailing: IconButton(onPressed: (){cubit.deleteMaterial(year,cubit.material[index]['id']);},icon: const Icon(Icons.delete,color: Colors.red,),),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  cubit.deleteMaterial(year, cubit.material[index]['id']);
+                                },
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
                             ),
                           );
                         },
@@ -114,7 +122,7 @@ class AddMaterialPage extends StatelessWidget {
                             },
                           );
                         },
-                        child:  Text('${getLang(context,  "Add Material")}'))
+                        child: Text('${getLang(context, "Add Material")}'))
                   ],
                 ),
               );
