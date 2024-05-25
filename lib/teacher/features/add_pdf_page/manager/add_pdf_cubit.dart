@@ -33,6 +33,7 @@ class AddPdfCubit extends Cubit<AddPdfState> {
 
   Future<void> addPdf(
     context, {
+    String? pdfId,
     required String year,
     required String subject,
     required String courseId,
@@ -41,13 +42,24 @@ class AddPdfCubit extends Cubit<AddPdfState> {
     required DocumentReference<Map<String, dynamic>> courseReference,
   }) async {
     emit(PdfAddedLoading());
-    var quiz = FirebaseFirestore.instance
-        .collection('secondary years')
-        .doc(year)
-        .collection(subject)
-        .doc(courseId.trim())
-        .collection('material')
-        .doc();
+    var quiz;
+    if (pdfId == null) {
+      quiz = FirebaseFirestore.instance
+          .collection('secondary years')
+          .doc(year)
+          .collection(subject)
+          .doc(courseId.trim())
+          .collection('material')
+          .doc();
+    } else {
+      quiz = FirebaseFirestore.instance
+          .collection('secondary years')
+          .doc(year)
+          .collection(subject)
+          .doc(courseId.trim())
+          .collection('material')
+          .doc(pdfId);
+    }
     print(courseReference);
     print(quiz.id);
     print(name);
@@ -60,17 +72,26 @@ class AddPdfCubit extends Cubit<AddPdfState> {
         )
         .then((p0) {
       p0.ref.getDownloadURL().then((value) async {
-        await quiz.set({
-          'courseReference': courseReference,
-          'id': quiz.id,
-          'name': name,
-          'reference': quiz,
-          'pdf': value,
-          'type': 'pdf',
-          'date': DateTime.now().toString(),
-        }).then((value) {
-          emit(PdfAddedSuccessfully());
-        });
+        if (pdfId == null) {
+          await quiz.set({
+            'courseReference': courseReference,
+            'id': quiz.id,
+            'name': name,
+            'reference': quiz,
+            'pdf': value,
+            'type': 'pdf',
+            'date': DateTime.now().toString(),
+          }).then((value) {
+            emit(PdfAddedSuccessfully());
+          });
+        } else {
+          await quiz.update({
+            'name': name,
+            'pdf': value,
+          }).then((value) {
+            emit(PdfAddedSuccessfully());
+          });
+        }
       });
     });
 
