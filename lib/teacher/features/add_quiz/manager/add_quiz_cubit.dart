@@ -73,15 +73,23 @@ class AddQuizCubit extends Cubit<AddQuizState> {
           .collection('material')
           .doc();
     }
-    await quiz.set({
-      'courseReference': courseReference,
-      'id': quiz.id,
-      'name': name,
-      'reference': quiz,
-      'questions': questionsData,
-      'type': type,
-      'date': DateTime.now().toString(),
-    });
+    if (quizId == null) {
+      await quiz.set({
+        'courseReference': courseReference,
+        'id': quiz.id,
+        'name': name,
+        'reference': quiz,
+        'questions': questionsData,
+        'type': type,
+        'date': DateTime.now().toString(),
+      });
+    } else {
+      await quiz.update({
+        'name': name,
+        'questions': questionsData,
+        'type': type,
+      });
+    }
 
     Navigator.pop(context);
     emit(QuizAddedSuccessfully());
