@@ -94,8 +94,8 @@ class ContactUsView extends StatelessWidget {
                       'from_number': phoneController.text,
                       'from_subject': subjectController.text,
                       'from_cv': cvController.text,
-                      'reply_to': 'doha.kroz0@gmail.com',
-                      'to_email': 'doha.kroz0@gmail.com',
+                      'reply_to': 'educationsystem718@gmail.com',
+                      'to_email': 'educationsystem718@gmail.com',
                     },
                   }),
                 );
